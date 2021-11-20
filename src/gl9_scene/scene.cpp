@@ -1,9 +1,14 @@
 #include "scene.h"
+#include "spear.h"
 
 void Scene::update(float time) {
   camera->update();
   age += time;
-  std::cout << age << std::endl;
+//  if (camera->position.x >= 20){
+//      auto spear = std::make_unique<Spear>();
+//      spear->position = glm::vec3(camera->position.x,-10,0);
+//      objects.push_back(move(spear));
+//  }
   // Use iterator to update all objects so we can remove while iterating
   auto i = std::begin(objects);
 

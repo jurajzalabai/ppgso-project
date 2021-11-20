@@ -19,9 +19,9 @@ std::unique_ptr<ppgso::Shader> Spear::shader;
 
 Spear::Spear() {
     // Set random scale speed and rotation
-    scale *= glm::linearRand(1.0f, 3.0f);
-    speed = {glm::linearRand(5.0f, 10.0f), glm::linearRand(5.0f, 10.0f), 0.0f};
-    rotation = glm::ballRand(ppgso::PI);
+    scale *= (1.0f);
+    speed = {(0.0f), (0.0f), 0.0f};
+    rotation.y = (ppgso::PI/180)*(-60);
 //    rotMomentum = glm::ballRand(ppgso::PI);
 
     // Initialize static resources if needed
@@ -33,19 +33,72 @@ Spear::Spear() {
 bool Spear::update(Scene &scene, float dt) {
     // Count time alive
     age += dt;
-
+    std::cout<< " z spear: "<< position.z<< std::endl;
+    std::cout<< " y spear: "<< position.y<< std::endl;
+    std::cout<< " x spear: "<< position.x<< std::endl;
     // Animate position according to timee
-    position += speed * dt;
+    if (age > 4) {
+        counter++;
+        std::cout<< " frames: "<< counter<< std::endl;
+        for ( auto& obj : scene.objects ) {
+            // Ignore self in scene
+            if (obj.get() == this)
+                continue;
+
+            // We only need to collide with asteroids, ignore other objects
+            auto player = dynamic_cast<Player*>(obj.get());
+            if (!player) continue;
+
+    if (distance(position, player->position) < player->scale.y * 3) {
+        // Explode
+//        spear->position.x -= 2;
+//        spear->position.y -= 2;
+//        rotation.y = (ppgso::PI/180)*(-60);
+        if (position.y <= 0){
+
+        }
+        else{
+        player->position.x = position.x + 2.5f;
+        player->position.y = position.y + 1.5f;
+        player->rotation.y += (-0.01f);
+        position.y -= 10 * dt;
+        rotation.y += (-0.001f);
+        }
+    }
+    else{
+        position.y += 40 * dt;
+        position.x += 40 * dt;
+        rotation.y += (-0.001f);
+    }
+////        position.y -= 5 * dt;
+////      auto explosion = std::make_unique<Explosion>();
+////      explosion->position = position;
+////      explosion->scale = scale * 3.0f;
+////      scene.objects.push_back(move(explosion));
+//
+//      // Die
+////      return false;
+//    }
+        }
+//        position.y -= 5 * dt;
+//      auto explosion = std::make_unique<Explosion>();
+//      explosion->position = position;
+//      explosion->scale = scale * 3.0f;
+//      scene.objects.push_back(move(explosion));
+
+            // Die
+//      return false;
+        }
     // Rotate the object
 //    rotation += rotMomentum * dt;
-
-    if (age > 4) {
-        auto obj = std::make_unique<Spear>();
-        obj->position = glm::vec3(-5,-5,0);
-//        obj->position.x += glm::linearRand(-20.0f, 20.0f);
-        scene.objects.push_back(move(obj));
-//        time = 0;
-    }
+//
+//    if (age > 4) {
+//        auto obj = std::make_unique<Spear>();
+//        obj->position = glm::vec3(-5,-5,0);
+////        obj->position.x += glm::linearRand(-20.0f, 20.0f);
+//        scene.objects.push_back(move(obj));
+////        time = 0;
+//    }
 
 
 
@@ -115,19 +168,22 @@ void Spear::explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosi
 }
 
 void Spear::render(Scene &scene) {
-    shader->use();
+//    std::cout << age << std::endl;
+    if (age > 4){
+        shader->use();
 
-    // Set up light
-    shader->setUniform("LightDirection", scene.lightDirection);
+        // Set up light
+        shader->setUniform("LightDirection", scene.lightDirection);
 
-    // use camera
-    shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+        // use camera
+        shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+        shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
-    // render mesh
-    shader->setUniform("ModelMatrix", modelMatrix);
-    shader->setUniform("Texture", *texture);
-    mesh->render();
+        // render mesh
+        shader->setUniform("ModelMatrix", modelMatrix);
+        shader->setUniform("Texture", *texture);
+        mesh->render();
+    }
 }
 
 void Spear::onClick(Scene &scene) {

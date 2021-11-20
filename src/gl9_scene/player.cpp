@@ -16,7 +16,9 @@ std::unique_ptr<ppgso::Shader> Player::shader;
 Player::Player() {
   // Scale the default model
   scale *= 3.0f;
-  rotation.z = ppgso::PI / -2.0f;
+  rotation.z = ppgso::PI/2.0f;
+  rotation.x = (ppgso::PI/180.0f)*(15);;
+  rotation.y = (ppgso::PI/180.0f)*(-25);
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
   if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
@@ -25,43 +27,34 @@ Player::Player() {
 
 bool Player::update(Scene &scene, float dt) {
   // Fire delay increment
+    std::cout<< " z vtacik: "<< position.z<< std::endl;
+    std::cout<< " y vtacik: "<< position.y<< std::endl;
+    std::cout<< " x vtacik: "<< position.x<< std::endl;
+    std::cout<<age<< " cas:"<< std::endl;
+    std::cout<<dt<< " dt:"<< std::endl;
   fireDelay += dt;
   age += dt;
   scene.camera->position.x = position.x;
   scene.camera->position.y = position.y;
+    for ( auto& obj : scene.objects ) {
+        if (obj.get() == this)
+            continue;
 
-  if(age < 5) {
-      position.x += 10 * dt;
-  }
-  else if(age > 5 && age < 10){
-      position.y += 10 * dt;
-      if (rotation.y == ppgso::PI / -2.0f) {
-          rotation.y = ppgso::PI / -1.0f;
-      }
-  }
-  // Hit detection
-  for ( auto& obj : scene.objects ) {
-    // Ignore self in scene
-    if (obj.get() == this)
-      continue;
-
-    // We only need to collide with asteroids, ignore other objects
-    auto spear = dynamic_cast<Spear*>(obj.get());
-    if (!spear) continue;
-
-    if (distance(position, spear->position) < spear->scale.y) {
-      // Explode
-        spear->position = position;
-        position.y -= 5 * dt;
-//      auto explosion = std::make_unique<Explosion>();
-//      explosion->position = position;
-//      explosion->scale = scale * 3.0f;
-//      scene.objects.push_back(move(explosion));
-
-      // Die
-//      return false;
-    }
-  }
+        // We only need to collide with asteroids, ignore other objects
+        auto spear = dynamic_cast<Spear *>(obj.get());
+        if (!spear) continue;
+        if (!(distance(position, spear->position) < spear->scale.y * 3)) {
+            position.x += 10 * dt;
+            position.y -= 2 * dt;
+        }
+        }
+//  else if(age > 5 && age < 10){
+////      position.y += 10 * dt;
+//      if (rotation.y == ppgso::PI / -2.0f) {
+////          rotation.y = ppgso::PI / -1.0f;
+//      }
+//  }
+//  }
 
 //  // Keyboard controls
 //  if(scene.keyboard[GLFW_KEY_LEFT]) {

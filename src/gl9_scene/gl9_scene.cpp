@@ -18,6 +18,7 @@
 #include "player.h"
 #include "space.h"
 #include "spear.h"
+#include "island.h"
 
 const unsigned int SIZE = 512;
 
@@ -44,17 +45,27 @@ private:
 //    generator->position.y = 10.0f;
 //    scene.objects.push_back(move(generator));
 
-      auto obj = std::make_unique<Spear>();
-      obj->position = glm::vec3(-5,-5,0);
-      scene.objects.push_back(move(obj));
-
     // Add player to the scene
     auto player = std::make_unique<Player>();
-    player->position.x = -6;
-    player->position.y = 5;
-    player->rotation.y = ppgso::PI/-2.0f;
-    player->rotation.x = ppgso::PI/5.0f;
+    player->position.x = -25;
+    player->position.y = 30;
+//    player->rotation.y = ppgso::PI/-2.0f;
+//    player->rotation.x = ppgso::PI/5.0f;
     scene.objects.push_back(move(player));
+
+      // Add player to the scene
+      auto island = std::make_unique<Island>();
+//      island->rotation.y = ppgso::PI/-2.0f;
+//      island->rotation.x = ppgso::PI/5.0f;
+      island->position.z = 0;
+      island->position.y = 0;
+      island->position.x = 0;
+//      island->scale *= 10;
+      scene.objects.push_back(move(island));
+
+      auto spear = std::make_unique<Spear>();
+      spear->position = glm::vec3(-1,-1.3,0);
+      scene.objects.push_back(move(spear));
 
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);

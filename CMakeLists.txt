@@ -112,7 +112,7 @@ add_executable(gl9_scene
         src/gl9_scene/player.cpp
         src/gl9_scene/projectile.cpp
         src/gl9_scene/explosion.cpp
-        src/gl9_scene/space.cpp src/gl9_scene/spear.h src/gl9_scene/spear.cpp)
+        src/gl9_scene/space.cpp src/gl9_scene/spear.h src/gl9_scene/spear.cpp src/gl9_scene/island.h src/gl9_scene/island.cpp)
 target_link_libraries(gl9_scene ppgso shaders)
 install(TARGETS gl9_scene DESTINATION .)
 

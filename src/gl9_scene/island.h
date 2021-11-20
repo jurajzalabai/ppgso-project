@@ -12,7 +12,7 @@
  * It initializes and loads all resources only once
  * It will move down along the Y axis and self delete when reaching below -10
  */
-class Spear final : public Object {
+class Island final : public Object {
 private:
     // Static resources (Shared between instances)
     static std::unique_ptr<ppgso::Mesh> mesh;
@@ -21,10 +21,9 @@ private:
 
     // Age of the object in seconds
     float age{0.0f};
-    float counter{0.0f};
 
     // Speed and rotational momentum
-    glm::vec3 speed;
+//    glm::vec3 speed;
 //    glm::vec3 rotMomentum;
 
     /*!
@@ -35,13 +34,13 @@ private:
      * @param explosionScale - Scale of the explosion
      * @param pieces - Asteroid pieces to generate
      */
-    void explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosionScale, int pieces);
+//    void explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosionScale, int pieces);
 
 public:
     /*!
      * Create new asteroid
      */
-    Spear();
+    Island();
 
     /*!
      * Update asteroid
@@ -60,7 +59,7 @@ public:
     /*!
      * Custom click event for asteroid
      */
-    void onClick(Scene &scene) override;
+//    void onClick(Scene &scene) override;
 
 private:
 };
