@@ -44,7 +44,6 @@ bool Spear::update(Scene &scene, float dt) {
         obj->position = glm::vec3(-5,-5,0);
 //        obj->position.x += glm::linearRand(-20.0f, 20.0f);
         scene.objects.push_back(move(obj));
-        std::cout << "Spear generated";
 //        time = 0;
     }
 
