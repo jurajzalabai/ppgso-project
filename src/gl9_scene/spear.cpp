@@ -49,7 +49,7 @@ bool Spear::update(Scene &scene, float dt) {
             auto player = dynamic_cast<Player *>(obj.get());
             if (!player) continue;
 
-            if (distance(position, player->position) < player->scale.y * 3) {
+            if (distance(position, player->position) < player->scale.y) {
                 // Explode
 //        spear->position.x -= 2;
 //        spear->position.y -= 2;
@@ -57,8 +57,8 @@ bool Spear::update(Scene &scene, float dt) {
                 if (position.y <= 2) {
 
                 } else {
-                    player->position.x = position.x + 2.5f;
-                    player->position.y = position.y + 1.5f;
+                    player->position.x = position.x;
+                    player->position.y = position.y;
                     player->rotation.y += (-0.02f);
                     position.y -= 10 * dt;
                     position.x += 2 * dt;

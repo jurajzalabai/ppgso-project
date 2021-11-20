@@ -43,7 +43,7 @@ bool Player::update(Scene &scene, float dt) {
         // We only need to collide with asteroids, ignore other objects
         auto spear = dynamic_cast<Spear *>(obj.get());
         if (!spear) continue;
-        if (!(distance(position, spear->position) < spear->scale.y * 3)) {
+        if (distance(position, spear->position) > spear->scale.y) {
             position.x += 10 * dt;
             position.y -= 2 * dt;
         }
