@@ -1,5 +1,5 @@
 #include <glm/glm.hpp>
-
+#include <glm/gtx/euler_angles.hpp>
 #include "camera.h"
 
 
@@ -10,6 +10,12 @@ Camera::Camera(float fow, float ratio, float near, float far) {
 }
 
 void Camera::update() {
+    std::cout<< " z camera: "<< position.z<< std::endl;
+    std::cout<< " y camera: "<< position.y<< std::endl;
+    std::cout<< " x camera: "<< position.x<< std::endl;
+
+
+    generateModelMatrix();
   viewMatrix = lookAt(position, position-back, up);
 }
 
@@ -28,4 +34,10 @@ glm::vec3 Camera::cast(double u, double v) {
   // Create direction vector
   auto direction = glm::normalize(planePosition - glm::vec4{position,1.0f});
   return glm::vec3{direction};
+}
+
+void Camera::generateModelMatrix() {
+    modelMatrix =
+            glm::translate(glm::mat4(1.0f), position)
+            * glm::orientate4(rotation);
 }

@@ -24,7 +24,7 @@
 #include "turtle.h"
 #include "ocean.h"
 
-const unsigned int SIZE = 512;
+const unsigned int SIZE = 800;
 
 /*!
  * Custom windows for our simple game
@@ -53,50 +53,41 @@ private:
     auto player = std::make_unique<Player>();
     player->position.x = -25;
     player->position.y = 30;
-//    player->rotation.y = ppgso::PI/-2.0f;
-//    player->rotation.x = ppgso::PI/5.0f;
     scene.objects.push_back(move(player));
 
       auto palmTree = std::make_unique<PalmTree>();
-      palmTree->position.x = -10;
+      palmTree->position.x = -35;
       palmTree->position.y = 0;
-//    player->rotation.y = ppgso::PI/-2.0f;
-//    player->rotation.x = ppgso::PI/5.0f;
+      palmTree->position.z = 12;
       scene.objects.push_back(move(palmTree));
 
       auto coconut = std::make_unique<Coconut>();
-      coconut->position.x = -15;
-      coconut->position.y = 5;
-//    player->rotation.y = ppgso::PI/-2.0f;
-//    player->rotation.x = ppgso::PI/5.0f;
+      coconut->position.x = -22;
+      coconut->position.y = 19;
+      coconut->position.z = 6;
       scene.objects.push_back(move(coconut));
 
       auto turtle = std::make_unique<Turtle>();
       turtle->position.x = -15;
       turtle->position.y = 1;
-//    player->rotation.y = ppgso::PI/-2.0f;
-//    player->rotation.x = ppgso::PI/5.0f;
+      turtle->position.z = -12;
       scene.objects.push_back(move(turtle));
 
       // Add player to the scene
       auto island = std::make_unique<Island>();
-//      island->rotation.y = ppgso::PI/-2.0f;
-//      island->rotation.x = ppgso::PI/5.0f;
       island->position.z = 0;
       island->position.y = 0;
       island->position.x = 0;
+      island->rotation.z = (ppgso::PI/180)*(-90);
 //      island->scale *= 10;
       scene.objects.push_back(move(island));
 
       auto ocean = std::make_unique<Ocean>();
-//      island->rotation.y = ppgso::PI/-2.0f;
-//      island->rotation.x = ppgso::PI/5.0f;
       ocean->position.z = 0;
       ocean->position.y = 10;
       ocean->position.x = 0;
       ocean->scale.x *= 10;
       ocean->scale.z *= 10;
-//      island->scale *= 10;
       scene.objects.push_back(move(ocean));
 
       auto spear = std::make_unique<Spear>();
@@ -104,8 +95,8 @@ private:
       scene.objects.push_back(move(spear));
 
     // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
-    camera->position.z = 75.0f;
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
+    camera->position.z = 100.0f;
     scene.camera = move(camera);
   }
 
@@ -140,6 +131,57 @@ public:
    */
   void onKey(int key, int scanCode, int action, int mods) override {
     scene.keyboard[key] = action;
+
+      if (key == GLFW_KEY_W ) {
+          scene.camera->position.y += 1;
+      }
+
+      if (key == GLFW_KEY_S) {
+          scene.camera->position.y -= 1;
+      }
+
+      if (key == GLFW_KEY_D) {
+          scene.camera->position.x += 1;
+      }
+
+      if (key == GLFW_KEY_A) {
+          scene.camera->position.x -= 1;
+      }
+
+      if (key == GLFW_KEY_E) {
+          scene.camera->position.z -= 1;
+      }
+
+      if (key == GLFW_KEY_Q) {
+          scene.camera->position.z += 1;
+      }
+
+      if (key == GLFW_KEY_X) {
+          scene.camera->back.x += (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_Z) {
+          scene.camera->back.x -= (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_1) {
+          scene.camera->position.z = 75.0f;
+          scene.camera->position.x = 0.0f;
+          scene.camera->position.y = 10.0f;
+          scene.camera->back.z = 1;
+      }
+
+      if (key == GLFW_KEY_2) {
+          scene.camera->position.z = -75.0f;
+          scene.camera->position.x = 20.0f;
+          scene.camera->position.y = 20.0f;
+          scene.camera->back.z = -1;
+      }
+
+      if (key == GLFW_KEY_1) {
+          scene.camera->position.z = 75.0f;
+      }
+
 
     // Reset
     if (key == GLFW_KEY_R && action == GLFW_PRESS) {
