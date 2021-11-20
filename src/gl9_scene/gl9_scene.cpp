@@ -23,6 +23,8 @@
 #include "coconut.h"
 #include "turtle.h"
 #include "ocean.h"
+#include "human.h"
+#include "house.h"
 
 const unsigned int SIZE = 800;
 
@@ -72,6 +74,20 @@ private:
       turtle->position.y = 1;
       turtle->position.z = -12;
       scene.objects.push_back(move(turtle));
+
+      auto human = std::make_unique<Human>();
+      human->position.x = 15;
+      human->position.y = 1;
+//    player->rotation.y = ppgso::PI/-2.0f;
+//    player->rotation.x = ppgso::PI/5.0f;
+      scene.objects.push_back(move(human));
+
+      auto house = std::make_unique<House>();
+      house->position.x = 25;
+      house->position.y = 1;
+//    player->rotation.y = ppgso::PI/-2.0f;
+//    player->rotation.x = ppgso::PI/5.0f;
+      scene.objects.push_back(move(house));
 
       // Add player to the scene
       auto island = std::make_unique<Island>();

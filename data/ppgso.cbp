@@ -437,6 +437,18 @@
 		<Unit filename="C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/gl9_scene.cpp">
 			<Option target="gl9_scene"/>
 		</Unit>
+		<Unit filename="C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/house.cpp">
+			<Option target="gl9_scene"/>
+		</Unit>
+		<Unit filename="C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/house.h">
+			<Option target="gl9_scene"/>
+		</Unit>
+		<Unit filename="C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/human.cpp">
+			<Option target="gl9_scene"/>
+		</Unit>
+		<Unit filename="C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/human.h">
+			<Option target="gl9_scene"/>
+		</Unit>
 		<Unit filename="C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/island.cpp">
 			<Option target="gl9_scene"/>
 		</Unit>
