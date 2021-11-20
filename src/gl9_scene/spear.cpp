@@ -46,98 +46,29 @@ bool Spear::update(Scene &scene, float dt) {
                 continue;
 
             // We only need to collide with asteroids, ignore other objects
-            auto player = dynamic_cast<Player*>(obj.get());
+            auto player = dynamic_cast<Player *>(obj.get());
             if (!player) continue;
 
-    if (distance(position, player->position) < player->scale.y * 3) {
-        // Explode
+            if (distance(position, player->position) < player->scale.y * 3) {
+                // Explode
 //        spear->position.x -= 2;
 //        spear->position.y -= 2;
 //        rotation.y = (ppgso::PI/180)*(-60);
-        if (position.y <= 0){
+                if (position.y <= 2) {
 
-        }
-        else{
-        player->position.x = position.x + 2.5f;
-        player->position.y = position.y + 1.5f;
-        player->rotation.y += (-0.01f);
-        position.y -= 10 * dt;
-        rotation.y += (-0.001f);
-        }
-    }
-    else{
-        position.y += 40 * dt;
-        position.x += 40 * dt;
-        rotation.y += (-0.001f);
-    }
-////        position.y -= 5 * dt;
-////      auto explosion = std::make_unique<Explosion>();
-////      explosion->position = position;
-////      explosion->scale = scale * 3.0f;
-////      scene.objects.push_back(move(explosion));
-//
-//      // Die
-////      return false;
-//    }
-        }
-//        position.y -= 5 * dt;
-//      auto explosion = std::make_unique<Explosion>();
-//      explosion->position = position;
-//      explosion->scale = scale * 3.0f;
-//      scene.objects.push_back(move(explosion));
-
-            // Die
-//      return false;
-        }
-    // Rotate the object
-//    rotation += rotMomentum * dt;
-//
-//    if (age > 4) {
-//        auto obj = std::make_unique<Spear>();
-//        obj->position = glm::vec3(-5,-5,0);
-////        obj->position.x += glm::linearRand(-20.0f, 20.0f);
-//        scene.objects.push_back(move(obj));
-////        time = 0;
-//    }
-
-
-
-    // Delete when alive longer than 10s or out of visibility
-//    if (age > 10.0f || position.y < -10) return false;
-
-    // Collide with scene
-    for (auto &obj : scene.objects) {
-        // Ignore self in scene
-        if (obj.get() == this) continue;
-
-        // We only need to collide with asteroids and projectiles, ignore other objects
-        auto spear = dynamic_cast<Spear*>(obj.get()); // dynamic_pointer_cast<Spear>(obj);
-        auto projectile = dynamic_cast<Projectile*>(obj.get()); //dynamic_pointer_cast<Projectile>(obj);
-        auto player = dynamic_cast<Player*>(obj.get()); //dynamic_pointer_cast<Projectile>(obj);
-        if (!spear && !projectile) continue;
-
-//        if (distance(position, player->position) < player->scale.y) {
-//            speed = {glm::linearRand(-2.0f, 2.0f), glm::linearRand(-5.0f, -10.0f), 0.0f};
-//        }
-        // When colliding with other asteroids make sure the object is older than .5s
-        // This prevents excessive collisions when asteroids explode.
-//        if (spear && age < 0.5f) continue;
-
-        // Compare distance to approximate size of the asteroid estimated from scale.
-        if (distance(position, obj->position) < (obj->scale.y + scale.y) * 0.7f) {
-//            int pieces = 3;
-
-            // Too small to split into pieces
-//            if (scale.y < 0.5) pieces = 0;
-
-            // The projectile will be destroyed
-            if (projectile) projectile->destroy();
-
-            // Generate smaller asteroids
-            //explode(scene, (obj->position + position) / 2.0f, (obj->scale + scale) / 2.0f, pieces);
-
-            // Destroy self
-            return false;
+                } else {
+                    player->position.x = position.x + 2.5f;
+                    player->position.y = position.y + 1.5f;
+                    player->rotation.y += (-0.02f);
+                    position.y -= 10 * dt;
+                    position.x += 2 * dt;
+                    rotation.y += (-0.001f);
+                }
+            } else {
+                position.y += 40 * dt;
+                position.x += 40 * dt;
+                rotation.y += (-0.001f);
+            }
         }
     }
 

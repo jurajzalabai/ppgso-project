@@ -18,7 +18,7 @@ Player::Player() {
   scale *= 3.0f;
   rotation.z = ppgso::PI/2.0f;
   rotation.x = (ppgso::PI/180.0f)*(15);;
-  rotation.y = (ppgso::PI/180.0f)*(-25);
+  rotation.y = (ppgso::PI/180.0f)*(25);
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
   if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
@@ -34,8 +34,8 @@ bool Player::update(Scene &scene, float dt) {
     std::cout<<dt<< " dt:"<< std::endl;
   fireDelay += dt;
   age += dt;
-  scene.camera->position.x = position.x;
-  scene.camera->position.y = position.y;
+//  scene.camera->position.x = position.x;
+//  scene.camera->position.y = position.y;
     for ( auto& obj : scene.objects ) {
         if (obj.get() == this)
             continue;
