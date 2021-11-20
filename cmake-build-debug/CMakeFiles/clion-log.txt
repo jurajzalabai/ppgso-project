@@ -1,0 +1,11 @@
+"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\juraj\Desktop\FIIT-JurajZ\5.Semester\PPGSO\ppgso-project
+-- Found GLFW3: C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/dependencies/lib/mingw/libglfw3.a
+FIND_PATH C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/dependencies/include
+-- Found GLEW: C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/dependencies/include
+-- GLEW_LIBRARIES: C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/dependencies/lib/mingw/libglew32.a
+-- GLM_INCLUDE_DIR = C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/dependencies/include
+-- Found OpenMP_CXX: -fopenmp  
+-- Found OpenMP: TRUE   
+-- Configuring done
+-- Generating done
+-- Build files have been written to: C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug

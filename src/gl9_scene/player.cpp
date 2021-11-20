@@ -26,7 +26,8 @@ Player::Player() {
 bool Player::update(Scene &scene, float dt) {
   // Fire delay increment
   fireDelay += dt;
-
+  scene.camera->position.x = position.x;
+  scene.camera->position.y = position.y;
   // Hit detection
   for ( auto& obj : scene.objects ) {
     // Ignore self in scene

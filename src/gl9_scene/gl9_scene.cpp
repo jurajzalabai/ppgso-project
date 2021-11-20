@@ -36,11 +36,6 @@ private:
   void initScene() {
     scene.objects.clear();
 
-    // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
-    camera->position.z = -15.0f;
-    scene.camera = move(camera);
-
     // Add space background
     //scene.objects.push_back(std::make_unique<Space>());
 
@@ -57,8 +52,12 @@ private:
     player->rotation.x = ppgso::PI/5.0f;
     scene.objects.push_back(move(player));
 
-
+    // Create a camera
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
+    camera->position.z = -15.0f;
+    scene.camera = move(camera);
   }
+
 
 public:
   /*!

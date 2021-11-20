@@ -1,0 +1,10 @@
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/shaders.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/install/local.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/install.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/list_install_components.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/gl9_scene.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/playground.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/install/strip.dir

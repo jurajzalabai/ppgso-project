@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="ppgso" targetName="playground" />
+      <config projectName="ppgso" targetName="shaders" />
+      <config projectName="ppgso" targetName="ppgso" />
+      <config projectName="ppgso" targetName="gl9_scene" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c092a5b6-ce78-425e-8f0a-91d5028d879b" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1yS8ZfOvfA6CqntTrsicfhxZ14E" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="Debugger.ObjectiveC" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\juraj\Desktop\FIIT-JurajZ\5.Semester\PPGSO\clean\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="CMake Application.gl9_scene">
+    <configuration name="gl9_scene" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ppgso" TARGET_NAME="gl9_scene" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ppgso" RUN_TARGET_NAME="gl9_scene">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="playground" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ppgso" TARGET_NAME="playground" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ppgso" RUN_TARGET_NAME="playground">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ppgso" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ppgso" TARGET_NAME="ppgso" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="shaders" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ppgso" TARGET_NAME="shaders" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.gl9_scene" />
+      <item itemvalue="CMake Application.playground" />
+      <item itemvalue="CMake Application.ppgso" />
+      <item itemvalue="CMake Application.shaders" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c092a5b6-ce78-425e-8f0a-91d5028d879b" name="Default Changelist" comment="" />
+      <created>1632233685270</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1632233685270</updated>
+      <workItem from="1632233688076" duration="3161000" />
+      <workItem from="1632236969874" duration="9000" />
+      <workItem from="1632237063845" duration="920000" />
+      <workItem from="1632238130556" duration="35000" />
+      <workItem from="1632238179286" duration="59000" />
+      <workItem from="1632238271291" duration="430000" />
+      <workItem from="1632238760803" duration="323000" />
+      <workItem from="1632239754597" duration="35000" />
+      <workItem from="1632240282049" duration="16000" />
+      <workItem from="1632240379513" duration="1629000" />
+      <workItem from="1632258193123" duration="71000" />
+      <workItem from="1632258390177" duration="227000" />
+      <workItem from="1632258996516" duration="3000" />
+      <workItem from="1632259029900" duration="364000" />
+      <workItem from="1632387300923" duration="1736000" />
+      <workItem from="1632414106667" duration="237000" />
+      <workItem from="1632641410910" duration="417000" />
+      <workItem from="1632767417307" duration="609000" />
+      <workItem from="1632833356587" duration="848000" />
+      <workItem from="1632837461768" duration="6354000" />
+      <workItem from="1632854338664" duration="147000" />
+      <workItem from="1632865685767" duration="848000" />
+      <workItem from="1632934258421" duration="618000" />
+      <workItem from="1633011756679" duration="157000" />
+      <workItem from="1633379080401" duration="66000" />
+      <workItem from="1633431426076" duration="3482000" />
+      <workItem from="1633515287263" duration="51000" />
+      <workItem from="1633595102224" duration="637000" />
+      <workItem from="1633636717171" duration="1857000" />
+      <workItem from="1633877843848" duration="452000" />
+      <workItem from="1634042735643" duration="20000" />
+      <workItem from="1634043533221" duration="4000" />
+      <workItem from="1634047013622" duration="1229000" />
+      <workItem from="1634067860217" duration="384000" />
+      <workItem from="1634069093348" duration="45000" />
+      <workItem from="1634204743564" duration="650000" />
+      <workItem from="1634585643660" duration="564000" />
+      <workItem from="1634652876202" duration="7505000" />
+      <workItem from="1634742241095" duration="1159000" />
+      <workItem from="1634808767423" duration="1024000" />
+      <workItem from="1634994826409" duration="1192000" />
+      <workItem from="1635161020910" duration="695000" />
+      <workItem from="1635171868777" duration="140000" />
+      <workItem from="1635257101460" duration="3673000" />
+      <workItem from="1635357655066" duration="578000" />
+      <workItem from="1635358436653" duration="110000" />
+      <workItem from="1635358560560" duration="4000" />
+      <workItem from="1635435950828" duration="2201000" />
+      <workItem from="1635503066057" duration="765000" />
+      <workItem from="1635860321258" duration="484000" />
+      <workItem from="1635865555693" duration="1485000" />
+      <workItem from="1636272978686" duration="1165000" />
+      <workItem from="1636456806601" duration="1339000" />
+      <workItem from="1636470468397" duration="11183000" />
+      <workItem from="1636484689774" duration="667000" />
+      <workItem from="1636498756266" duration="146000" />
+      <workItem from="1636538881079" duration="5115000" />
+      <workItem from="1636556931624" duration="84000" />
+      <workItem from="1636576333855" duration="582000" />
+      <workItem from="1637399720751" duration="1908000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1636457552671">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1636457552671" />
+    <state width="1877" height="200" key="GridCell.Tab.0.bottom" timestamp="1637401309787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="14" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1040@-1920.0.1280.693" timestamp="1636476936784" />
+    <state width="1877" height="200" key="GridCell.Tab.0.bottom/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1637401309787" />
+    <state width="1877" height="200" key="GridCell.Tab.0.center" timestamp="1637401309787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="14" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1040@-1920.0.1280.693" timestamp="1636476936784" />
+    <state width="1877" height="200" key="GridCell.Tab.0.center/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1637401309787" />
+    <state width="1877" height="200" key="GridCell.Tab.0.left" timestamp="1637401309787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="14" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1040@-1920.0.1280.693" timestamp="1636476936783" />
+    <state width="1877" height="200" key="GridCell.Tab.0.left/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1637401309787" />
+    <state width="1877" height="200" key="GridCell.Tab.0.right" timestamp="1637401309787">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1237" height="14" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1040@-1920.0.1280.693" timestamp="1636476936886" />
+    <state width="1877" height="200" key="GridCell.Tab.0.right/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1637401309787" />
+    <state x="-1636" y="54" key="SettingsEditor" timestamp="1636476568233">
+      <screen x="-1920" y="0" width="1280" height="693" />
+    </state>
+    <state x="-1636" y="54" key="SettingsEditor/-1920.0.1280.693/0.0.1920.1040@-1920.0.1280.693" timestamp="1636476568233" />
+    <state x="461" y="165" key="SettingsEditor/-1920.0.1280.693/0.0.1920.1040@0.0.1920.1040" timestamp="1632242391408" />
+  </component>
+</project>
