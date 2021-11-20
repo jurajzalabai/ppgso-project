@@ -22,7 +22,7 @@ Spear::Spear() {
     scale *= glm::linearRand(1.0f, 3.0f);
     speed = {glm::linearRand(5.0f, 10.0f), glm::linearRand(5.0f, 10.0f), 0.0f};
     rotation = glm::ballRand(ppgso::PI);
-    rotMomentum = glm::ballRand(ppgso::PI);
+//    rotMomentum = glm::ballRand(ppgso::PI);
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -36,10 +36,21 @@ bool Spear::update(Scene &scene, float dt) {
     // Animate position according to timee
     position += speed * dt;
     // Rotate the object
-    rotation += rotMomentum * dt;
+//    rotation += rotMomentum * dt;
+
+    if (age > 4) {
+        auto obj = std::make_unique<Spear>();
+        obj->position = glm::vec3(-5,-5,0);
+//        obj->position.x += glm::linearRand(-20.0f, 20.0f);
+        scene.objects.push_back(move(obj));
+        std::cout << "Spear generated";
+//        time = 0;
+    }
+
+
 
     // Delete when alive longer than 10s or out of visibility
-    if (age > 10.0f || position.y < -10) return false;
+//    if (age > 10.0f || position.y < -10) return false;
 
     // Collide with scene
     for (auto &obj : scene.objects) {
@@ -57,14 +68,14 @@ bool Spear::update(Scene &scene, float dt) {
 //        }
         // When colliding with other asteroids make sure the object is older than .5s
         // This prevents excessive collisions when asteroids explode.
-        if (spear && age < 0.5f) continue;
+//        if (spear && age < 0.5f) continue;
 
         // Compare distance to approximate size of the asteroid estimated from scale.
         if (distance(position, obj->position) < (obj->scale.y + scale.y) * 0.7f) {
-            int pieces = 3;
+//            int pieces = 3;
 
             // Too small to split into pieces
-            if (scale.y < 0.5) pieces = 0;
+//            if (scale.y < 0.5) pieces = 0;
 
             // The projectile will be destroyed
             if (projectile) projectile->destroy();
@@ -96,7 +107,7 @@ void Spear::explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosi
         auto asteroid = std::make_unique<Spear>();
         asteroid->speed = speed + glm::vec3(glm::linearRand(-3.0f, 3.0f), glm::linearRand(0.0f, -5.0f), 0.0f);;
         asteroid->position = position;
-        asteroid->rotMomentum = rotMomentum;
+//        asteroid->rotMomentum = rotMomentum;
         float factor = (float) pieces / 2.0f;
         asteroid->scale = scale / factor;
         scene.objects.push_back(move(asteroid));

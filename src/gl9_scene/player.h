@@ -19,6 +19,7 @@ private:
   float fireDelay{0.0f};
   float fireRate{1.0f};
   glm::vec3 fireOffset{0.7f,0.0f,0.0f};
+  float age{0.0f};
 
 public:
   /*!

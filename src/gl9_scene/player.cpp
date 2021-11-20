@@ -16,7 +16,7 @@ std::unique_ptr<ppgso::Shader> Player::shader;
 Player::Player() {
   // Scale the default model
   scale *= 3.0f;
-
+  rotation.y = ppgso::PI / -2.0f;
   // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
   if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("corsair.bmp"));
@@ -26,8 +26,19 @@ Player::Player() {
 bool Player::update(Scene &scene, float dt) {
   // Fire delay increment
   fireDelay += dt;
+  age += dt;
   scene.camera->position.x = position.x;
   scene.camera->position.y = position.y;
+
+  if(age < 5) {
+      position.x += 10 * dt;
+  }
+//  else if(age > 5 && age < 10){
+//      position.y += 10 * dt;
+//      if (rotation.y == ppgso::PI / -2.0f){
+//        rotation.y = ppgso::PI / -1.0f;
+//
+//  }
   // Hit detection
   for ( auto& obj : scene.objects ) {
     // Ignore self in scene
@@ -52,14 +63,14 @@ bool Player::update(Scene &scene, float dt) {
     }
   }
 
-  // Keyboard controls
-  if(scene.keyboard[GLFW_KEY_LEFT]) {
-    position.x += 10 * dt;
-    rotation.y = ppgso::PI/-2.0f;
-  } else if(scene.keyboard[GLFW_KEY_RIGHT]) {
-    position.x -= 10 * dt;
-    rotation.y = ppgso::PI/2.0f;
-  }
+//  // Keyboard controls
+//  if(scene.keyboard[GLFW_KEY_LEFT]) {
+//    position.x += 10 * dt;
+//    rotation.y = ppgso::PI/-2.0f;
+//  } else if(scene.keyboard[GLFW_KEY_RIGHT]) {
+//    position.x -= 10 * dt;
+//    rotation.y = ppgso::PI/2.0f;
+//  }
 //  else {
 //    rotation.z = 0;
 //  }

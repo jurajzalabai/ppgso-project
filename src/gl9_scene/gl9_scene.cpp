@@ -40,9 +40,13 @@ private:
     //scene.objects.push_back(std::make_unique<Space>());
 
 //     Add generator to scene
-    auto generator = std::make_unique<Generator>();
-    generator->position.y = 10.0f;
-    scene.objects.push_back(move(generator));
+//    auto generator = std::make_unique<Generator>();
+//    generator->position.y = 10.0f;
+//    scene.objects.push_back(move(generator));
+
+      auto obj = std::make_unique<Spear>();
+      obj->position = glm::vec3(-5,-5,0);
+      scene.objects.push_back(move(obj));
 
     // Add player to the scene
     auto player = std::make_unique<Player>();
@@ -54,7 +58,7 @@ private:
 
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
-    camera->position.z = -15.0f;
+    camera->position.z = -25.0f;
     scene.camera = move(camera);
   }
 

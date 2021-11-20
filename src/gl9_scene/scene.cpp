@@ -2,7 +2,8 @@
 
 void Scene::update(float time) {
   camera->update();
-
+  age += time;
+  std::cout << age << std::endl;
   // Use iterator to update all objects so we can remove while iterating
   auto i = std::begin(objects);
 

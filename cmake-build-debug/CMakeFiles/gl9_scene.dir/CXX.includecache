@@ -1004,6 +1004,20 @@ GL/glew.h
 GLFW/glfw3.h
 -
 
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/asteroid.cpp
+glm/gtc/random.hpp
+-
+asteroid.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/asteroid.h
+projectile.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/projectile.h
+explosion.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/explosion.h
+shaders/diffuse_vert_glsl.h
+-
+shaders/diffuse_frag_glsl.h
+-
+
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/asteroid.h
 memory
 -
@@ -1022,11 +1036,35 @@ glm/glm.hpp
 ppgso/ppgso.h
 -
 
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/explosion.cpp
+glm/gtc/random.hpp
+-
+scene.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/scene.h
+explosion.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/explosion.h
+shaders/texture_vert_glsl.h
+-
+shaders/texture_frag_glsl.h
+-
+
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/explosion.h
 ppgso/ppgso.h
 -
 object.h
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/object.h
+
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/generator.cpp
+glm/gtc/random.hpp
+-
+ppgso/ppgso.h
+-
+generator.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/generator.h
+asteroid.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/asteroid.h
+spear.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/spear.h
 
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/generator.h
 object.h
@@ -1090,11 +1128,27 @@ ppgso/ppgso.h
 object.h
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/object.h
 
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/projectile.cpp
+glm/gtc/random.hpp
+-
+scene.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/scene.h
+projectile.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/projectile.h
+shaders/diffuse_vert_glsl.h
+-
+shaders/diffuse_frag_glsl.h
+-
+
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/projectile.h
 ppgso/ppgso.h
 -
 object.h
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/object.h
+
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/scene.cpp
+scene.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/scene.h
 
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/scene.h
 memory
@@ -1108,11 +1162,37 @@ C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/
 camera.h
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/camera.h
 
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/space.cpp
+space.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/space.h
+scene.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/scene.h
+shaders/texture_vert_glsl.h
+-
+shaders/texture_frag_glsl.h
+-
+
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/space.h
 ppgso/ppgso.h
 -
 object.h
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/object.h
+
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/spear.cpp
+glm/gtc/random.hpp
+-
+spear.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/spear.h
+projectile.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/projectile.h
+explosion.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/explosion.h
+player.h
+C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/player.h
+shaders/diffuse_vert_glsl.h
+-
+shaders/diffuse_frag_glsl.h
+-
 
 C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/gl9_scene/spear.h
 memory
@@ -1129,6 +1209,14 @@ string
 -
 
 shaders/diffuse_vert_glsl.h
+string
+-
+
+shaders/texture_frag_glsl.h
+string
+-
+
+shaders/texture_vert_glsl.h
 string
 -
 
