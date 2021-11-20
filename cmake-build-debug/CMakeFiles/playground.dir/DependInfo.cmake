@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/src/playground/playground.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/playground.dir/src/playground/playground.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/playground/playground.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/playground.dir/src/playground/playground.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -24,8 +24,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/DependInfo.cmake"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/shaders.dir/DependInfo.cmake"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/DependInfo.cmake"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/shaders.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -4,14 +4,14 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/image.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/image.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/image_bmp.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/image_raw.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/mesh.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/mesh.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/shader.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/shader.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/texture.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/texture.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/tiny_obj_loader.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.obj"
-  "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/ppgso/window.cpp" "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/window.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/image.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/image.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/image_bmp.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/image_bmp.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/image_raw.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/image_raw.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/mesh.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/mesh.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/shader.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/shader.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/texture.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/texture.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/tiny_obj_loader.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/tiny_obj_loader.cpp.obj"
+  "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/ppgso/window.cpp" "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/CMakeFiles/ppgso.dir/ppgso/window.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

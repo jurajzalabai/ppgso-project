@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2019.2.5\bin\cmake\win\bin\cmake.exe" -E remove -f CMakeFiles\task4_2dshapes.dir/objects.a
-C:\mingw-w64\mingw64\bin\ar.exe cr CMakeFiles\task4_2dshapes.dir/objects.a @CMakeFiles\task4_2dshapes.dir\objects1.rsp
-C:\mingw-w64\mingw64\bin\g++.exe -fopenmp -g -Wpedantic -Wall -Wno-c++98-compat -Wextra -Wconversion -Wsign-compare -Wuninitialized -Wno-unused-parameter   -Wl,--whole-archive CMakeFiles\task4_2dshapes.dir/objects.a -Wl,--no-whole-archive  -o task4_2dshapes.exe -Wl,--out-implib,libtask4_2dshapes.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\task4_2dshapes.dir\linklibs.rsp

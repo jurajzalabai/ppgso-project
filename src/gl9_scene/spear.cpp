@@ -26,8 +26,9 @@ Spear::Spear() {
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("asteroid.bmp"));
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("asteroid.obj");
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("SpearTexture.bmp"));
+//    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Spear-1.obj");
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Spear-2.obj");
 }
 bool Spear::update(Scene &scene, float dt) {
     // Count time alive

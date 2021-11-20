@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project
+# Install script for directory: C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/_install")
+  set(CMAKE_INSTALL_PREFIX "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/_install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,8 +32,13 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "C:/mingw-w64/mingw64/bin/objdump.exe")
+endif()
+
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/gl9_scene.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/gl9_scene.exe")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./gl9_scene.exe" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./gl9_scene.exe")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -43,7 +48,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/playground.exe")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE EXECUTABLE FILES "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/playground.exe")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./playground.exe" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/./playground.exe")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -53,7 +58,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/data/")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/." TYPE DIRECTORY FILES "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/data/")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -64,5 +69,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/juraj/Desktop/FIIT-JurajZ/5.Semester/PPGSO/ppgso-project/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
