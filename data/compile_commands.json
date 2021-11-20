@@ -161,6 +161,16 @@
 },
 {
   "directory": "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug",
+  "command": "C:\\mingw-w64\\mingw64\\bin\\g++.exe -DGLEW_STATIC -DGLM_FORCE_RADIANS @CMakeFiles/gl9_scene.dir/includes_CXX.rsp -fopenmp -g -Wpedantic -Wall -Wno-c++98-compat -Wextra -Wconversion -Wsign-compare -Wuninitialized -Wno-unused-parameter -std=gnu++14 -o CMakeFiles\\gl9_scene.dir\\src\\gl9_scene\\human.cpp.obj -c C:\\Users\\thoma\\OneDrive\\Dokumenty\\FIIT\\5.semester\\PPGSO\\Projekt\\src\\gl9_scene\\human.cpp",
+  "file": "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/human.cpp"
+},
+{
+  "directory": "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug",
+  "command": "C:\\mingw-w64\\mingw64\\bin\\g++.exe -DGLEW_STATIC -DGLM_FORCE_RADIANS @CMakeFiles/gl9_scene.dir/includes_CXX.rsp -fopenmp -g -Wpedantic -Wall -Wno-c++98-compat -Wextra -Wconversion -Wsign-compare -Wuninitialized -Wno-unused-parameter -std=gnu++14 -o CMakeFiles\\gl9_scene.dir\\src\\gl9_scene\\house.cpp.obj -c C:\\Users\\thoma\\OneDrive\\Dokumenty\\FIIT\\5.semester\\PPGSO\\Projekt\\src\\gl9_scene\\house.cpp",
+  "file": "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/gl9_scene/house.cpp"
+},
+{
+  "directory": "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/cmake-build-debug",
   "command": "C:\\mingw-w64\\mingw64\\bin\\g++.exe -DGLEW_STATIC -DGLM_FORCE_RADIANS @CMakeFiles/playground.dir/includes_CXX.rsp -fopenmp -g -Wpedantic -Wall -Wno-c++98-compat -Wextra -Wconversion -Wsign-compare -Wuninitialized -Wno-unused-parameter -std=gnu++14 -o CMakeFiles\\playground.dir\\src\\playground\\playground.cpp.obj -c C:\\Users\\thoma\\OneDrive\\Dokumenty\\FIIT\\5.semester\\PPGSO\\Projekt\\src\\playground\\playground.cpp",
   "file": "C:/Users/thoma/OneDrive/Dokumenty/FIIT/5.semester/PPGSO/Projekt/src/playground/playground.cpp"
 }

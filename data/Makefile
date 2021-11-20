@@ -820,6 +820,60 @@ src/gl9_scene/gl9_scene.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/gl9_scene.cpp.s
 .PHONY : src/gl9_scene/gl9_scene.cpp.s
 
+src/gl9_scene/house.obj: src/gl9_scene/house.cpp.obj
+
+.PHONY : src/gl9_scene/house.obj
+
+# target to build an object file
+src/gl9_scene/house.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/house.cpp.obj
+.PHONY : src/gl9_scene/house.cpp.obj
+
+src/gl9_scene/house.i: src/gl9_scene/house.cpp.i
+
+.PHONY : src/gl9_scene/house.i
+
+# target to preprocess a source file
+src/gl9_scene/house.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/house.cpp.i
+.PHONY : src/gl9_scene/house.cpp.i
+
+src/gl9_scene/house.s: src/gl9_scene/house.cpp.s
+
+.PHONY : src/gl9_scene/house.s
+
+# target to generate assembly for a file
+src/gl9_scene/house.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/house.cpp.s
+.PHONY : src/gl9_scene/house.cpp.s
+
+src/gl9_scene/human.obj: src/gl9_scene/human.cpp.obj
+
+.PHONY : src/gl9_scene/human.obj
+
+# target to build an object file
+src/gl9_scene/human.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/human.cpp.obj
+.PHONY : src/gl9_scene/human.cpp.obj
+
+src/gl9_scene/human.i: src/gl9_scene/human.cpp.i
+
+.PHONY : src/gl9_scene/human.i
+
+# target to preprocess a source file
+src/gl9_scene/human.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/human.cpp.i
+.PHONY : src/gl9_scene/human.cpp.i
+
+src/gl9_scene/human.s: src/gl9_scene/human.cpp.s
+
+.PHONY : src/gl9_scene/human.s
+
+# target to generate assembly for a file
+src/gl9_scene/human.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\gl9_scene.dir\build.make CMakeFiles/gl9_scene.dir/src/gl9_scene/human.cpp.s
+.PHONY : src/gl9_scene/human.cpp.s
+
 src/gl9_scene/island.obj: src/gl9_scene/island.cpp.obj
 
 .PHONY : src/gl9_scene/island.obj
@@ -1199,6 +1253,12 @@ help:
 	@echo ... src/gl9_scene/gl9_scene.obj
 	@echo ... src/gl9_scene/gl9_scene.i
 	@echo ... src/gl9_scene/gl9_scene.s
+	@echo ... src/gl9_scene/house.obj
+	@echo ... src/gl9_scene/house.i
+	@echo ... src/gl9_scene/house.s
+	@echo ... src/gl9_scene/human.obj
+	@echo ... src/gl9_scene/human.i
+	@echo ... src/gl9_scene/human.s
 	@echo ... src/gl9_scene/island.obj
 	@echo ... src/gl9_scene/island.i
 	@echo ... src/gl9_scene/island.s
