@@ -19,16 +19,15 @@ std::unique_ptr<ppgso::Shader> Island::shader;
 
 Island::Island() {
     // Set random scale speed and rotation
-    scale *= (30.0f);
+    scale *= (0.5f);
 //    speed = {glm::linearRand(5.0f, 10.0f), glm::linearRand(5.0f, 10.0f), 0.0f};
 //    rotation = glm::ballRand(ppgso::PI);
 //    rotMomentum = glm::ballRand(ppgso::PI);
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
-//    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Spear-1.obj");
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("seagull-low-poly.obj");
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("IslandTexture.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Island.obj");
 }
 bool Island::update(Scene &scene, float dt) {
     // Count time alive

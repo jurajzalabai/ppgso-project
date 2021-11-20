@@ -19,6 +19,10 @@
 #include "space.h"
 #include "spear.h"
 #include "island.h"
+#include "palmTree.h"
+#include "coconut.h"
+#include "turtle.h"
+#include "ocean.h"
 
 const unsigned int SIZE = 512;
 
@@ -53,6 +57,27 @@ private:
 //    player->rotation.x = ppgso::PI/5.0f;
     scene.objects.push_back(move(player));
 
+      auto palmTree = std::make_unique<PalmTree>();
+      palmTree->position.x = -10;
+      palmTree->position.y = 0;
+//    player->rotation.y = ppgso::PI/-2.0f;
+//    player->rotation.x = ppgso::PI/5.0f;
+      scene.objects.push_back(move(palmTree));
+
+      auto coconut = std::make_unique<Coconut>();
+      coconut->position.x = -15;
+      coconut->position.y = 5;
+//    player->rotation.y = ppgso::PI/-2.0f;
+//    player->rotation.x = ppgso::PI/5.0f;
+      scene.objects.push_back(move(coconut));
+
+      auto turtle = std::make_unique<Turtle>();
+      turtle->position.x = -15;
+      turtle->position.y = 1;
+//    player->rotation.y = ppgso::PI/-2.0f;
+//    player->rotation.x = ppgso::PI/5.0f;
+      scene.objects.push_back(move(turtle));
+
       // Add player to the scene
       auto island = std::make_unique<Island>();
 //      island->rotation.y = ppgso::PI/-2.0f;
@@ -63,13 +88,24 @@ private:
 //      island->scale *= 10;
       scene.objects.push_back(move(island));
 
+      auto ocean = std::make_unique<Ocean>();
+//      island->rotation.y = ppgso::PI/-2.0f;
+//      island->rotation.x = ppgso::PI/5.0f;
+      ocean->position.z = 0;
+      ocean->position.y = 10;
+      ocean->position.x = 0;
+      ocean->scale.x *= 10;
+      ocean->scale.z *= 10;
+//      island->scale *= 10;
+      scene.objects.push_back(move(ocean));
+
       auto spear = std::make_unique<Spear>();
       spear->position = glm::vec3(-1,-1.3,0);
       scene.objects.push_back(move(spear));
 
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
-    camera->position.z = 50.0f;
+    camera->position.z = 75.0f;
     scene.camera = move(camera);
   }
 

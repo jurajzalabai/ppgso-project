@@ -34,8 +34,8 @@ bool Player::update(Scene &scene, float dt) {
     std::cout<<dt<< " dt:"<< std::endl;
   fireDelay += dt;
   age += dt;
-//  scene.camera->position.x = position.x;
-//  scene.camera->position.y = position.y;
+  scene.camera->position.x = position.x;
+  scene.camera->position.y = position.y;
     for ( auto& obj : scene.objects ) {
         if (obj.get() == this)
             continue;
