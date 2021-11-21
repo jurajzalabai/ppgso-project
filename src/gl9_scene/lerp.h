@@ -20,13 +20,12 @@ private:
     float age{0.0f};
     glm::vec3 firsts;
     glm::vec3 seconds;
+    glm::vec3 back_firsts;
+    glm::vec3 back_seconds;
     bool flag;
     float j;
     float speeds;
     float times;
-    float back_x;
-    float back_y;
-    float back_z;
 
     /*!
      * Split the asteroid into multiple pieces and spawn an explosion object.
@@ -41,7 +40,7 @@ public:
     /*!
      * Create new asteroid
      */
-    Lerp(glm::vec3 first, glm::vec3 second, float speed, float time, float backs_x, float backs_y, float backs_z);
+    Lerp(glm::vec3 first, glm::vec3 second, float speed, float time, glm::vec3 back_first, glm::vec3 back_second);
 
     /*!
      * Update asteroid

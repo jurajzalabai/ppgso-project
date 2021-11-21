@@ -6,7 +6,7 @@
 #include "human.h"
 #include "projectile.h"
 #include "explosion.h"
-#include "player.h"
+#include "seagull.h"
 #include "lerp.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -15,17 +15,16 @@
 
 // Static resources
 
-Lerp::Lerp(glm::vec3 first, glm::vec3 second, float speed, float time, float backs_x, float backs_y, float backs_z) {
+Lerp::Lerp(glm::vec3 first, glm::vec3 second, float speed, float time, glm::vec3 back_first, glm::vec3 back_second) {
     // Set random scale speed and rotation
     firsts = first;
     seconds = second;
+    back_firsts = back_first;
+    back_seconds = back_second;
     flag = false;
     j = 0;
     speeds = speed;
     times = time;
-    back_x = backs_x;
-    back_y = backs_y;
-    back_z = backs_z;
 
 }
 
@@ -38,16 +37,16 @@ glm::vec3 bezierPoint(const glm::vec3 &p0, const glm::vec3 &p1, const float t) {
 bool Lerp::update(Scene &scene, float dt) {
     age += dt;
     if (j < speeds and age > times){
-        glm::vec3 q0;
+        glm::vec3 q0, c0;
         q0 = firsts + (static_cast<float>(j) / float(speeds)) * (seconds-firsts);
         scene.camera->position = q0;
 
-        scene.camera->back.x = (back_x / j);
-        scene.camera->back.y = (back_y / j);
-        scene.camera->back.z = (back_z / j);
+        c0 = back_firsts + (static_cast<float>(j) / float(speeds)) * (back_seconds-back_firsts);
+
+        scene.camera-> back = c0;
 
         j++;
-        }
+    }
 
 
 //    if (age > 5 && !flag){

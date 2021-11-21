@@ -24,8 +24,12 @@ private:
     float counter{0.0f};
 
     // Speed and rotational momentum
-    glm::vec3 speed;
-//    glm::vec3 rotMomentum;
+    int speed;
+    bool flag;
+    glm::vec3 start;
+    glm::vec3 goal1;
+    int j;
+    glm::vec3 rotMomentum;
 
     /*!
      * Split the asteroid into multiple pieces and spawn an explosion object.

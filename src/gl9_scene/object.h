@@ -49,6 +49,9 @@ public:
   glm::vec3 scale{1,1,1};
   glm::mat4 modelMatrix{1};
 
+  Object *parent = nullptr;
+  Object *child = nullptr;
+
 protected:
   /*!
    * Generate modelMatrix from position, rotation and scale

@@ -15,7 +15,7 @@
 #include "camera.h"
 #include "scene.h"
 #include "generator.h"
-#include "player.h"
+#include "seagull.h"
 #include "space.h"
 #include "spear.h"
 #include "island.h"
@@ -26,6 +26,7 @@
 #include "human.h"
 #include "house.h"
 #include "lerp.h"
+#include "chimney.h"
 
 const unsigned int SIZE = 800;
 
@@ -52,60 +53,65 @@ private:
 //    generator->position.y = 10.0f;
 //    scene.objects.push_back(move(generator));
 
-    // Add player to the scene
-    auto player = std::make_unique<Player>();
-    player->position = glm::vec3(-25,30,0);
-    scene.objects.push_back(move(player));
-
-      auto palmTree = std::make_unique<PalmTree>();
-      palmTree->position = glm::vec3(-35,0,12);
-      scene.objects.push_back(move(palmTree));
-
-      auto coconut = std::make_unique<Coconut>();
-      coconut->position = glm::vec3(-22,19,6);
-      scene.objects.push_back(move(coconut));
-
-      auto turtle = std::make_unique<Turtle>();
-      turtle->position = glm::vec3(-15,1,-30);
-      scene.objects.push_back(move(turtle));
-
-      auto human = std::make_unique<Human>();
-      human->position = glm::vec3(-1,2,0);
-      scene.objects.push_back(move(human));
-
-      auto house = std::make_unique<House>();
-      house->position = glm::vec3(50,0,0);
-      house->scale *= 1.6;
-      scene.objects.push_back(move(house));
-
-      // Add player to the scene
-      auto island = std::make_unique<Island>();
-      island->position = glm::vec3(0,0,0);
-      island->rotation.z = (ppgso::PI/180)*(-90);
-      scene.objects.push_back(move(island));
-
-      auto ocean = std::make_unique<Ocean>();
-      ocean->position = glm::vec3(0,10,0);
-      ocean->scale.x *= 10;
-      ocean->scale.z *= 10;
-      scene.objects.push_back(move(ocean));
-
+        // Add player to the scene
       auto spear = std::make_unique<Spear>();
-      spear->position = glm::vec3(-1,2,-1);
+      spear->position = glm::vec3(-1,5,47);
       scene.objects.push_back(move(spear));
-//
-//      auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, 0, 0, 1);
-//      scene.objects.push_back(move(lerp));
-//
-//      auto lerp2 = std::make_unique<Lerp>(glm::vec3(0,15,30), glm::vec3(75,30,30), 100, 8, 0.0f, 0.5f, 0.5f);
-//      scene.objects.push_back(move(lerp2));
-//
-//      auto lerp3 = std::make_unique<Lerp>(glm::vec3(75,30,30), glm::vec3(70,30,-60), 1000, 11, 1.2, 0, 0.31);
-//      scene.objects.push_back(move(lerp3));
 
-      // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
-    scene.camera = move(camera);
+        auto seagull = std::make_unique<Seagull>();
+        seagull->position = glm::vec3(25,30,0);
+        scene.objects.push_back(move(seagull));
+
+
+        auto palmTree = std::make_unique<PalmTree>();
+        palmTree->position = glm::vec3(-35,0,12);
+        scene.objects.push_back(move(palmTree));
+
+        auto coconut = std::make_unique<Coconut>();
+        coconut->position = glm::vec3(-22,19,6);
+        scene.objects.push_back(move(coconut));
+
+        auto turtle = std::make_unique<Turtle>();
+        turtle->position = glm::vec3(-15,1,-30);
+        scene.objects.push_back(move(turtle));
+
+        auto human = std::make_unique<Human>();
+        human->position = glm::vec3(-1,-1,50);
+        scene.objects.push_back(move(human));
+
+//        auto house = std::make_unique<House>();
+//        house->position = glm::vec3(50,0,0);
+//        house->scale *= 1.6;
+//        scene.objects.push_back(move(house));
+//
+//        auto chimney = std::make_unique<Chimney>();
+//        chimney->position = glm::vec3(62,15,10);
+//        scene.objects.push_back(move(chimney));
+
+        // Add player to the scene
+        auto island = std::make_unique<Island>();
+        island->position = glm::vec3(0,0,0);
+        island->rotation.z = (ppgso::PI/180)*(-90);
+        scene.objects.push_back(move(island));
+
+        auto ocean = std::make_unique<Ocean>();
+        ocean->position = glm::vec3(0,10,0);
+        ocean->scale.x *= 10;
+        ocean->scale.z *= 10;
+        scene.objects.push_back(move(ocean));
+
+//        auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+//        scene.objects.push_back(move(lerp));
+//
+//        auto lerp2 = std::make_unique<Lerp>(glm::vec3(0,15,30), glm::vec3(75,30,30), 100, 8, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.5f, 0.5f));
+//        scene.objects.push_back(move(lerp2));
+//
+//        auto lerp3 = std::make_unique<Lerp>(glm::vec3(75,30,30), glm::vec3(70,30,-60), 1000, 11, glm::vec3(0.0f, 0.5f, 0.5f), glm::vec3(1.2, 0, 0.31));
+//        scene.objects.push_back(move(lerp3));
+
+        // Create a camera
+        auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
+        scene.camera = move(camera);
   }
 
 

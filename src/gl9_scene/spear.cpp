@@ -6,7 +6,7 @@
 #include "spear.h"
 #include "projectile.h"
 #include "explosion.h"
-#include "player.h"
+#include "seagull.h"
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
@@ -21,7 +21,11 @@ Spear::Spear() {
     // Set random scale speed and rotation
     scale *= (1.0f);
     speed = {(0.0f), (0.0f), 0.0f};
-    rotation.y = (ppgso::PI/180)*(-60);
+    rotation.y = (ppgso::PI/180)*(20);
+    rotation.x = (ppgso::PI/180)*(-45);
+
+    parent = nullptr;
+    child = nullptr;
 //    rotMomentum = glm::ballRand(ppgso::PI);
 
     // Initialize static resources if needed
@@ -46,56 +50,54 @@ bool Spear::update(Scene &scene, float dt) {
                 continue;
 
             // We only need to collide with asteroids, ignore other objects
-            auto player = dynamic_cast<Player *>(obj.get());
-            if (!player) continue;
+            auto seagull = dynamic_cast<Seagull *>(obj.get());
+            if (!seagull) continue;
 
-            if (distance(position, player->position) < player->scale.y) {
-                // Explode
-//        spear->position.x -= 2;
-//        spear->position.y -= 2;
-//        rotation.y = (ppgso::PI/180)*(-60);
-                if (position.y <= 2) {
-
-                } else {
-                    player->position.x = position.x;
-                    player->position.y = position.y;
-                    player->rotation.y += (-0.02f);
-                    position.y -= 10 * dt;
-                    position.x += 2 * dt;
-                    rotation.y += (-0.001f);
-                }
-            } else {
-                position.y += 40 * dt;
-                position.x += 40 * dt;
-                rotation.y += (-0.001f);
+            if (seagull->parent == nullptr && distance(position, seagull->position) < seagull->scale.y) {
+                seagull->parent = this;
+                this->child = seagull;
             }
         }
+        if (this->child == nullptr) {
+            position.y += 8 * dt;
+            position.x -= 20 * dt;
+            position.z -= 30 * dt;
+            rotation.y += (-0.001f);
+        }
+        else if (position.y >= 2){
+            position.y -= 10 * dt;
+            position.x += 2 * dt;
+            rotation.y += (ppgso::PI/180)*(-0.6f);
+        }
+//                if (position.y <= 2) {
+//                    continue;
+//                }
+//                else {
+////                    seagull->position.x = position.x;
+////                    seagull->position.y = position.y;
+////                    seagull->rotation.y += (-0.02f);
+//                    position.y -= 10 * dt;
+//                    position.x += 2 * dt;
+//                    rotation.y += (-0.001f);
+////                            seagull->position.x = position.x;
+////                            seagull->position.y = position.y;
+////                            seagull->rotation.y += (-0.02f);
+////                            position.y -= 10 * dt;
+////                            position.x += 2 * dt;
+////                            rotation.y += (-0.001f);
+//                }
+//            } else {
+//                position.y += 40 * dt;
+//                position.x += 40 * dt;
+//                rotation.y += (-0.001f);
+//            }
+//        }
     }
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
 
     return true;
-}
-
-void Spear::explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosionScale, int pieces) {
-    // Generate explosion
-    auto explosion = std::make_unique<Explosion>();
-    explosion->position = explosionPosition;
-    explosion->scale = explosionScale;
-    explosion->speed = speed / 2.0f;
-    scene.objects.push_back(move(explosion));
-
-    // Generate smaller asteroids
-    for (int i = 0; i < pieces; i++) {
-        auto asteroid = std::make_unique<Spear>();
-        asteroid->speed = speed + glm::vec3(glm::linearRand(-3.0f, 3.0f), glm::linearRand(0.0f, -5.0f), 0.0f);;
-        asteroid->position = position;
-//        asteroid->rotMomentum = rotMomentum;
-        float factor = (float) pieces / 2.0f;
-        asteroid->scale = scale / factor;
-        scene.objects.push_back(move(asteroid));
-    }
 }
 
 void Spear::render(Scene &scene) {
@@ -114,10 +116,3 @@ void Spear::render(Scene &scene) {
         shader->setUniform("Texture", *texture);
         mesh->render();
 }
-
-void Spear::onClick(Scene &scene) {
-    std::cout << "Spear clicked!" << std::endl;
-    explode(scene, position, {10.0f, 10.0f, 10.0f}, 0 );
-    age = 10000;
-}
-
