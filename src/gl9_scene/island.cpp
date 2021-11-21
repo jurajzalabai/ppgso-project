@@ -19,7 +19,7 @@ std::unique_ptr<ppgso::Shader> Island::shader;
 
 Island::Island() {
     // Set random scale speed and rotation
-    scale *= (1.0f);
+    scale *= (1.3f);
 //    speed = {glm::linearRand(5.0f, 10.0f), glm::linearRand(5.0f, 10.0f), 0.0f};
 //    rotation = glm::ballRand(ppgso::PI);
 //    rotMomentum = glm::ballRand(ppgso::PI);

@@ -25,6 +25,7 @@
 #include "ocean.h"
 #include "human.h"
 #include "house.h"
+#include "lerp.h"
 
 const unsigned int SIZE = 800;
 
@@ -53,66 +54,57 @@ private:
 
     // Add player to the scene
     auto player = std::make_unique<Player>();
-    player->position.x = -25;
-    player->position.y = 30;
+    player->position = glm::vec3(-25,30,0);
     scene.objects.push_back(move(player));
 
       auto palmTree = std::make_unique<PalmTree>();
-      palmTree->position.x = -35;
-      palmTree->position.y = 0;
-      palmTree->position.z = 12;
+      palmTree->position = glm::vec3(-35,0,12);
       scene.objects.push_back(move(palmTree));
 
       auto coconut = std::make_unique<Coconut>();
-      coconut->position.x = -22;
-      coconut->position.y = 19;
-      coconut->position.z = 6;
+      coconut->position = glm::vec3(-22,19,6);
       scene.objects.push_back(move(coconut));
 
       auto turtle = std::make_unique<Turtle>();
-      turtle->position.x = -15;
-      turtle->position.y = 1;
-      turtle->position.z = -12;
+      turtle->position = glm::vec3(-15,1,-30);
       scene.objects.push_back(move(turtle));
 
       auto human = std::make_unique<Human>();
-      human->position.x = 15;
-      human->position.y = 1;
-//    player->rotation.y = ppgso::PI/-2.0f;
-//    player->rotation.x = ppgso::PI/5.0f;
+      human->position = glm::vec3(-1,2,0);
       scene.objects.push_back(move(human));
 
       auto house = std::make_unique<House>();
-      house->position.x = 25;
-      house->position.y = 1;
-//    player->rotation.y = ppgso::PI/-2.0f;
-//    player->rotation.x = ppgso::PI/5.0f;
+      house->position = glm::vec3(50,0,0);
+      house->scale *= 1.6;
       scene.objects.push_back(move(house));
 
       // Add player to the scene
       auto island = std::make_unique<Island>();
-      island->position.z = 0;
-      island->position.y = 0;
-      island->position.x = 0;
+      island->position = glm::vec3(0,0,0);
       island->rotation.z = (ppgso::PI/180)*(-90);
-//      island->scale *= 10;
       scene.objects.push_back(move(island));
 
       auto ocean = std::make_unique<Ocean>();
-      ocean->position.z = 0;
-      ocean->position.y = 10;
-      ocean->position.x = 0;
+      ocean->position = glm::vec3(0,10,0);
       ocean->scale.x *= 10;
       ocean->scale.z *= 10;
       scene.objects.push_back(move(ocean));
 
       auto spear = std::make_unique<Spear>();
-      spear->position = glm::vec3(-1,-1.3,0);
+      spear->position = glm::vec3(-1,2,-1);
       scene.objects.push_back(move(spear));
 
-    // Create a camera
+      auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, 0, 0, 1);
+      scene.objects.push_back(move(lerp));
+
+      auto lerp2 = std::make_unique<Lerp>(glm::vec3(0,15,30), glm::vec3(75,30,30), 100, 8, 0.0f, 0.5f, 0.5f);
+      scene.objects.push_back(move(lerp2));
+
+      auto lerp3 = std::make_unique<Lerp>(glm::vec3(75,30,30), glm::vec3(70,30,-60), 1000, 11, 1.2, 0, 0.31);
+      scene.objects.push_back(move(lerp3));
+
+      // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
-    camera->position.z = 100.0f;
     scene.camera = move(camera);
   }
 
@@ -180,22 +172,92 @@ public:
           scene.camera->back.x -= (ppgso::PI/180)*(-3);
       }
 
+      if (key == GLFW_KEY_C) {
+          scene.camera->back.y += (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_V) {
+          scene.camera->back.y -= (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_B) {
+          scene.camera->back.z += (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_N) {
+          scene.camera->back.z -= (ppgso::PI/180)*(-3);
+      }
+
       if (key == GLFW_KEY_1) {
           scene.camera->position.z = 75.0f;
           scene.camera->position.x = 0.0f;
           scene.camera->position.y = 10.0f;
-          scene.camera->back.z = 1;
+          scene.camera->back.z = 1.0f;
+          scene.camera->back.y = 0;
+          scene.camera->back.x = 0;
       }
 
       if (key == GLFW_KEY_2) {
-          scene.camera->position.z = -75.0f;
-          scene.camera->position.x = 20.0f;
-          scene.camera->position.y = 20.0f;
-          scene.camera->back.z = -1;
+          scene.camera->position.z = 28.0f;
+          scene.camera->position.x = 55.0f;
+          scene.camera->position.y = 19.0f;
+          scene.camera->back.z = 1.20944f;
+          scene.camera->back.y = 0;
+          scene.camera->back.x = -0.418879f;
       }
 
-      if (key == GLFW_KEY_1) {
-          scene.camera->position.z = 75.0f;
+      if (key == GLFW_KEY_3) {
+          scene.camera->position.z = 12.0f;
+          scene.camera->position.x = 1.0f;
+          scene.camera->position.y = 14.0f;
+          scene.camera->back.z = 1.0f;
+          scene.camera->back.y = 0.418879f;
+          scene.camera->back.x = 0.314159f;
+      }
+
+      if (key == GLFW_KEY_4) {
+          scene.camera->position.z = 36.0f;
+          scene.camera->position.x = -17.0f;
+          scene.camera->position.y = 19.0f;
+          scene.camera->back.z = 1.0f;
+          scene.camera->back.y = 0.418879f;
+          scene.camera->back.x = 0.314159f;
+      }
+
+      if (key == GLFW_KEY_5) {
+          scene.camera->position.z = 4.0f;
+          scene.camera->position.x = 23.0f;
+          scene.camera->position.y = 7.0f;
+          scene.camera->back.z = 1.0f;
+          scene.camera->back.y = 0.0f;
+          scene.camera->back.x = -3.97935f;
+      }
+
+      if (key == GLFW_KEY_6) {
+          scene.camera->position.z = 12.0f;
+          scene.camera->position.x = 45.0f;
+          scene.camera->position.y = 11.0f;
+          scene.camera->back.z = 1.0f;
+          scene.camera->back.y = 0.733038f;
+          scene.camera->back.x = 0.047752f;
+      }
+
+      if (key == GLFW_KEY_7) {
+          scene.camera->position.z = 7.0f;
+          scene.camera->position.x = 23.0f;
+          scene.camera->position.y = 7.0f;
+          scene.camera->back.z = 0.0f;
+          scene.camera->back.y = 0.0f;
+          scene.camera->back.x = -1.0f;
+      }
+
+      if (key == GLFW_KEY_8) {
+          scene.camera->position.z = 7.0f;
+          scene.camera->position.x = 23.0f;
+          scene.camera->position.y = 7.0f;
+          scene.camera->back.z = 0.0f;
+          scene.camera->back.y = 0.0f;
+          scene.camera->back.x = -1.0f;
       }
 
 

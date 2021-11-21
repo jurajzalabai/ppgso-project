@@ -100,7 +100,6 @@ void Spear::explode(Scene &scene, glm::vec3 explosionPosition, glm::vec3 explosi
 
 void Spear::render(Scene &scene) {
 //    std::cout << age << std::endl;
-    if (age > 4){
         shader->use();
 
         // Set up light
@@ -114,7 +113,6 @@ void Spear::render(Scene &scene) {
         shader->setUniform("ModelMatrix", modelMatrix);
         shader->setUniform("Texture", *texture);
         mesh->render();
-    }
 }
 
 void Spear::onClick(Scene &scene) {
