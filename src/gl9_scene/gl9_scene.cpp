@@ -57,26 +57,29 @@ private:
     player->position = glm::vec3(-25,30,0);
     scene.objects.push_back(move(player));
 
-      auto palmTree = std::make_unique<PalmTree>();
-      palmTree->position = glm::vec3(-35,0,12);
-      scene.objects.push_back(move(palmTree));
+//      auto palmTree = std::make_unique<PalmTree>();
+//      palmTree->position = glm::vec3(-35,0,12);
+//      scene.objects.push_back(move(palmTree));
+//
+//      auto coconut = std::make_unique<Coconut>();
+//      coconut->position = glm::vec3(-22,19,6);
+//      scene.objects.push_back(move(coconut));
+//
+//      auto turtle = std::make_unique<Turtle>();
+//      turtle->position = glm::vec3(-15,1,-30);
+//      scene.objects.push_back(move(turtle));
+//
+//      auto human = std::make_unique<Human>();
+//      human->position = glm::vec3(-1,2,0);
+//      scene.objects.push_back(move(human));
+//
+//      auto house = std::make_unique<House>();
+//      house->position = glm::vec3(50,0,0);
+//      house->scale *= 1.6;
+//      scene.objects.push_back(move(house));
 
-      auto coconut = std::make_unique<Coconut>();
-      coconut->position = glm::vec3(-22,19,6);
-      scene.objects.push_back(move(coconut));
-
-      auto turtle = std::make_unique<Turtle>();
-      turtle->position = glm::vec3(-15,1,-30);
-      scene.objects.push_back(move(turtle));
-
-      auto human = std::make_unique<Human>();
-      human->position = glm::vec3(-1,2,0);
-      scene.objects.push_back(move(human));
-
-      auto house = std::make_unique<House>();
-      house->position = glm::vec3(50,0,0);
-      house->scale *= 1.6;
-      scene.objects.push_back(move(house));
+      auto generator = std::make_unique<Generator>();
+      scene.objects.push_back(move(generator));
 
       // Add player to the scene
       auto island = std::make_unique<Island>();
@@ -93,7 +96,7 @@ private:
       auto spear = std::make_unique<Spear>();
       spear->position = glm::vec3(-1,2,-1);
       scene.objects.push_back(move(spear));
-//
+
 //      auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, 0, 0, 1);
 //      scene.objects.push_back(move(lerp));
 //
@@ -104,7 +107,7 @@ private:
 //      scene.objects.push_back(move(lerp3));
 
       // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
     scene.camera = move(camera);
   }
 
