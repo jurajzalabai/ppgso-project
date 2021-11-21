@@ -212,9 +212,9 @@ public:
       }
 
       if (key == GLFW_KEY_2) {
-          scene.camera->position.z = 28.0f;
-          scene.camera->position.x = 55.0f;
-          scene.camera->position.y = 19.0f;
+          scene.camera->position.z = 36.0f;
+          scene.camera->position.x = 53.0f;
+          scene.camera->position.y = 20.0f;
           scene.camera->back.z = 1.20944f;
           scene.camera->back.y = 0;
           scene.camera->back.x = -0.418879f;

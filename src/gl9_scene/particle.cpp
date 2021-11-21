@@ -31,12 +31,24 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc) {
 }
 bool Particle::update(Scene &scene, float dt) {
     age += dt;
-//    fast_start++;
-//    speed.y = 1000 + fast_start * (10-1000);
+    fast_start++;
+    if (speed.y >= 0)
+        speed.y = 4 + (fast_start / 1000) * (1 - 4);
 //    speed.y -= 10 * dt;
+//    if (fast_start % 100 == 0 ){
+//        if (position.x >= 5){
+//            speed.x += glm::linearRand(speed.x - 1, speed.x);
+//        }
+//        else if (position.x <= -5){
+//            speed.x += glm::linearRand(speed.x, speed.x + 1);
+//        }
+//        else{
+//            speed.x += glm::linearRand(speed.x - 1, speed.x + 1);
+//        }
+//    }
     position += speed * dt;
     generateModelMatrix();
-    return age <= 1.0;
+    return age <= 3.0;
 
     return true;
 }
