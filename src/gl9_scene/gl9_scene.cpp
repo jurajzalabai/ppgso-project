@@ -71,6 +71,10 @@ private:
         coconut->position = glm::vec3(-22,19,6);
         scene.objects.push_back(move(coconut));
 
+
+      auto generator = std::make_unique<Generator>();
+      scene.objects.push_back(move(generator));
+
         auto turtle = std::make_unique<Turtle>();
         turtle->position = glm::vec3(-15,1,-30);
         scene.objects.push_back(move(turtle));
@@ -79,14 +83,15 @@ private:
         human->position = glm::vec3(-1,-1,50);
         scene.objects.push_back(move(human));
 
-//        auto house = std::make_unique<House>();
-//        house->position = glm::vec3(50,0,0);
-//        house->scale *= 1.6;
-//        scene.objects.push_back(move(house));
-//
-//        auto chimney = std::make_unique<Chimney>();
-//        chimney->position = glm::vec3(62,15,10);
-//        scene.objects.push_back(move(chimney));
+
+        auto house = std::make_unique<House>();
+        house->position = glm::vec3(50,0,0);
+        house->scale *= 1.6;
+        scene.objects.push_back(move(house));
+
+        auto chimney = std::make_unique<Chimney>();
+        chimney->position = glm::vec3(62,15,10);
+        scene.objects.push_back(move(chimney));
 
         // Add player to the scene
         auto island = std::make_unique<Island>();
@@ -102,6 +107,7 @@ private:
 
 //        auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 //        scene.objects.push_back(move(lerp));
+
 //
 //        auto lerp2 = std::make_unique<Lerp>(glm::vec3(0,15,30), glm::vec3(75,30,30), 100, 8, glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 0.5f, 0.5f));
 //        scene.objects.push_back(move(lerp2));
@@ -109,9 +115,11 @@ private:
 //        auto lerp3 = std::make_unique<Lerp>(glm::vec3(75,30,30), glm::vec3(70,30,-60), 1000, 11, glm::vec3(0.0f, 0.5f, 0.5f), glm::vec3(1.2, 0, 0.31));
 //        scene.objects.push_back(move(lerp3));
 
-        // Create a camera
-        auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
-        scene.camera = move(camera);
+
+      // Create a camera
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
+    scene.camera = move(camera);
+
   }
 
 
