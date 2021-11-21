@@ -2,6 +2,8 @@
 # It should find bundled binary dependencies automatically when using MinGW compiler
 # On Linux and Mac the dependencies (glm, glew, glfw) need to be installed manually
 
+set(CMAKE_AUTOMOC ON)
+
 cmake_minimum_required(VERSION 3.1)
 project(ppgso CXX)
 
@@ -109,10 +111,12 @@ add_executable(gl9_scene
         src/gl9_scene/camera.cpp
         src/gl9_scene/asteroid.cpp
         src/gl9_scene/generator.cpp
-        src/gl9_scene/player.cpp
+        src/gl9_scene/seagull.cpp
         src/gl9_scene/projectile.cpp
         src/gl9_scene/explosion.cpp
-        src/gl9_scene/space.cpp src/gl9_scene/spear.h src/gl9_scene/spear.cpp src/gl9_scene/island.h src/gl9_scene/island.cpp src/gl9_scene/palmTree.cpp src/gl9_scene/palmTree.h src/gl9_scene/coconut.cpp src/gl9_scene/coconut.h src/gl9_scene/turtle.cpp src/gl9_scene/turtle.h src/gl9_scene/ocean.cpp src/gl9_scene/ocean.h src/gl9_scene/human.cpp src/gl9_scene/human.h src/gl9_scene/house.cpp src/gl9_scene/house.h src/gl9_scene/lerp.h src/gl9_scene/lerp.cpp src/gl9_scene/particle.h src/gl9_scene/particle.cpp)
+
+        src/gl9_scene/space.cpp src/gl9_scene/spear.h src/gl9_scene/spear.cpp src/gl9_scene/island.h src/gl9_scene/island.cpp src/gl9_scene/palmTree.cpp src/gl9_scene/palmTree.h src/gl9_scene/coconut.cpp src/gl9_scene/coconut.h src/gl9_scene/turtle.cpp src/gl9_scene/turtle.h src/gl9_scene/ocean.cpp src/gl9_scene/ocean.h src/gl9_scene/human.cpp src/gl9_scene/human.h src/gl9_scene/house.cpp src/gl9_scene/house.h src/gl9_scene/lerp.h src/gl9_scene/lerp.cpp src/gl9_scene/particle.h src/gl9_scene/particle.cpp src/gl9_scene/chimney.cpp src/gl9_scene/chimney.h)
+
 target_link_libraries(gl9_scene ppgso shaders)
 install(TARGETS gl9_scene DESTINATION .)
 

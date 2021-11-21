@@ -6,7 +6,7 @@
 #include "coconut.h"
 #include "projectile.h"
 #include "explosion.h"
-#include "player.h"
+#include "seagull.h"
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>

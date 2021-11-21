@@ -6,7 +6,7 @@
 #include "particle.h"
 #include "projectile.h"
 #include "explosion.h"
-#include "player.h"
+#include "seagull.h"
 
 #include <shaders/color_vert_glsl.h>
 #include <shaders/color_frag_glsl.h>

@@ -29,9 +29,10 @@ private:
     float direction_x{0.0f};
     float direction_z{0.0f};
     glm::vec3 rotMomentum;
+
     // Speed and rotational momentum
     glm::vec3 speed;
-//    glm::vec3 rotMomentum;
+
 
 public:
     /*!

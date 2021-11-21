@@ -7,8 +7,17 @@
 #include "object.h"
 
 void Object::generateModelMatrix() {
-  modelMatrix =
-          glm::translate(glm::mat4(1.0f), position)
-          * glm::orientate4(rotation)
-          * glm::scale(glm::mat4(1.0f), scale);
+    if (parent != nullptr) {
+//        position = parent->position;
+        modelMatrix = parent->modelMatrix *
+                glm::translate(glm::mat4(1.0f), position)
+                * glm::orientate4(rotation)
+                * glm::scale(glm::mat4(1.0f), scale);
+    }
+    else {
+        modelMatrix =
+                glm::translate(glm::mat4(1.0f), position)
+                * glm::orientate4(rotation)
+                * glm::scale(glm::mat4(1.0f), scale);
+    }
 }

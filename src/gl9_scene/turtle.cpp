@@ -6,7 +6,7 @@
 #include "turtle.h"
 #include "projectile.h"
 #include "explosion.h"
-#include "player.h"
+#include "seagull.h"
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
@@ -49,7 +49,6 @@ bool Turtle::update(Scene &scene, float dt) {
 }
 
 void Turtle::render(Scene &scene) {
-//    std::cout << age << std::endl;
     shader->use();
 
     // Set up light
