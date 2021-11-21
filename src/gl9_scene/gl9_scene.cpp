@@ -93,15 +93,15 @@ private:
       auto spear = std::make_unique<Spear>();
       spear->position = glm::vec3(-1,2,-1);
       scene.objects.push_back(move(spear));
-
-      auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, 0, 0, 1);
-      scene.objects.push_back(move(lerp));
-
-      auto lerp2 = std::make_unique<Lerp>(glm::vec3(0,15,30), glm::vec3(75,30,30), 100, 8, 0.0f, 0.5f, 0.5f);
-      scene.objects.push_back(move(lerp2));
-
-      auto lerp3 = std::make_unique<Lerp>(glm::vec3(75,30,30), glm::vec3(70,30,-60), 1000, 11, 1.2, 0, 0.31);
-      scene.objects.push_back(move(lerp3));
+//
+//      auto lerp = std::make_unique<Lerp>(glm::vec3(0,15,100), glm::vec3(0,15,30), 500, 4, 0, 0, 1);
+//      scene.objects.push_back(move(lerp));
+//
+//      auto lerp2 = std::make_unique<Lerp>(glm::vec3(0,15,30), glm::vec3(75,30,30), 100, 8, 0.0f, 0.5f, 0.5f);
+//      scene.objects.push_back(move(lerp2));
+//
+//      auto lerp3 = std::make_unique<Lerp>(glm::vec3(75,30,30), glm::vec3(70,30,-60), 1000, 11, 1.2, 0, 0.31);
+//      scene.objects.push_back(move(lerp3));
 
       // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
