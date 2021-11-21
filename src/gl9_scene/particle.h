@@ -38,7 +38,7 @@ public:
     /*!
      * Create new asteroid
      */
-    Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c);
+    Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc);
 
     /*!
      * Update asteroid

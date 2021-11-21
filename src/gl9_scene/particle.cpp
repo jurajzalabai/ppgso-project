@@ -17,12 +17,12 @@ std::unique_ptr<ppgso::Mesh> Particle::mesh;
 std::unique_ptr<ppgso::Texture> Particle::texture;
 std::unique_ptr<ppgso::Shader> Particle::shader;
 
-Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c) {
+Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc) {
     // Set random scale speed and rotation
     position = p;
     speed = s;
     age = 0;
-    scale *= 0.5;
+    scale *= sc;
     color = c;
     fast_start = 0;
     if (!shader) shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
