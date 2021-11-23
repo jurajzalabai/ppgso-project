@@ -15,6 +15,7 @@ public:
    * @param dt Time delta
    * @return true to delete the object
    */
+
   bool update(Scene &scene, float dt) override;
 
   /*!
@@ -24,4 +25,5 @@ public:
   void render(Scene &scene) override;
 
   float time = 0.0f;
+  float time_sand = 0.0f;
 };

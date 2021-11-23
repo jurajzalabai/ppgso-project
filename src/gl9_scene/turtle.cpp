@@ -35,12 +35,7 @@ bool Turtle::update(Scene &scene, float dt) {
             position.z += 3*dt;
         }
         else{
-            std::cout<<rotation.y<<std::endl;
-            if (rotation.y <= -2.82743f){
-                rotation.y -= (ppgso::PI/180)*(-0.5f);
-            }else{
-                rotation.y += (ppgso::PI/180)*(-0.5f);
-            }
+                rotation.y = static_cast<float>(sin(age) + 4.14);
         }
     }
 

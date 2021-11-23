@@ -17,7 +17,7 @@ std::unique_ptr<ppgso::Mesh> Particle::mesh;
 std::unique_ptr<ppgso::Texture> Particle::texture;
 std::unique_ptr<ppgso::Shader> Particle::shader;
 
-Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc) {
+Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts) {
     // Set random scale speed and rotation
     position = p;
     speed = s;
@@ -25,6 +25,7 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc) {
     scale *= sc;
     color = c;
     fast_start = 0;
+    part = parts;
     if (!shader) shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("stars.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("sphere.obj");
@@ -32,9 +33,11 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc) {
 bool Particle::update(Scene &scene, float dt) {
     age += dt;
     fast_start++;
-    if (speed.y >= 0)
+    if (speed.y >= 0 && part)
         speed.y = 4 + (fast_start / 1000) * (1 - 4);
-//    speed.y -= 10 * dt;
+    if (!part){
+        speed.y -= 20 * dt;
+    }
 //    if (fast_start % 100 == 0 ){
 //        if (position.x >= 5){
 //            speed.x += glm::linearRand(speed.x - 1, speed.x);
@@ -48,9 +51,10 @@ bool Particle::update(Scene &scene, float dt) {
 //    }
     position += speed * dt;
     generateModelMatrix();
-    return age <= 3.0;
-
-    return true;
+    if (part)
+        return age <= 3.0;
+    else
+        return age <= 0.5;
 }
 
 void Particle::render(Scene &scene) {
@@ -69,21 +73,24 @@ void Particle::render(Scene &scene) {
     shader->setUniform("OverallColor", color);
 
 
+    if (part){
+        // Disable depth testing
+        glDisable(GL_DEPTH_TEST);
 
-    // Disable depth testing
-    glDisable(GL_DEPTH_TEST);
-
-    // Enable blending
-    glEnable(GL_BLEND);
-    // Additive blending
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        // Enable blending
+        glEnable(GL_BLEND);
+        // Additive blending
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    }
 
     mesh->render();
 
-    // Disable blending
-    glDisable(GL_BLEND);
-    // Enable depth test
-    glEnable(GL_DEPTH_TEST);
+    if(part){
+        // Disable blending
+        glDisable(GL_BLEND);
+        // Enable depth test
+        glEnable(GL_DEPTH_TEST);
+    }
 }
 
 

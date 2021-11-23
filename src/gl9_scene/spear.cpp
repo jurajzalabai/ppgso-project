@@ -37,13 +37,10 @@ Spear::Spear() {
 bool Spear::update(Scene &scene, float dt) {
     // Count time alive
     age += dt;
-    std::cout<< " z spear: "<< position.z<< std::endl;
-    std::cout<< " y spear: "<< position.y<< std::endl;
-    std::cout<< " x spear: "<< position.x<< std::endl;
+    std::cout<< " frames: "<< counter<< std::endl;
     // Animate position according to timee
     if (age > 4) {
         counter++;
-        std::cout<< " frames: "<< counter<< std::endl;
         for ( auto& obj : scene.objects ) {
             // Ignore self in scene
             if (obj.get() == this)

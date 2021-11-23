@@ -21,9 +21,10 @@ private:
 
     // Age of the object in seconds
     float age{0.0f};
-    int fast_start{0};
+    float fast_start{0.0f};
     glm::vec3 speed;
     glm::vec3 color;
+    bool part;
 
     /*!
      * Split the asteroid into multiple pieces and spawn an explosion object.
@@ -38,7 +39,7 @@ public:
     /*!
      * Create new asteroid
      */
-    Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc);
+    Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts);
 
     /*!
      * Update asteroid

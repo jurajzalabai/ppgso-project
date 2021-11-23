@@ -31,11 +31,7 @@ Seagull::Seagull() {
 
 bool Seagull::update(Scene &scene, float dt) {
   // Fire delay increment
-    std::cout<< " z vtacik: "<< position.z<< std::endl;
-    std::cout<< " y vtacik: "<< position.y<< std::endl;
-    std::cout<< " x vtacik: "<< position.x<< std::endl;
-    std::cout<<age<< " cas:"<< std::endl;
-    std::cout<<dt<< " dt:"<< std::endl;
+    std::cout<<" cas: "<<age << std::endl;
   age += dt;
 
     for ( auto& obj : scene.objects ) {
