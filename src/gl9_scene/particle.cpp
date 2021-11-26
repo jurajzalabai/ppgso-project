@@ -4,8 +4,6 @@
 
 #include <glm/gtc/random.hpp>
 #include "particle.h"
-#include "projectile.h"
-#include "explosion.h"
 #include "seagull.h"
 
 #include <shaders/color_vert_glsl.h>

@@ -48,6 +48,7 @@ public:
   glm::vec3 rotation{0,0,0};
   glm::vec3 scale{1,1,1};
   glm::mat4 modelMatrix{1};
+  glm::mat4 modelMatrixNotScaled{1};
 
   Object *parent = nullptr;
   Object *child = nullptr;
@@ -57,5 +58,7 @@ protected:
    * Generate modelMatrix from position, rotation and scale
    */
   void generateModelMatrix();
+
+  glm::vec3 lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration);
 };
 

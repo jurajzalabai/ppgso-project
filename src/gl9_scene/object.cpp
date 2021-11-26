@@ -3,21 +3,24 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/euler_angles.hpp>
 #include <glm/gtx/transform.hpp>
+#include <iostream>
 
 #include "object.h"
 
 void Object::generateModelMatrix() {
     if (parent != nullptr) {
-//        position = parent->position;
-        modelMatrix = parent->modelMatrix *
-                glm::translate(glm::mat4(1.0f), position)
-                * glm::orientate4(rotation)
-                * glm::scale(glm::mat4(1.0f), scale);
+        modelMatrixNotScaled = parent->modelMatrixNotScaled *
+                               glm::translate(glm::mat4(1.0f), position)
+                               * glm::orientate4(rotation);
     }
     else {
-        modelMatrix =
+        modelMatrixNotScaled =
                 glm::translate(glm::mat4(1.0f), position)
-                * glm::orientate4(rotation)
-                * glm::scale(glm::mat4(1.0f), scale);
+                * glm::orientate4(rotation);
     }
+    modelMatrix = modelMatrixNotScaled * glm::scale(glm::mat4(1.0f), scale);
+}
+
+glm::vec3 Object::lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration){
+    return a + ((age - start)/duration) * (b-a);
 }

@@ -1,8 +1,5 @@
 #include "seagull.h"
 #include "scene.h"
-#include "asteroid.h"
-#include "projectile.h"
-#include "explosion.h"
 #include "spear.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -14,16 +11,13 @@ std::unique_ptr<ppgso::Texture> Seagull::texture;
 std::unique_ptr<ppgso::Shader> Seagull::shader;
 
 Seagull::Seagull() {
-  // Scale the default model
+
   scale *= 3.0f;
-  rotation.z = ppgso::PI/-2.0f;
-  rotation.x = (ppgso::PI/180.0f)*(15);;
-  rotation.y = (ppgso::PI/180.0f)*(-25);
+    keyframes  = {Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
+                  Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)};
+    position = keyframes[0].position;
+    rotation = keyframes[0].rotation;
 
-  parent = nullptr;
-  child = nullptr;
-
-  // Initialize static resources if needed
   if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
   if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
   if (!mesh) mesh = std::make_unique<ppgso::Mesh>("seagull-low-poly.obj");
@@ -32,25 +26,23 @@ Seagull::Seagull() {
 bool Seagull::update(Scene &scene, float dt) {
   // Fire delay increment
     std::cout<<" cas: "<<age << std::endl;
-  age += dt;
+    age += dt;
 
-    for ( auto& obj : scene.objects ) {
-        if (obj.get() == this)
-            continue;
-
-        // We only need to collide with asteroids, ignore other objects
-        auto spear = dynamic_cast<Spear *>(obj.get());
-        if (!spear) continue;
-
-        if (parent == nullptr) {
-            position.x -= 10 * dt;
-            position.y -= 2 * dt;
+    if (parent == nullptr) {
+        if (keyframes[curr].startTime < age) {
+            if (keyframes[curr].duration != 0) {
+                if (age < keyframes[curr].startTime + keyframes[curr].duration){
+                    position = lerp(keyframes[curr].position, keyframes[curr+1].position, age, keyframes[curr].startTime, keyframes[curr].duration);
+                    rotation = lerp(keyframes[curr].rotation, keyframes[curr+1].rotation, age, keyframes[curr].startTime, keyframes[curr].duration);
+                }
+                else {
+                    curr++;
+                }
+            }
         }
-        else {
-            (*parent).update(scene, dt);
-            position = glm::vec3{0, 0, 0};
-        }
-
+    }
+    else {
+        position = glm::vec3{0, 0, 0};
     }
 
   generateModelMatrix();

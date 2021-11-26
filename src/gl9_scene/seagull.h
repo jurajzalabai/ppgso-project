@@ -2,6 +2,7 @@
 #include <ppgso/ppgso.h>
 
 #include "object.h"
+#include "keyframe.h"
 
 /*!
  * Simple object representing the player
@@ -15,11 +16,9 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-    // Delay fire and fire rate
-    float fireDelay{0.0f};
-    float fireRate{1.0f};
-    glm::vec3 fireOffset{0.7f, 0.0f, 0.0f};
     float age{0.0f};
+    std::vector<Keyframe> keyframes;
+    unsigned long long int curr = 0;
 
 public:
     /*!

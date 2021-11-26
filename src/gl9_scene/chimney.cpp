@@ -3,8 +3,6 @@
 //
 
 #include <glm/gtc/random.hpp>
-#include "projectile.h"
-#include "explosion.h"
 #include "seagull.h"
 #include "chimney.h"
 

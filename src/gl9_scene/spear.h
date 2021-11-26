@@ -5,6 +5,7 @@
 
 #include "scene.h"
 #include "object.h"
+#include "keyframe.h"
 
 /*!
  * Simple asteroid object
@@ -21,7 +22,8 @@ private:
 
     // Age of the object in seconds
     float age{0.0f};
-    float counter{0.0f};
+    std::vector<Keyframe> keyframes;
+    unsigned long long int curr = 0;
 
     // Speed and rotational momentum
     glm::vec3 speed;

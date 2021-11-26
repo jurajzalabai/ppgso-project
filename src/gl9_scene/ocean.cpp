@@ -4,8 +4,6 @@
 
 #include <glm/gtc/random.hpp>
 #include "ocean.h"
-#include "projectile.h"
-#include "explosion.h"
 #include "seagull.h"
 
 #include <shaders/diffuse_vert_glsl.h>

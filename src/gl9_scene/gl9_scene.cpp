@@ -14,9 +14,7 @@
 
 #include "camera.h"
 #include "scene.h"
-#include "generator.h"
 #include "seagull.h"
-#include "space.h"
 #include "spear.h"
 #include "island.h"
 #include "palmTree.h"
@@ -27,6 +25,7 @@
 #include "house.h"
 #include "lerp.h"
 #include "chimney.h"
+#include "generator.h"
 
 const unsigned int SIZE = 800;
 
@@ -80,7 +79,7 @@ private:
         scene.objects.push_back(move(turtle));
 
         auto human = std::make_unique<Human>();
-        human->position = glm::vec3(-1,-1,50);
+//        human->position = glm::vec3(-1,-1,50);
         scene.objects.push_back(move(human));
 
 

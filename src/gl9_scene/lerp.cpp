@@ -4,8 +4,6 @@
 
 #include <glm/gtc/random.hpp>
 #include "human.h"
-#include "projectile.h"
-#include "explosion.h"
 #include "seagull.h"
 #include "lerp.h"
 

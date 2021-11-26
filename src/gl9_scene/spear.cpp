@@ -4,8 +4,6 @@
 
 #include <glm/gtc/random.hpp>
 #include "spear.h"
-#include "projectile.h"
-#include "explosion.h"
 #include "seagull.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -18,15 +16,12 @@ std::unique_ptr<ppgso::Texture> Spear::texture;
 std::unique_ptr<ppgso::Shader> Spear::shader;
 
 Spear::Spear() {
-    // Set random scale speed and rotation
-    scale *= (1.0f);
-    speed = {(0.0f), (0.0f), 0.0f};
-    rotation.y = (ppgso::PI/180)*(20);
-    rotation.x = (ppgso::PI/180)*(-45);
 
-    parent = nullptr;
-    child = nullptr;
-//    rotMomentum = glm::ballRand(ppgso::PI);
+    scale *= (1.0f);
+    keyframes  = {Keyframe(glm::vec3(-1,5,47), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), 0), 4.0f, 2.0f),
+                  Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(5), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)};
+    position = keyframes[0].position;
+    rotation = keyframes[0].rotation;
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -35,60 +30,48 @@ Spear::Spear() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Spear-2.obj");
 }
 bool Spear::update(Scene &scene, float dt) {
-    // Count time alive
+
     age += dt;
-    std::cout<< " frames: "<< counter<< std::endl;
-    // Animate position according to timee
-    if (age > 4) {
-        counter++;
-        for ( auto& obj : scene.objects ) {
+
+    // Collision detection
+    if (age > 5) {
+        for (auto &obj : scene.objects) {
             // Ignore self in scene
             if (obj.get() == this)
                 continue;
 
-            // We only need to collide with asteroids, ignore other objects
             auto seagull = dynamic_cast<Seagull *>(obj.get());
             if (!seagull) continue;
 
             if (seagull->parent == nullptr && distance(position, seagull->position) < seagull->scale.y) {
                 seagull->parent = this;
-                this->child = seagull;
+                child = seagull;
             }
         }
-        if (this->child == nullptr) {
-            position.y += 8 * dt;
-            position.x -= 20 * dt;
-            position.z -= 30 * dt;
-            rotation.y += (-0.001f);
+    }
+
+    if (child == nullptr) {
+        if (keyframes[curr].startTime < age) {
+            if (keyframes[curr].duration != 0) {
+                if (age < keyframes[curr].startTime + keyframes[curr].duration){
+                    position = lerp(keyframes[curr].position, keyframes[curr+1].position, age, keyframes[curr].startTime, keyframes[curr].duration);
+                    rotation = lerp(keyframes[curr].rotation, keyframes[curr+1].rotation, age, keyframes[curr].startTime, keyframes[curr].duration);
+                }
+                else {
+                    curr++;
+                }
+            }
         }
-        else if (position.y >= 2){
-            position.y -= 10 * dt;
-            position.x += 2 * dt;
-            rotation.y += (ppgso::PI/180)*(-0.6f);
-        }
-//                if (position.y <= 2) {
-//                    continue;
-//                }
-//                else {
-////                    seagull->position.x = position.x;
-////                    seagull->position.y = position.y;
-////                    seagull->rotation.y += (-0.02f);
-//                    position.y -= 10 * dt;
-//                    position.x += 2 * dt;
-//                    rotation.y += (-0.001f);
-////                            seagull->position.x = position.x;
-////                            seagull->position.y = position.y;
-////                            seagull->rotation.y += (-0.02f);
-////                            position.y -= 10 * dt;
-////                            position.x += 2 * dt;
-////                            rotation.y += (-0.001f);
-//                }
-//            } else {
-//                position.y += 40 * dt;
-//                position.x += 40 * dt;
-//                rotation.y += (-0.001f);
-//            }
-//        }
+    }
+    else if (position.y >= 2){
+        position.y -= 10 * dt;
+        position.x += 2 * dt;
+        rotation.y += (ppgso::PI/180)*(-0.6f);
+    }
+
+    if(parent != nullptr) {
+        position = glm::vec3{0, 6, 3};
+        rotation = glm::vec3{(ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)};
     }
 
     // Generate modelMatrix from position, rotation and scale
@@ -98,7 +81,7 @@ bool Spear::update(Scene &scene, float dt) {
 }
 
 void Spear::render(Scene &scene) {
-//    std::cout << age << std::endl;
+
         shader->use();
 
         // Set up light

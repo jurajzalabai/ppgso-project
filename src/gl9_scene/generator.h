@@ -9,21 +9,21 @@
  */
 class Generator final : public Object {
 public:
-  /*!
-   * Generate new asteroids over time
-   * @param scene Scene to update
-   * @param dt Time delta
-   * @return true to delete the object
-   */
+    /*!
+     * Generate new asteroids over time
+     * @param scene Scene to update
+     * @param dt Time delta
+     * @return true to delete the object
+     */
 
-  bool update(Scene &scene, float dt) override;
+    bool update(Scene &scene, float dt) override;
 
-  /*!
-   * Render placeholder for generator
-   * @param scene Scene to render in
-   */
-  void render(Scene &scene) override;
+    /*!
+     * Render placeholder for generator
+     * @param scene Scene to render in
+     */
+    void render(Scene &scene) override;
 
-  float time = 0.0f;
-  float time_sand = 0.0f;
+    float time = 0.0f;
+    float time_sand = 0.0f;
 };

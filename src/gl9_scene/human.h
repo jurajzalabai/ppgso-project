@@ -5,6 +5,7 @@
 
 #include "scene.h"
 #include "object.h"
+#include "keyframe.h"
 
 /*!
  * Simple asteroid object
@@ -21,15 +22,17 @@ private:
 
     // Age of the object in seconds
     float age{0.0f};
-    float counter{0.0f};
+    std::vector<Keyframe> keyframes;
+    unsigned long long int curr = 0;
+//    float counter{0.0f};
 
     // Speed and rotational momentum
-    int speed;
-    bool flag;
-    glm::vec3 start;
-    glm::vec3 goal1;
-    int j;
-    glm::vec3 rotMomentum;
+//    int speed;
+//    bool flag;
+//    glm::vec3 start;
+//    glm::vec3 goal1;
+//    int j;
+//    glm::vec3 rotMomentum;
 
     /*!
      * Split the asteroid into multiple pieces and spawn an explosion object.
