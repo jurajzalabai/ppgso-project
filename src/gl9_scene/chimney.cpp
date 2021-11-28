@@ -1,7 +1,3 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "seagull.h"
 #include "chimney.h"

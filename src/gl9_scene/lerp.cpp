@@ -63,14 +63,14 @@ void Lerp::render(Scene &scene) {
 }
 
 
-void Lerp::bezierShape(Scene &scene, glm::vec3 first, glm::vec3 second, int count) {
-    for (int j = 0; j <= count; j++) {
-        glm::vec3 point;
-        point = bezierPoint(first, second, static_cast<float>(j) / float(count));
-        scene.camera->position = point;
-        scene.camera->update();
-    }
-}
+//void Lerp::bezierShape(Scene &scene, glm::vec3 first, glm::vec3 second, int count) {
+//    for (int j = 0; j <= count; j++) {
+//        glm::vec3 point;
+//        point = bezierPoint(first, second, static_cast<float>(j) / float(count));
+//        scene.camera->position = point;
+//        scene.camera->update(dt);
+//    }
+//}
 
 
 

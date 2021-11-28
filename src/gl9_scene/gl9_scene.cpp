@@ -26,6 +26,10 @@
 #include "lerp.h"
 #include "chimney.h"
 #include "generator.h"
+#include "fireplace.h"
+#include "table.h"
+#include "plate.h"
+#include "glass.h"
 
 const unsigned int SIZE = 800;
 
@@ -41,8 +45,8 @@ private:
    * Reset and initialize the game scene
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
-  void initScene() {
-    scene.objects.clear();
+    void initScene() {
+        scene.objects.clear();
 
     // Add space background
     //scene.objects.push_back(std::make_unique<Space>());
@@ -53,14 +57,13 @@ private:
 //    scene.objects.push_back(move(generator));
 
         // Add player to the scene
-      auto spear = std::make_unique<Spear>();
-      spear->position = glm::vec3(-1,5,47);
-      scene.objects.push_back(move(spear));
+        auto spear = std::make_unique<Spear>();
+        spear->position = glm::vec3(-1,5,47);
+        scene.objects.push_back(move(spear));
 
         auto seagull = std::make_unique<Seagull>();
         seagull->position = glm::vec3(25,30,0);
         scene.objects.push_back(move(seagull));
-
 
         auto palmTree = std::make_unique<PalmTree>();
         palmTree->position = glm::vec3(-35,0,12);
@@ -70,18 +73,16 @@ private:
         coconut->position = glm::vec3(-22,19,6);
         scene.objects.push_back(move(coconut));
 
-
-      auto generator = std::make_unique<Generator>();
-      scene.objects.push_back(move(generator));
+        auto generator = std::make_unique<Generator>();
+        scene.objects.push_back(move(generator));
 
         auto turtle = std::make_unique<Turtle>();
         turtle->position = glm::vec3(-15,1,-30);
         scene.objects.push_back(move(turtle));
 
         auto human = std::make_unique<Human>();
-//        human->position = glm::vec3(-1,-1,50);
+        //        human->position = glm::vec3(-1,-1,50);
         scene.objects.push_back(move(human));
-
 
         auto house = std::make_unique<House>();
         house->position = glm::vec3(50,0,0);
@@ -91,6 +92,24 @@ private:
         auto chimney = std::make_unique<Chimney>();
         chimney->position = glm::vec3(62,15,10);
         scene.objects.push_back(move(chimney));
+
+        auto table = std::make_unique<Table>();
+        table->position = glm::vec3(0,0,25);
+        table->rotation.z = (ppgso::PI/180)*(-90);
+        scene.objects.push_back(move(table));
+
+        auto plate = std::make_unique<Plate>();
+        plate->position = glm::vec3(0,2.5f,25);
+        scene.objects.push_back(move(plate));
+
+//        auto glass = std::make_unique<Glass>();
+//        glass->position = glm::vec3(-5,10,25);
+//        scene.objects.push_back(move(glass));
+
+        auto fireplace = std::make_unique<Fireplace>();
+        fireplace->position = glm::vec3(-10,0,25);
+        fireplace->rotation.x = (ppgso::PI/180)*(-90);
+        scene.objects.push_back(move(fireplace));
 
         // Add player to the scene
         auto island = std::make_unique<Island>();
@@ -114,9 +133,9 @@ private:
 //        scene.objects.push_back(move(lerp3));
 
 
-      // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
-    scene.camera = move(camera);
+        // Create a camera
+        auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
+        scene.camera = move(camera);
 
   }
 

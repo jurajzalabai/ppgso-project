@@ -28,8 +28,8 @@ Human::Human() {
     rotation = keyframes[0].rotation;
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("HumanTexture-1.bmp"));
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Human-1.obj");
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("HumanTexture.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Human.obj");
 }
 bool Human::update(Scene &scene, float dt) {
     age += dt;
