@@ -1,3 +1,7 @@
+//
+// Created by Tommy on 20. 11. 2021.
+//
+
 #pragma once
 #include <memory>
 
@@ -12,26 +16,18 @@
  * It initializes and loads all resources only once
  * It will move down along the Y axis and self delete when reaching below -10
  */
-class Glass final : public Object {
+class Walls final : public Object {
 private:
     // Static resources (Shared between instances)
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
-
-    // Age of the object in seconds
     float age{0.0f};
-    float counter{0.0f};
-    glm::vec3 color;
-
-    // Speed and rotational momentum
-    glm::vec3 speed;
-
 public:
     /*!
      * Create new asteroid
      */
-    Glass();
+    Walls();
 
     /*!
      * Update asteroid
@@ -49,5 +45,3 @@ public:
 
 private:
 };
-
-

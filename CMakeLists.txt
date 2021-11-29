@@ -68,6 +68,7 @@ set(PPGSO_SHADER_SRC
         shader/color_vert.glsl shader/color_frag.glsl
         shader/convolution_vert.glsl shader/convolution_frag.glsl
         shader/diffuse_vert.glsl shader/diffuse_frag.glsl
+        shader/scene_diffuse_vert.glsl shader/scene_diffuse_frag.glsl
         shader/texture_vert.glsl shader/texture_frag.glsl
         )
 add_resources(shaders ${PPGSO_SHADER_SRC})
@@ -111,7 +112,7 @@ add_executable(gl9_scene
         src/gl9_scene/camera.cpp
         src/gl9_scene/seagull.cpp
 
-        src/gl9_scene/spear.h src/gl9_scene/spear.cpp src/gl9_scene/island.h src/gl9_scene/island.cpp src/gl9_scene/palmTree.cpp src/gl9_scene/palmTree.h src/gl9_scene/coconut.cpp src/gl9_scene/coconut.h src/gl9_scene/turtle.cpp src/gl9_scene/turtle.h src/gl9_scene/ocean.cpp src/gl9_scene/ocean.h src/gl9_scene/human.cpp src/gl9_scene/human.h src/gl9_scene/house.cpp src/gl9_scene/house.h src/gl9_scene/lerp.h src/gl9_scene/lerp.cpp src/gl9_scene/particle.h src/gl9_scene/particle.cpp src/gl9_scene/chimney.cpp src/gl9_scene/chimney.h src/gl9_scene/keyframe.h src/gl9_scene/keyframe.cpp src/gl9_scene/generator.cpp src/gl9_scene/generator.h src/gl9_scene/fireplace.cpp src/gl9_scene/fireplace.h src/gl9_scene/table.cpp src/gl9_scene/table.h src/gl9_scene/plate.cpp src/gl9_scene/plate.h src/gl9_scene/glass.cpp src/gl9_scene/glass.h)
+        src/gl9_scene/spear.h src/gl9_scene/spear.cpp src/gl9_scene/island.h src/gl9_scene/island.cpp src/gl9_scene/palmTree.cpp src/gl9_scene/palmTree.h src/gl9_scene/coconut.cpp src/gl9_scene/coconut.h src/gl9_scene/turtle.cpp src/gl9_scene/turtle.h src/gl9_scene/ocean.cpp src/gl9_scene/ocean.h src/gl9_scene/human.cpp src/gl9_scene/human.h src/gl9_scene/house.cpp src/gl9_scene/house.h src/gl9_scene/lerp.h src/gl9_scene/lerp.cpp src/gl9_scene/particle.h src/gl9_scene/particle.cpp src/gl9_scene/chimney.cpp src/gl9_scene/chimney.h src/gl9_scene/keyframe.h src/gl9_scene/keyframe.cpp src/gl9_scene/generator.cpp src/gl9_scene/generator.h src/gl9_scene/fireplace.cpp src/gl9_scene/fireplace.h src/gl9_scene/table.cpp src/gl9_scene/table.h src/gl9_scene/plate.cpp src/gl9_scene/plate.h src/gl9_scene/glass.cpp src/gl9_scene/glass.h src/gl9_scene/floor.h src/gl9_scene/floor.cpp src/gl9_scene/walls.h src/gl9_scene/walls.cpp)
 
 target_link_libraries(gl9_scene ppgso shaders)
 install(TARGETS gl9_scene DESTINATION .)

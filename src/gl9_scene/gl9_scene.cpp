@@ -30,6 +30,8 @@
 #include "table.h"
 #include "plate.h"
 #include "glass.h"
+#include "floor.h"
+#include "walls.h"
 
 const unsigned int SIZE = 800;
 
@@ -45,9 +47,65 @@ private:
    * Reset and initialize the game scene
    * Creating unique smart pointers to objects that are stored in the scene object list
    */
+  void initInteriorScene() {
+      scene.objects.clear();
+      scene.name = false;
+
+
+      auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
+      camera->position = glm::vec3{0,9,100};
+      scene.camera = move(camera);
+
+      auto floor = std::make_unique<Floor>();
+      floor->position = glm::vec3(0,0,60);
+      scene.objects.push_back(move(floor));
+
+      auto table = std::make_unique<Table>();
+      table->position = glm::vec3(9,1,60);
+      scene.objects.push_back(move(table));
+
+      auto plate = std::make_unique<Plate>();
+      plate->position = glm::vec3(9,3.2,60);
+      scene.objects.push_back(move(plate));
+
+      auto glass = std::make_unique<Glass>();
+      glass->position = glm::vec3(9,3.2,63);
+      glass->scale *= 0.3;
+      scene.objects.push_back(move(glass));
+
+      auto fireplace = std::make_unique<Fireplace>();
+      fireplace->position = glm::vec3(0,0,33);
+      fireplace->rotation.x = (ppgso::PI/180)*(-90);
+      scene.objects.push_back(move(fireplace));
+
+      auto human = std::make_unique<Human>();
+      human->position = glm::vec3(0,0,60);
+      scene.objects.push_back(move(human));
+
+      auto spear = std::make_unique<Spear>();
+      spear->position = glm::vec3(0,6,3);
+      spear->rotation = glm::vec3{(ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)};
+      spear->parent = scene.objects.back().get();
+
+      scene.objects.push_back(move(spear));
+
+      auto seagull = std::make_unique<Seagull>();
+      seagull->position = glm::vec3(0,-1,0.5);
+
+      seagull->parent = scene.objects.back().get();
+
+      scene.objects.push_back(move(seagull));
+
+      auto walls = std::make_unique<Walls>();
+      walls->position = glm::vec3(0,0,60);
+      scene.objects.push_back(move(walls));
+  }
+
+
+
     void initScene() {
         scene.objects.clear();
-
+        scene.name = true;
     // Add space background
     //scene.objects.push_back(std::make_unique<Space>());
 
@@ -89,27 +147,27 @@ private:
         house->scale *= 1.6;
         scene.objects.push_back(move(house));
 
-        auto chimney = std::make_unique<Chimney>();
-        chimney->position = glm::vec3(62,15,10);
-        scene.objects.push_back(move(chimney));
-
-        auto table = std::make_unique<Table>();
-        table->position = glm::vec3(0,0,25);
-        table->rotation.z = (ppgso::PI/180)*(-90);
-        scene.objects.push_back(move(table));
-
-        auto plate = std::make_unique<Plate>();
-        plate->position = glm::vec3(0,2.5f,25);
-        scene.objects.push_back(move(plate));
-
+//        auto chimney = std::make_unique<Chimney>();
+//        chimney->position = glm::vec3(62,15,10);
+//        scene.objects.push_back(move(chimney));
+//
+//        auto table = std::make_unique<Table>();
+//        table->position = glm::vec3(0,0,25);
+//        table->rotation.z = (ppgso::PI/180)*(-90);
+//        scene.objects.push_back(move(table));
+//
+//        auto plate = std::make_unique<Plate>();
+//        plate->position = glm::vec3(0,2.5f,25);
+//        scene.objects.push_back(move(plate));
+//
 //        auto glass = std::make_unique<Glass>();
 //        glass->position = glm::vec3(-5,10,25);
 //        scene.objects.push_back(move(glass));
-
-        auto fireplace = std::make_unique<Fireplace>();
-        fireplace->position = glm::vec3(-10,0,25);
-        fireplace->rotation.x = (ppgso::PI/180)*(-90);
-        scene.objects.push_back(move(fireplace));
+//
+//        auto fireplace = std::make_unique<Fireplace>();
+//        fireplace->position = glm::vec3(-10,0,25);
+//        fireplace->rotation.x = (ppgso::PI/180)*(-90);
+//        scene.objects.push_back(move(fireplace));
 
         // Add player to the scene
         auto island = std::make_unique<Island>();
@@ -158,7 +216,8 @@ public:
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
 
-    initScene();
+//    initScene();
+      initInteriorScene();
   }
 
   /*!

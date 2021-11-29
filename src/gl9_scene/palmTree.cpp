@@ -18,7 +18,6 @@ std::unique_ptr<ppgso::Shader> PalmTree::shader;
 PalmTree::PalmTree() {
     // Set random scale speed and rotation
     scale *= (2.0f);
-    speed = {(0.0f), (0.0f), 0.0f};
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
