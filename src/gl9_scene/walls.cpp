@@ -72,11 +72,21 @@ void Walls::render(Scene &scene) {
         shader->setUniform("pointLights[2].constant", 1.0f);
         shader->setUniform("pointLights[2].linear", 0.0f);
         shader->setUniform("pointLights[2].quadratic", 0.0f);
-        shader->setUniform("pointLights[2].color", {0.0f, 0.8f, 0});
+        shader->setUniform("pointLights[2].color", {1.0f, 0.5f, 0});
         shader->setUniform("pointLights[2].direction", {0.5f, 0.5f, 0.5f});
         shader->setUniform("pointLights[2].outerCutOff", glm::cos(glm::radians(180.0f)));
         shader->setUniform("pointLights[2].cutOff",  glm::cos(glm::radians(180.0f)));
     }
+
+    shader->setUniform("pointLights[3].position", {8.14,5.45,62});
+    shader->setUniform("pointLights[3].constant", 1.0f);
+    shader->setUniform("pointLights[3].linear", 0.0f);
+    shader->setUniform("pointLights[3].quadratic", 0.0f);
+    shader->setUniform("pointLights[3].color", {1.0f, 1.0f, 1.0f});
+    shader->setUniform("pointLights[3].direction", {0.0f, -1.0f, 0.0f});
+    shader->setUniform("pointLights[3].outerCutOff", glm::cos(glm::radians(45.0f)));
+    shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
+
 
     shader->setUniform("diffuse_strength", 0.3f);
     shader->setUniform("ambient_strength", 0.2f);

@@ -22,7 +22,7 @@ public:
     glm::vec3 back{0,0,1};
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
-    bool autoMovement = true;
+    bool autoMovement = false;
 
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors

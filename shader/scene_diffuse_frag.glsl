@@ -35,7 +35,7 @@ struct PointLight {
 
     vec3 color;
 };
-#define NR_POINT_LIGHTS 2
+#define NR_POINT_LIGHTS 4
 uniform PointLight pointLights[NR_POINT_LIGHTS];
 
 vec3 CalcPointLight(PointLight light, vec3 viewDir)
