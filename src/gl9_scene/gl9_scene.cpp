@@ -70,11 +70,6 @@ private:
       plate->position = glm::vec3(9,3.2,60);
       scene.objects.push_back(move(plate));
 
-      auto glass = std::make_unique<Glass>();
-      glass->position = glm::vec3(9,3.2,63);
-      glass->scale *= 0.3;
-      scene.objects.push_back(move(glass));
-
       auto fireplace = std::make_unique<Fireplace>();
       fireplace->position = glm::vec3(0,0,33);
       fireplace->rotation.x = (ppgso::PI/180)*(-90);
@@ -149,29 +144,6 @@ private:
         house->scale *= 1.6;
         scene.objects.push_back(move(house));
 
-<<<<<<< HEAD
-//        auto chimney = std::make_unique<Chimney>();
-//        chimney->position = glm::vec3(62,15,10);
-//        scene.objects.push_back(move(chimney));
-//
-//        auto table = std::make_unique<Table>();
-//        table->position = glm::vec3(0,0,25);
-//        table->rotation.z = (ppgso::PI/180)*(-90);
-//        scene.objects.push_back(move(table));
-//
-//        auto plate = std::make_unique<Plate>();
-//        plate->position = glm::vec3(0,2.5f,25);
-//        scene.objects.push_back(move(plate));
-//
-//        auto glass = std::make_unique<Glass>();
-//        glass->position = glm::vec3(-5,10,25);
-//        scene.objects.push_back(move(glass));
-//
-//        auto fireplace = std::make_unique<Fireplace>();
-//        fireplace->position = glm::vec3(-10,0,25);
-//        fireplace->rotation.x = (ppgso::PI/180)*(-90);
-//        scene.objects.push_back(move(fireplace));
-=======
         auto chimney = std::make_unique<Chimney>();
         chimney->position = glm::vec3(62,15,10);
         scene.objects.push_back(move(chimney));
@@ -201,7 +173,6 @@ private:
         fireplace->position = glm::vec3(-10,0,25);
         fireplace->rotation.x = (ppgso::PI/180)*(-90);
         scene.objects.push_back(move(fireplace));
->>>>>>> main
 
         // Add player to the scene
         auto island = std::make_unique<Island>();

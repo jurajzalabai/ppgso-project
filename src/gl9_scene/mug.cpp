@@ -15,9 +15,8 @@ Mug::Mug() {
     // Set random scale speed and rotation
     scale *= (1.0f);
     speed = {(0.0f), (0.0f), 0.0f};
-    color = glm::vec3(0.5,0.5,0.5);
     // Initialize static resources if needed
-    if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
+    if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("PlateTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Mug.obj");
 }
