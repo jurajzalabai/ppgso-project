@@ -12,7 +12,6 @@
  */
 class Camera {
 private:
-    std::vector<Keyframe> keyframes;
     unsigned long long int curr = 0;
 
 public:
@@ -23,7 +22,8 @@ public:
     glm::mat4 projectionMatrix;
     float age{0.0f};
     bool autoMovement = true;
-
+    bool inside = false;
+    std::vector<std::vector<Keyframe>> keyframes;
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors
    * @param fow - Field of view in degrees
@@ -31,7 +31,7 @@ public:
    * @param near - Distance to the near frustum plane
    * @param far - Distance to the far frustum plane
    */
-  Camera(float fow = 45.0f, float ratio = 1.0f, float near = 0.1f, float far = 10.0f);
+  Camera(float fow, float ratio, float near, float far);
 
   /*!
    * Update Camera viewMatrix based on up, position and back vectors

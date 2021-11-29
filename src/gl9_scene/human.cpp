@@ -18,13 +18,29 @@ std::unique_ptr<ppgso::Shader> Human::shader;
 Human::Human(Scene &scene) {
 
     scale *= (4.0f);
-
     keyframes  = {{Keyframe(glm::vec3(-1,-1,50), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 3.0f),
-                  Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
-                  Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
-                  Keyframe(glm::vec3(22,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
-                  {Keyframe(glm::vec3(0,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 40.0f, 3.0f),
-                  Keyframe(glm::vec3(0,0,35), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 0.0f, 0.0f)}};
+                          Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
+                          Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
+                          Keyframe(glm::vec3(22,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
+                  {Keyframe(glm::vec3(0,0,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 5.0f, 3.0f),
+                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 2.0f),
+                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 11.0f, 4.0f),
+                          Keyframe(glm::vec3(5,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}};
+    keyframes  = {{
+            Keyframe(glm::vec3(-1,-1,50), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 3.0f),
+            //idem si po cajku
+            Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
+            //otocim sa ku domu
+            Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
+            //idem domov
+            Keyframe(glm::vec3(25,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
+
+
+                  {Keyframe(glm::vec3(0,0,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 62.0f, 3.0f),
+                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 65.0f, 2.0f),
+                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 68.0f, 1.0f),
+                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 69.0f, 4.0f),
+                          Keyframe(glm::vec3(5,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}};
 
     position = keyframes[scene.inside][0].position;
     rotation = keyframes[scene.inside][0].rotation;
@@ -35,7 +51,7 @@ Human::Human(Scene &scene) {
 }
 bool Human::update(Scene &scene, float dt) {
     age += dt;
-
+    std::cout << scene.inside << curr << "age human:" << age << std::endl;
     if (keyframes[scene.inside][curr].startTime < age) {
         if (keyframes[scene.inside][curr].duration != 0) {
             if (age < keyframes[scene.inside][curr].startTime + keyframes[scene.inside][curr].duration) {
@@ -61,8 +77,6 @@ bool Human::update(Scene &scene, float dt) {
                 child = spear;
             }
         }
-    }
-    else{
     }
 
     generateModelMatrix();

@@ -29,7 +29,7 @@ Coconut::Coconut() {
 }
 bool Coconut::update(Scene &scene, float dt) {
     age += dt;
-    if (age > 3.0f && age < 7.0f){
+    if (age > 43.0f && age < 47.0f){
         rotation += rotMomentum * dt;
         if (position.y > 0.5f){
             position.y -= 20 * dt;
