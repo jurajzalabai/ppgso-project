@@ -101,7 +101,7 @@ void Spear::render(Scene &scene) {
     shader->setUniform("pointLights[1].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[1].cutOff",  glm::cos(glm::radians(180.0f)));
 
-    if (age >= 1.0 && age <= 3.0){
+    if (age >= 1.0 && age <= 3.0 && scene.inside){
         shader->setUniform("pointLights[2].position", {0,1,35});
         shader->setUniform("pointLights[2].constant", 1.0f);
         shader->setUniform("pointLights[2].linear", 0.0f);
@@ -110,7 +110,7 @@ void Spear::render(Scene &scene) {
         shader->setUniform("pointLights[2].direction", {0.5f, 0.5f, 0.5f});
         shader->setUniform("pointLights[2].outerCutOff", glm::cos(glm::radians(180.0f)));
         shader->setUniform("pointLights[2].cutOff",  glm::cos(glm::radians(180.0f)));
-        if (age>=2.5f){
+        if (age>=2.5f && scene.inside){
             age = 0;
         }
 

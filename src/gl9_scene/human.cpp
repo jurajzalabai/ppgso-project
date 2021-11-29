@@ -23,7 +23,7 @@ Human::Human(Scene &scene) {
                   Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
                   Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
                   Keyframe(glm::vec3(22,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
-                  {Keyframe(glm::vec3(0,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 30.0f, 3.0f),
+                  {Keyframe(glm::vec3(0,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 40.0f, 3.0f),
                   Keyframe(glm::vec3(0,0,35), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 0.0f, 0.0f)}};
 
     position = keyframes[scene.inside][0].position;
@@ -90,7 +90,7 @@ void Human::render(Scene &scene) {
     shader->setUniform("pointLights[1].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[1].cutOff",  glm::cos(glm::radians(180.0f)));
 
-    if (age >= 1.0 && age <= 3.0){
+    if (age >= 1.0 && age <= 3.0 && scene.inside){
         shader->setUniform("pointLights[2].position", {0,1,35});
         shader->setUniform("pointLights[2].constant", 1.0f);
         shader->setUniform("pointLights[2].linear", 0.0f);
@@ -99,7 +99,7 @@ void Human::render(Scene &scene) {
         shader->setUniform("pointLights[2].direction", {0.5f, 0.5f, 0.5f});
         shader->setUniform("pointLights[2].outerCutOff", glm::cos(glm::radians(180.0f)));
         shader->setUniform("pointLights[2].cutOff",  glm::cos(glm::radians(180.0f)));
-        if (age>=2.5f){
+        if (age>=2.5f && scene.inside){
             age = 0;
         }
 

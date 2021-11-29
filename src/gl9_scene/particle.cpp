@@ -50,7 +50,7 @@ bool Particle::update(Scene &scene, float dt) {
     position += speed * dt;
     generateModelMatrix();
     if (part){
-        if (scene.name)
+        if (!scene.inside)
             return age <= 3.0;
         else
             return age <= 1.0;
@@ -77,7 +77,7 @@ void Particle::render(Scene &scene) {
 
     if (part){
         // Disable depth testing
-        if (scene.name)
+        if (!scene.inside)
             glDisable(GL_DEPTH_TEST);
 
         // Enable blending
@@ -92,7 +92,7 @@ void Particle::render(Scene &scene) {
         // Disable blending
         glDisable(GL_BLEND);
         // Enable depth test
-        if (scene.name)
+        if (!scene.inside)
             glEnable(GL_DEPTH_TEST);
     }
 }

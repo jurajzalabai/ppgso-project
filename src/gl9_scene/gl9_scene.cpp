@@ -49,17 +49,6 @@ public:
   /*!
    * Construct custom game window
    */
-      //TODO: zmenit svetla, tak aby vyzerali ze svietia
-      //TODO: pohyb v druhej scene
-      //TODO: kamery v druhej scene
-      //TODO: prepinanie medzi scenami
-      //TODO: tiene
-      //TODO: zapad slnka
-      //TODO: textura podlahy, mozno steny
-      //TODO: mozno dym z ohna
-      //TODO: ohen textura
-      //TODO: svetlo lampa
-      //TODO: refaktor kodu
   Scene scene;
 
   SceneWindow() : Window{"gl9_scene", SIZE, SIZE} {
@@ -155,31 +144,76 @@ public:
 
     void initInteriorScene() {
         scene.objects.clear();
-        scene.inside = true;
+
+        //TODO: zmenit svetla, tak aby vyzerali ze svietia
+        //TODO: pohyb v druhej scene
+        //TODO: kamery v druhej scene
+        //TODO: prepinanie medzi scenami
+        //TODO: tiene
+        //TODO: zapad slnka
+        //TODO: textura podlahy, mozno steny
+        //TODO: mozno dym z ohna
+        //TODO: ohen textura
+        //TODO: svetlo lampa
+        //TODO: refaktor kodu
+
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
-        camera->position = glm::vec3{0,9,100};
+        camera->position = glm::vec3{0, 9, 100};
         camera->age = scene.age;
         scene.camera = move(camera);
 
+        auto generator = std::make_unique<Generator>();
+        scene.objects.push_back(move(generator));
+
         auto floor = std::make_unique<Floor>();
-        floor->position = glm::vec3(0,0,60);
+        floor->position = glm::vec3(0, 0, 60);
         scene.objects.push_back(move(floor));
 
+        auto bulb = std::make_unique<Sphere>();
+        bulb->position = glm::vec3(8.14, 5.4, 62);
+        bulb->scale *= 0.3;
+        bulb->color = glm::vec3(1.0f);
+        scene.objects.push_back(move(bulb));
+
+        auto bulb_ceiling = std::make_unique<Sphere>();
+        bulb_ceiling->position = glm::vec3(0, 17, 63);
+        bulb_ceiling->scale *= 3;
+        bulb_ceiling->color = glm::vec3(1.0f);
+        scene.objects.push_back(move(bulb_ceiling));
+
         auto table = std::make_unique<Table>();
-        table->position = glm::vec3(9,1,60);
+        table->position = glm::vec3(9, 1, 60);
         scene.objects.push_back(move(table));
 
         auto plate = std::make_unique<Plate>();
-        plate->position = glm::vec3(9,3.2,60);
+        plate->position = glm::vec3(9, 3.2, 60);
         scene.objects.push_back(move(plate));
 
+        auto walls = std::make_unique<Walls>();
+        walls->position = glm::vec3(0,0,60);
+        scene.objects.push_back(move(walls));
+
         auto fireplace = std::make_unique<Fireplace>();
-        fireplace->position = glm::vec3(0,0,33);
-        fireplace->rotation.x = (ppgso::PI/180)*(-90);
+        fireplace->position = glm::vec3(0, 0, 33);
+        fireplace->rotation.x = (ppgso::PI / 180) * (-90);
         scene.objects.push_back(move(fireplace));
 
+        auto lamp = std::make_unique<Lamp>();
+        lamp->position = glm::vec3(9, 3.2, 62);
+        lamp->scale *= 0.5;
+        lamp->rotation.z = (ppgso::PI / 180) * (-90);
+        scene.objects.push_back(move(lamp));
+
+        auto mug = std::make_unique<Mug>();
+        mug->position = glm::vec3(9, 3.2, 58);
+        mug->scale *= 0.5;
+        scene.objects.push_back(move(mug));
+
+        auto ceilinglamp = std::make_unique<CeilingLamp>();
+        ceilinglamp->position = glm::vec3(0, 16.10, 63);
+        scene.objects.push_back(move(ceilinglamp));
+
         auto human = std::make_unique<Human>(scene);
-        human->position = glm::vec3(0,0,60);
         human->age = scene.age;
         scene.objects.push_back(move(human));
 
@@ -193,14 +227,6 @@ public:
         seagull->age = scene.age;
         seagull->parent = scene.objects.back().get();
         scene.objects.push_back(move(seagull));
-
-        auto walls = std::make_unique<Walls>();
-        walls->position = glm::vec3(0,0,60);
-        scene.objects.push_back(move(walls));
-
-        auto lamp = std::make_unique<Lamp>();
-        lamp->position = glm::vec3(0,0,60);
-        scene.objects.push_back(move(lamp));
     }
 
 

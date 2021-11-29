@@ -11,7 +11,7 @@ bool Generator::update(Scene &scene, float dt) {
     time_sand += dt;
 
     // Add object to scene when time reaches certain level
-    if (scene.name){
+    if (!scene.inside){
         if (time_sand > 2 && time_sand < 2.2)
             for (int i=0; i < 50; i++ ){
                 auto obj2 = std::make_unique<Particle>(
