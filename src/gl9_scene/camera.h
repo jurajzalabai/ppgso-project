@@ -3,6 +3,7 @@
 
 #include <glm/glm.hpp>
 #include <ppgso/ppgso.h>
+#include <src/gl9_scene/keyframe.h>
 
 /*!
  * Simple camera object that keeps track of viewMatrix and projectionMatrix
@@ -10,12 +11,18 @@
  * the viewMatrix is generated from up, position and back vectors on update
  */
 class Camera {
+private:
+    float age{0.0f};
+    std::vector<Keyframe> keyframes;
+    unsigned long long int curr = 0;
+
 public:
-  glm::vec3 up{0,1,0};
-  glm::vec3 position{0,15,100};
-  glm::vec3 back{0,0,1};
-  glm::mat4 viewMatrix;
-  glm::mat4 projectionMatrix;
+    glm::vec3 up{0,1,0};
+    glm::vec3 position{0,15,100};
+    glm::vec3 back{0,0,1};
+    glm::mat4 viewMatrix;
+    glm::mat4 projectionMatrix;
+    bool autoMovement = true;
 
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors
@@ -29,7 +36,7 @@ public:
   /*!
    * Update Camera viewMatrix based on up, position and back vectors
    */
-  void update();
+  void update(float dt);
 
   /*!
    * Get direction vector in world coordinates through camera projection plane
@@ -37,7 +44,9 @@ public:
    * @param v - camera projection plane vertical coordinate [-1,1]
    * @return Normalized vector from camera position to position on the camera projection plane
    */
-  glm::vec3 cast(double u, double v);
+    glm::vec3 cast(double u, double v);
+
+    glm::vec3 lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration);
 
 protected:
     /*!

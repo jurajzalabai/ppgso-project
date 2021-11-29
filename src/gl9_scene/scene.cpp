@@ -2,7 +2,7 @@
 #include "spear.h"
 
 void Scene::update(float time) {
-  camera->update();
+  camera->update(time);
   age += time;
 //  if (camera->position.x >= 20){
 //      auto spear = std::make_unique<Spear>();

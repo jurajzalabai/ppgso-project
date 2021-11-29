@@ -29,7 +29,9 @@
 #include "fireplace.h"
 #include "table.h"
 #include "plate.h"
-#include "glass.h"
+#include "mug.h"
+#include "lamp.h"
+#include "ceilinglamp.h"
 
 const unsigned int SIZE = 800;
 
@@ -102,9 +104,17 @@ private:
         plate->position = glm::vec3(0,2.5f,25);
         scene.objects.push_back(move(plate));
 
-//        auto glass = std::make_unique<Glass>();
-//        glass->position = glm::vec3(-5,10,25);
-//        scene.objects.push_back(move(glass));
+        auto lamp = std::make_unique<Lamp>();
+        lamp->position = glm::vec3(2,2.5f,25);
+        scene.objects.push_back(move(lamp));
+
+        auto mug = std::make_unique<Mug>();
+        mug->position = glm::vec3(4,2.5f,25);
+        scene.objects.push_back(move(mug));
+
+        auto ceilinglamp = std::make_unique<CeilingLamp>();
+        ceilinglamp->position = glm::vec3(4, 5, 25);
+        scene.objects.push_back(move(ceilinglamp));
 
         auto fireplace = std::make_unique<Fireplace>();
         fireplace->position = glm::vec3(-10,0,25);
@@ -217,6 +227,10 @@ public:
 
       if (key == GLFW_KEY_N) {
           scene.camera->back.z -= (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_T) {
+          scene.camera->autoMovement = false;
       }
 
       if (key == GLFW_KEY_1) {

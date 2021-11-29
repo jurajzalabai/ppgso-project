@@ -12,7 +12,7 @@
  * It initializes and loads all resources only once
  * It will move down along the Y axis and self delete when reaching below -10
  */
-class Glass final : public Object {
+class CeilingLamp final : public Object {
 private:
     // Static resources (Shared between instances)
     static std::unique_ptr<ppgso::Mesh> mesh;
@@ -30,7 +30,7 @@ public:
     /*!
      * Create new asteroid
      */
-    Glass();
+    CeilingLamp();
 
     /*!
      * Update asteroid
@@ -48,5 +48,6 @@ public:
 
 private:
 };
+
 
 
