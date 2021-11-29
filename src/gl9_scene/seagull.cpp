@@ -10,13 +10,14 @@ std::unique_ptr<ppgso::Mesh> Seagull::mesh;
 std::unique_ptr<ppgso::Texture> Seagull::texture;
 std::unique_ptr<ppgso::Shader> Seagull::shader;
 
-Seagull::Seagull() {
+Seagull::Seagull(Scene &scene) {
 
   scale *= 3.0f;
-    keyframes  = {Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
-                  Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)};
-    position = keyframes[0].position;
-    rotation = keyframes[0].rotation;
+    keyframes  = {{Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
+                  Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
+                  {Keyframe(glm::vec3(0,-1,0.5), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)}};
+    position = keyframes[scene.inside][0].position;
+    rotation = keyframes[scene.inside][0].rotation;
 
   if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
   if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
@@ -28,26 +29,21 @@ bool Seagull::update(Scene &scene, float dt) {
     std::cout<<" cas: "<<age << std::endl;
     age += dt;
 
-    if (scene.name) {
-        if (parent == nullptr) {
-            if (keyframes[curr].startTime < age) {
-                if (keyframes[curr].duration != 0) {
-                    if (age < keyframes[curr].startTime + keyframes[curr].duration){
-                        position = lerp(keyframes[curr].position, keyframes[curr+1].position, age, keyframes[curr].startTime, keyframes[curr].duration);
-                        rotation = lerp(keyframes[curr].rotation, keyframes[curr+1].rotation, age, keyframes[curr].startTime, keyframes[curr].duration);
-                    }
-                    else {
-                        curr++;
-                    }
+    if (parent == nullptr) {
+        if (keyframes[scene.inside][curr].startTime < age) {
+            if (keyframes[scene.inside][curr].duration != 0) {
+                if (age < keyframes[scene.inside][curr].startTime + keyframes[scene.inside][curr].duration){
+                    position = lerp(keyframes[scene.inside][curr].position, keyframes[scene.inside][curr+1].position, age, keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+                    rotation = lerp(keyframes[scene.inside][curr].rotation, keyframes[scene.inside][curr+1].rotation, age, keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+                }
+                else {
+                    curr++;
                 }
             }
         }
-        else {
-            position = glm::vec3{0, 0, 0};
-        }
     }
-    else{
-
+    else {
+        position = glm::vec3{0, 0, 0};
     }
 
   generateModelMatrix();

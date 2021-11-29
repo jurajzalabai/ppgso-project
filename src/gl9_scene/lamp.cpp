@@ -15,6 +15,7 @@ Lamp::Lamp() {
     // Set random scale speed and rotation
     scale *= (0.1f);
     speed = {(0.0f), (0.0f), 0.0f};
+    this->age = age;
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);

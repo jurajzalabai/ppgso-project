@@ -43,17 +43,12 @@ const unsigned int SIZE = 800;
  */
 class SceneWindow : public ppgso::Window {
 private:
-  Scene scene;
   bool animate = true;
 
+public:
   /*!
-   * Reset and initialize the game scene
-   * Creating unique smart pointers to objects that are stored in the scene object list
+   * Construct custom game window
    */
-  void initInteriorScene() {
-      scene.objects.clear();
-      scene.name = false;
-
       //TODO: zmenit svetla, tak aby vyzerali ze svietia
       //TODO: pohyb v druhej scene
       //TODO: kamery v druhej scene
@@ -65,88 +60,29 @@ private:
       //TODO: ohen textura
       //TODO: svetlo lampa
       //TODO: refaktor kodu
+  Scene scene;
 
-      auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
-      camera->position = glm::vec3{0,9,100};
-      scene.camera = move(camera);
+  SceneWindow() : Window{"gl9_scene", SIZE, SIZE} {
+    //hideCursor();
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 
-      auto generator = std::make_unique<Generator>();
-      scene.objects.push_back(move(generator));
+    // Initialize OpenGL state
+    // Enable Z-buffer
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
 
-      auto floor = std::make_unique<Floor>();
-      floor->position = glm::vec3(0,0,60);
-      scene.objects.push_back(move(floor));
+    // Enable polygon culling
+    glEnable(GL_CULL_FACE);
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
 
-      auto bulb = std::make_unique<Sphere>();
-      bulb->position = glm::vec3(8.14,5.4,62);
-      bulb->scale *= 0.3;
-      bulb->color = glm::vec3(1.0f);
-      scene.objects.push_back(move(bulb));
-
-      auto bulb_ceiling = std::make_unique<Sphere>();
-      bulb_ceiling->position = glm::vec3(0,17,63);
-      bulb_ceiling->scale *= 3;
-      bulb_ceiling->color = glm::vec3(1.0f);
-      scene.objects.push_back(move(bulb_ceiling));
-
-      auto table = std::make_unique<Table>();
-      table->position = glm::vec3(9,1,60);
-      scene.objects.push_back(move(table));
-
-      auto plate = std::make_unique<Plate>();
-      plate->position = glm::vec3(9,3.2,60);
-      scene.objects.push_back(move(plate));
-
-      auto fireplace = std::make_unique<Fireplace>();
-      fireplace->position = glm::vec3(0,0,33);
-      fireplace->rotation.x = (ppgso::PI/180)*(-90);
-      scene.objects.push_back(move(fireplace));
-
-      auto lamp = std::make_unique<Lamp>();
-      lamp->position = glm::vec3(9,3.2,62);
-      lamp->scale *= 0.5;
-      lamp->rotation.z = (ppgso::PI/180)*(-90);
-      scene.objects.push_back(move(lamp));
-
-      auto mug = std::make_unique<Mug>();
-      mug->position = glm::vec3(9,3.2,58);
-      mug->scale *= 0.5;
-      scene.objects.push_back(move(mug));
-
-      auto ceilinglamp = std::make_unique<CeilingLamp>();
-      ceilinglamp->position = glm::vec3(0, 16.10,63);
-      scene.objects.push_back(move(ceilinglamp));
-
-      auto human = std::make_unique<Human>();
-      human->position = glm::vec3(3,0,90);
-      scene.objects.push_back(move(human));
-
-      auto spear = std::make_unique<Spear>();
-      spear->position = glm::vec3(0,6,3);
-      spear->rotation = glm::vec3{(ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)};
-      spear->parent = scene.objects.back().get();
-
-      scene.objects.push_back(move(spear));
-
-      auto seagull = std::make_unique<Seagull>();
-      seagull->position = glm::vec3(0,-1,0.5);
-
-      seagull->parent = scene.objects.back().get();
-
-      scene.objects.push_back(move(seagull));
-
-      auto walls = std::make_unique<Walls>();
-      walls->position = glm::vec3(0,0,60);
-      scene.objects.push_back(move(walls));
   }
-
-
 
     void initScene() {
         scene.objects.clear();
-        scene.name = true;
-    // Add space background
-    //scene.objects.push_back(std::make_unique<Space>());
+        scene.inside = false;
+        // Add space background
+        //scene.objects.push_back(std::make_unique<Space>());
 
 //     Add generator to scene
 //    auto generator = std::make_unique<Generator>();
@@ -154,11 +90,11 @@ private:
 //    scene.objects.push_back(move(generator));
 
         // Add player to the scene
-        auto spear = std::make_unique<Spear>();
+        auto spear = std::make_unique<Spear>(scene);
         spear->position = glm::vec3(-1,5,47);
         scene.objects.push_back(move(spear));
 
-        auto seagull = std::make_unique<Seagull>();
+        auto seagull = std::make_unique<Seagull>(scene);
         seagull->position = glm::vec3(25,30,0);
         scene.objects.push_back(move(seagull));
 
@@ -177,8 +113,7 @@ private:
         turtle->position = glm::vec3(-15,1,-30);
         scene.objects.push_back(move(turtle));
 
-        auto human = std::make_unique<Human>();
-        //        human->position = glm::vec3(-1,-1,50);
+        auto human = std::make_unique<Human>(scene);
         scene.objects.push_back(move(human));
 
         auto house = std::make_unique<House>();
@@ -189,32 +124,6 @@ private:
         auto chimney = std::make_unique<Chimney>();
         chimney->position = glm::vec3(62,15,10);
         scene.objects.push_back(move(chimney));
-
-        auto table = std::make_unique<Table>();
-        table->position = glm::vec3(0,0,25);
-        table->rotation.z = (ppgso::PI/180)*(-90);
-        scene.objects.push_back(move(table));
-
-        auto plate = std::make_unique<Plate>();
-        plate->position = glm::vec3(0,2.5f,25);
-        scene.objects.push_back(move(plate));
-
-        auto lamp = std::make_unique<Lamp>();
-        lamp->position = glm::vec3(2,2.5f,25);
-        scene.objects.push_back(move(lamp));
-
-        auto mug = std::make_unique<Mug>();
-        mug->position = glm::vec3(4,2.5f,25);
-        scene.objects.push_back(move(mug));
-
-        auto ceilinglamp = std::make_unique<CeilingLamp>();
-        ceilinglamp->position = glm::vec3(4, 5, 25);
-        scene.objects.push_back(move(ceilinglamp));
-
-        auto fireplace = std::make_unique<Fireplace>();
-        fireplace->position = glm::vec3(-10,0,25);
-        fireplace->rotation.x = (ppgso::PI/180)*(-90);
-        scene.objects.push_back(move(fireplace));
 
         // Add player to the scene
         auto island = std::make_unique<Island>();
@@ -242,30 +151,58 @@ private:
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         scene.camera = move(camera);
 
-  }
+    }
 
+    void initInteriorScene() {
+        scene.objects.clear();
+        scene.inside = true;
+        auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
+        camera->position = glm::vec3{0,9,100};
+        camera->age = scene.age;
+        scene.camera = move(camera);
 
-public:
-  /*!
-   * Construct custom game window
-   */
-  SceneWindow() : Window{"gl9_scene", SIZE, SIZE} {
-    //hideCursor();
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
+        auto floor = std::make_unique<Floor>();
+        floor->position = glm::vec3(0,0,60);
+        scene.objects.push_back(move(floor));
 
-    // Initialize OpenGL state
-    // Enable Z-buffer
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
+        auto table = std::make_unique<Table>();
+        table->position = glm::vec3(9,1,60);
+        scene.objects.push_back(move(table));
 
-    // Enable polygon culling
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
-    glCullFace(GL_BACK);
+        auto plate = std::make_unique<Plate>();
+        plate->position = glm::vec3(9,3.2,60);
+        scene.objects.push_back(move(plate));
 
-//    initScene();
-      initInteriorScene();
-  }
+        auto fireplace = std::make_unique<Fireplace>();
+        fireplace->position = glm::vec3(0,0,33);
+        fireplace->rotation.x = (ppgso::PI/180)*(-90);
+        scene.objects.push_back(move(fireplace));
+
+        auto human = std::make_unique<Human>(scene);
+        human->position = glm::vec3(0,0,60);
+        human->age = scene.age;
+        scene.objects.push_back(move(human));
+
+        auto spear = std::make_unique<Spear>(scene);
+        spear->age = scene.age;
+        spear->parent = scene.objects.back().get();
+
+        scene.objects.push_back(move(spear));
+
+        auto seagull = std::make_unique<Seagull>(scene);
+        seagull->age = scene.age;
+        seagull->parent = scene.objects.back().get();
+        scene.objects.push_back(move(seagull));
+
+        auto walls = std::make_unique<Walls>();
+        walls->position = glm::vec3(0,0,60);
+        scene.objects.push_back(move(walls));
+
+        auto lamp = std::make_unique<Lamp>();
+        lamp->position = glm::vec3(0,0,60);
+        scene.objects.push_back(move(lamp));
+    }
+
 
   /*!
    * Handles pressed key when the window is focused
@@ -481,11 +418,16 @@ public:
 };
 
 int main() {
-  // Initialize our window
-  SceneWindow window;
+    // Initialize our window
+    SceneWindow window;
+    window.initScene();
 
-  // Main execution loop
-  while (window.pollEvents()) {}
+    // Main execution loop
+    while (window.pollEvents()) {
+        if (window.scene.age >= 30.0f && !window.scene.inside){
+            window.initInteriorScene();
+        }
+    }
 
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

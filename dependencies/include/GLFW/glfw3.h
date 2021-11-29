@@ -2739,7 +2739,7 @@ GLFWAPI GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window
  *
  *  On some platforms, certain events are sent directly to the application
  *  without going through the event queue, causing callbacks to be called
- *  outside of a call to one of the event processing functions.
+ *  inside of a call to one of the event processing functions.
  *
  *  Event processing is not required for joystick input to work.
  *
@@ -2779,7 +2779,7 @@ GLFWAPI void glfwPollEvents(void);
  *  [window refresh callback](@ref window_refresh) to redraw the contents of
  *  your window when necessary during such operations.
  *
- *  On some platforms, certain callbacks may be called outside of a call to one
+ *  On some platforms, certain callbacks may be called inside of a call to one
  *  of the event processing functions.
  *
  *  If no windows exist, this function returns immediately.  For synchronization
@@ -2826,7 +2826,7 @@ GLFWAPI void glfwWaitEvents(void);
  *  [window refresh callback](@ref window_refresh) to redraw the contents of
  *  your window when necessary during such operations.
  *
- *  On some platforms, certain callbacks may be called outside of a call to one
+ *  On some platforms, certain callbacks may be called inside of a call to one
  *  of the event processing functions.
  *
  *  If no windows exist, this function returns immediately.  For synchronization

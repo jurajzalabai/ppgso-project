@@ -20,9 +20,7 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-    // Age of the object in seconds
-    float age{0.0f};
-    std::vector<Keyframe> keyframes;
+    std::vector<std::vector<Keyframe>> keyframes;
     unsigned long long int curr = 0;
 //    float counter{0.0f};
 
@@ -44,10 +42,13 @@ private:
      */
 
 public:
+
+    float age{0.0f};
+
     /*!
      * Create new asteroid
      */
-    Human();
+    Human(Scene &scene);
 
     /*!
      * Update asteroid

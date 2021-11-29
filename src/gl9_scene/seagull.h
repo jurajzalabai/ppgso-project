@@ -16,15 +16,17 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-    float age{0.0f};
-    std::vector<Keyframe> keyframes;
+    std::vector<std::vector<Keyframe>> keyframes;
     unsigned long long int curr = 0;
 
 public:
+
+    float age{0.0f};
+
     /*!
      * Create a new player
      */
-    Seagull();
+    Seagull(Scene &scene);
 
     /*!
      * Update player position considering keyboard inputs

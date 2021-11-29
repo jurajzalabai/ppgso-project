@@ -12,7 +12,6 @@
  */
 class Camera {
 private:
-    float age{0.0f};
     std::vector<Keyframe> keyframes;
     unsigned long long int curr = 0;
 
@@ -22,7 +21,8 @@ public:
     glm::vec3 back{0,0,1};
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
-    bool autoMovement = false;
+    float age{0.0f};
+    bool autoMovement = true;
 
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors

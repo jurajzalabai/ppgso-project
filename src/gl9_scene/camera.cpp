@@ -29,13 +29,14 @@ void Camera::update(float dt) {
             }
         }
     }
-    std::cout<< " z camera: "<< position.z<< std::endl;
-    std::cout<< " y camera: "<< position.y<< std::endl;
-    std::cout<< " x camera: "<< position.x<< std::endl;
-    std::cout<< " rotate camera: "<< back.z<< std::endl;
-    std::cout<< " rotate camera: "<< back.y<< std::endl;
-    std::cout<< " rotate camera: "<< back.x<< std::endl;
-  viewMatrix = lookAt(position, position-back, up);
+//    std::cout<< " z camera: "<< position.z<< std::endl;
+//    std::cout<< " y camera: "<< position.y<< std::endl;
+//    std::cout<< " x camera: "<< position.x<< std::endl;
+//    std::cout<< " rotate camera: "<< back.z<< std::endl;
+//    std::cout<< " rotate camera: "<< back.y<< std::endl;
+//    std::cout<< " rotate camera: "<< back.x<< std::endl;
+    std::cout<< " age: "<< age << std::endl;
+    viewMatrix = lookAt(position, position-back, up);
 }
 
 glm::vec3 Camera::cast(double u, double v) {
