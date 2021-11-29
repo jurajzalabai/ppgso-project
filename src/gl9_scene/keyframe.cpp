@@ -1,4 +1,3 @@
-#include <glm/gtc/random.hpp>
 #include "keyframe.h"
 
 //Keyframe::Keyframe(glm::vec3 position, glm::vec3 rotation, float arrivalTime, float departureTime) {

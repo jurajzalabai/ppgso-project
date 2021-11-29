@@ -29,9 +29,11 @@
 #include "fireplace.h"
 #include "table.h"
 #include "plate.h"
-#include "glass.h"
 #include "floor.h"
 #include "walls.h"
+#include "mug.h"
+#include "lamp.h"
+#include "ceilinglamp.h"
 
 const unsigned int SIZE = 800;
 
@@ -147,6 +149,7 @@ private:
         house->scale *= 1.6;
         scene.objects.push_back(move(house));
 
+<<<<<<< HEAD
 //        auto chimney = std::make_unique<Chimney>();
 //        chimney->position = glm::vec3(62,15,10);
 //        scene.objects.push_back(move(chimney));
@@ -168,6 +171,37 @@ private:
 //        fireplace->position = glm::vec3(-10,0,25);
 //        fireplace->rotation.x = (ppgso::PI/180)*(-90);
 //        scene.objects.push_back(move(fireplace));
+=======
+        auto chimney = std::make_unique<Chimney>();
+        chimney->position = glm::vec3(62,15,10);
+        scene.objects.push_back(move(chimney));
+
+        auto table = std::make_unique<Table>();
+        table->position = glm::vec3(0,0,25);
+        table->rotation.z = (ppgso::PI/180)*(-90);
+        scene.objects.push_back(move(table));
+
+        auto plate = std::make_unique<Plate>();
+        plate->position = glm::vec3(0,2.5f,25);
+        scene.objects.push_back(move(plate));
+
+        auto lamp = std::make_unique<Lamp>();
+        lamp->position = glm::vec3(2,2.5f,25);
+        scene.objects.push_back(move(lamp));
+
+        auto mug = std::make_unique<Mug>();
+        mug->position = glm::vec3(4,2.5f,25);
+        scene.objects.push_back(move(mug));
+
+        auto ceilinglamp = std::make_unique<CeilingLamp>();
+        ceilinglamp->position = glm::vec3(4, 5, 25);
+        scene.objects.push_back(move(ceilinglamp));
+
+        auto fireplace = std::make_unique<Fireplace>();
+        fireplace->position = glm::vec3(-10,0,25);
+        fireplace->rotation.x = (ppgso::PI/180)*(-90);
+        scene.objects.push_back(move(fireplace));
+>>>>>>> main
 
         // Add player to the scene
         auto island = std::make_unique<Island>();
@@ -276,6 +310,10 @@ public:
 
       if (key == GLFW_KEY_N) {
           scene.camera->back.z -= (ppgso::PI/180)*(-3);
+      }
+
+      if (key == GLFW_KEY_T) {
+          scene.camera->autoMovement = false;
       }
 
       if (key == GLFW_KEY_1) {
