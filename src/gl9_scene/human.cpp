@@ -15,17 +15,19 @@ std::unique_ptr<ppgso::Mesh> Human::mesh;
 std::unique_ptr<ppgso::Texture> Human::texture;
 std::unique_ptr<ppgso::Shader> Human::shader;
 
-Human::Human() {
+Human::Human(Scene &scene) {
 
     scale *= (4.0f);
 
-    keyframes  = {Keyframe(glm::vec3(-1,-1,50), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 3.0f),
+    keyframes  = {{Keyframe(glm::vec3(-1,-1,50), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 3.0f),
                   Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
                   Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
-                  Keyframe(glm::vec3(22,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)};
+                  Keyframe(glm::vec3(22,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
+                  {Keyframe(glm::vec3(0,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 30.0f, 3.0f),
+                  Keyframe(glm::vec3(0,0,35), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 0.0f, 0.0f)}};
 
-    position = keyframes[0].position;
-    rotation = keyframes[0].rotation;
+    position = keyframes[scene.inside][0].position;
+    rotation = keyframes[scene.inside][0].rotation;
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("HumanTexture.bmp"));
@@ -34,16 +36,15 @@ Human::Human() {
 bool Human::update(Scene &scene, float dt) {
     age += dt;
 
-    if (scene.name){
-        if (keyframes[curr].startTime < age) {
-            if (keyframes[curr].duration != 0) {
-                if (age < keyframes[curr].startTime + keyframes[curr].duration){
-                    position = lerp(keyframes[curr].position, keyframes[curr+1].position, age, keyframes[curr].startTime, keyframes[curr].duration);
-                    rotation = lerp(keyframes[curr].rotation, keyframes[curr+1].rotation, age, keyframes[curr].startTime, keyframes[curr].duration);
-                }
-                else {
-                    curr++;
-                }
+    if (keyframes[scene.inside][curr].startTime < age) {
+        if (keyframes[scene.inside][curr].duration != 0) {
+            if (age < keyframes[scene.inside][curr].startTime + keyframes[scene.inside][curr].duration) {
+                position = lerp(keyframes[scene.inside][curr].position, keyframes[scene.inside][curr + 1].position, age,
+                                keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+                rotation = lerp(keyframes[scene.inside][curr].rotation, keyframes[scene.inside][curr + 1].rotation, age,
+                                keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+            } else {
+                curr++;
             }
         }
 

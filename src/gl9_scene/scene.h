@@ -48,7 +48,7 @@ class Scene {
 
     float age={0.0};
 
-    bool name;
+    bool inside;
 
     // Store cursor state
     struct {

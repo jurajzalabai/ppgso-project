@@ -20,19 +20,21 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-    // Age of the object in seconds
-    float age{0.0f};
-    std::vector<Keyframe> keyframes;
+    std::vector<std::vector<Keyframe>> keyframes;
     unsigned long long int curr = 0;
 
     // Speed and rotational momentum
     glm::vec3 speed;
 
 public:
+
+    // Age of the object in seconds
+    float age{0.0f};
+
     /*!
      * Create new asteroid
      */
-    Spear();
+    Spear(Scene &scene);
 
     /*!
      * Update asteroid

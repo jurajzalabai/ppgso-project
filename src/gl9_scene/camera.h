@@ -12,7 +12,6 @@
  */
 class Camera {
 private:
-    float age{0.0f};
     std::vector<Keyframe> keyframes;
     unsigned long long int curr = 0;
 
@@ -22,6 +21,7 @@ public:
     glm::vec3 back{0,0,1};
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
+    float age{0.0f};
     bool autoMovement = true;
 
   /*!
