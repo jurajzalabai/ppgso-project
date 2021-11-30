@@ -144,7 +144,7 @@ public:
 
     void initInteriorScene() {
         scene.objects.clear();
-
+        scene.inside = true;
         //TODO: zmenit svetla, tak aby vyzerali ze svietia
         //TODO: pohyb v druhej scene
         //TODO: kamery v druhej scene
@@ -156,6 +156,15 @@ public:
         //TODO: ohen textura
         //TODO: svetlo lampa
         //TODO: refaktor kodu
+        //TODO: let vtaka - parent
+        //TODO: keyframe - na vsetko
+        //TODO: spravne textury na vsetko
+
+
+        //TODO: otazky - ked sa dlho nacitava scena
+        //TODO: ked nechcem vidiet smoke zo vsade
+        //TODO: textury ci na vsetkom, nevieme najst
+        //TODO: ci vsetko cez keyframes.. pady
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->position = glm::vec3{0, 9, 100};
