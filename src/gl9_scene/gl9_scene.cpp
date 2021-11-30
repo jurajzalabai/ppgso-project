@@ -81,10 +81,12 @@ public:
         // Add player to the scene
         auto spear = std::make_unique<Spear>(scene);
         spear->position = glm::vec3(-1,5,47);
+        spear->age = scene.age;
         scene.objects.push_back(move(spear));
 
         auto seagull = std::make_unique<Seagull>(scene);
         seagull->position = glm::vec3(25,30,0);
+        seagull->age = scene.age;
         scene.objects.push_back(move(seagull));
 
         auto palmTree = std::make_unique<PalmTree>();
@@ -103,6 +105,7 @@ public:
         scene.objects.push_back(move(turtle));
 
         auto human = std::make_unique<Human>(scene);
+        human->age = scene.age;
         scene.objects.push_back(move(human));
 
         auto house = std::make_unique<House>();
@@ -138,6 +141,8 @@ public:
 
         // Create a camera
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
+        camera->age = scene.age;
+        camera->inside = scene.inside;
         scene.camera = move(camera);
 
     }
@@ -167,8 +172,10 @@ public:
         //TODO: ci vsetko cez keyframes.. pady
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
-        camera->position = glm::vec3{0, 9, 100};
         camera->age = scene.age;
+        camera->inside = scene.inside;
+        camera->position = camera->keyframes[camera->inside][0].position;
+        camera->back = camera->keyframes[camera->inside][0].rotation;
         scene.camera = move(camera);
 
         auto generator = std::make_unique<Generator>();
@@ -298,7 +305,7 @@ public:
       }
 
       if (key == GLFW_KEY_T) {
-          scene.camera->autoMovement = true;
+          scene.camera->autoMovement = false;
       }
 
       if (key == GLFW_KEY_1) {
@@ -456,11 +463,13 @@ int main() {
     // Initialize our window
     SceneWindow window;
     window.initScene();
-
     // Main execution loop
     while (window.pollEvents()) {
-        if (window.scene.age >= 30.0f && !window.scene.inside){
+        if (window.scene.age >= 52.0f && !window.scene.inside){
             window.initInteriorScene();
+        }
+        if (window.scene.age >= 80.0f && window.scene.inside){
+            window.initScene();
         }
     }
 

@@ -15,7 +15,7 @@ Sphere::Sphere() {
     // Set random scale speed and rotation
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sphere.bmp"));
+//    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sphere.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("sphere.obj");
 }
 bool Sphere::update(Scene &scene, float dt) {

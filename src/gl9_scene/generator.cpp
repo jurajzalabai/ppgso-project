@@ -25,15 +25,15 @@ bool Generator::update(Scene &scene, float dt) {
                     time_sand = 0;
                 }
             }
-        //if (time > 0.001){
-        float color = glm::linearRand(0.01f, 0.05f);
-        auto obj = std::make_unique<Particle>(
-                glm::vec3(62,22,9),
-                glm::vec3(glm::linearRand(-2.0f, 2.0f),glm::linearRand(4.0f, 8.0f), glm::linearRand(-2.0f, 2.0f)),
-                glm::vec3(color, color, color),
-                glm::linearRand(0.5f, 1.5f), true);
-        scene.objects.push_back(move(obj));
-        time = 0;
+        if (time > 21.0f) {
+            float color = glm::linearRand(0.01f, 0.05f);
+            auto obj = std::make_unique<Particle>(
+                    glm::vec3(62, 22, 9),
+                    glm::vec3(glm::linearRand(-2.0f, 2.0f), glm::linearRand(4.0f, 8.0f), glm::linearRand(-2.0f, 2.0f)),
+                    glm::vec3(color, color, color),
+                    glm::linearRand(0.5f, 1.5f), true);
+            scene.objects.push_back(move(obj));
+        }
     }
     else {
         if (time > 0 && time < 0.2){
