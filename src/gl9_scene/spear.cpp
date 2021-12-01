@@ -17,17 +17,21 @@ std::unique_ptr<ppgso::Mesh> Spear::mesh;
 std::unique_ptr<ppgso::Texture> Spear::texture;
 std::unique_ptr<ppgso::Shader> Spear::shader;
 
-Spear::Spear(Scene &scene) {
+Spear::Spear() {
 
     scale *= (1.0f);
-    keyframes  = {{Keyframe(glm::vec3(-1,5,47), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), 0), 4.0f, 2.0f),
-                  Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(5), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
-                  {Keyframe(glm::vec3(0,6,3), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)), 0.0f, 0.0f)}};
-    position = keyframes[scene.inside][0].position;
-    rotation = keyframes[scene.inside][0].rotation;
+    keyframes  = {
+            {
+            Keyframe(glm::vec3(-1,5,47), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), 0), 4.0f, 2.0f),
+            // trafenie cajky
+            Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(5), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
+
+            {
+            Keyframe(glm::vec3(0,6,3), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)), 0.0f, 0.0f)}
+    };
 
     // Initialize static resources if needed
-    if (scene.inside){
+    if (scene_num == 1){
         if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     }
     else{
@@ -58,11 +62,11 @@ bool Spear::update(Scene &scene, float dt) {
     }
 
     if (child == nullptr) {
-        if (keyframes[scene.inside][curr].startTime < age) {
-            if (keyframes[scene.inside][curr].duration != 0) {
-                if (age < keyframes[scene.inside][curr].startTime + keyframes[scene.inside][curr].duration){
-                    position = lerp(keyframes[scene.inside][curr].position, keyframes[scene.inside][curr+1].position, age, keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
-                    rotation = lerp(keyframes[scene.inside][curr].rotation, keyframes[scene.inside][curr+1].rotation, age, keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+        if (keyframes[scene_num][curr].startTime < age) {
+            if (keyframes[scene_num][curr].duration != 0) {
+                if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration){
+                    position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr+1].position, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+                    rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr+1].rotation, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
                 }
                 else {
                     curr++;
@@ -90,7 +94,7 @@ bool Spear::update(Scene &scene, float dt) {
 
 void Spear::render(Scene &scene) {
     shader->use();
-    if (scene.inside){
+    if (scene_num == 1){
         shader->setUniform("pointLights[0].position", {0,15,74});
         shader->setUniform("pointLights[0].constant", 1.0f);
         shader->setUniform("pointLights[0].linear", 0.0f);

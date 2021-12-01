@@ -17,10 +17,11 @@ std::unique_ptr<ppgso::Mesh> Human::mesh;
 std::unique_ptr<ppgso::Texture> Human::texture;
 std::unique_ptr<ppgso::Shader> Human::shader;
 
-Human::Human(Scene &scene) {
+Human::Human() {
 
     scale *= (4.0f);
-    keyframes  = {{
+    keyframes  = {
+            {
             Keyframe(glm::vec3(-1,-1,50), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 3.0f),
             //idem si po cajku
             Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
@@ -30,16 +31,19 @@ Human::Human(Scene &scene) {
             Keyframe(glm::vec3(25,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
 
 
-                  {Keyframe(glm::vec3(0,0,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 62.0f, 3.0f),
-                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 65.0f, 2.0f),
-                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 68.0f, 1.0f),
-                          Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 69.0f, 4.0f),
-                          Keyframe(glm::vec3(5,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}};
+            {
+            Keyframe(glm::vec3(0,0,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 62.0f, 3.0f),
+            // prichod ku krbu
+            Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 65.0f, 2.0f),
+            // otocenie ku krbu
+            Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 68.0f, 1.0f),
+            // otocenie ku stolu
+            Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 69.0f, 4.0f),
+            // prichod ku stolu
+            Keyframe(glm::vec3(5,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}
+    };
 
-    position = keyframes[scene.inside][0].position;
-    rotation = keyframes[scene.inside][0].rotation;
-
-    if (scene.inside){
+    if (scene_num == 1){
         if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     }
     else{
@@ -51,14 +55,14 @@ Human::Human(Scene &scene) {
 }
 bool Human::update(Scene &scene, float dt) {
     age += dt;
-    std::cout << scene.inside << curr << "age human:" << age << std::endl;
-    if (keyframes[scene.inside][curr].startTime < age) {
-        if (keyframes[scene.inside][curr].duration != 0) {
-            if (age < keyframes[scene.inside][curr].startTime + keyframes[scene.inside][curr].duration) {
-                position = lerp(keyframes[scene.inside][curr].position, keyframes[scene.inside][curr + 1].position, age,
-                                keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
-                rotation = lerp(keyframes[scene.inside][curr].rotation, keyframes[scene.inside][curr + 1].rotation, age,
-                                keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+    std::cout << scene_num << curr << "age human:" << age << std::endl;
+    if (keyframes[scene_num][curr].startTime < age) {
+        if (keyframes[scene_num][curr].duration != 0) {
+            if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
+                position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr + 1].position, age,
+                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+                rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr + 1].rotation, age,
+                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
             } else {
                 curr++;
             }
@@ -87,7 +91,7 @@ bool Human::update(Scene &scene, float dt) {
 void Human::render(Scene &scene) {
     shader->use();
 
-    if (scene.inside){
+    if (scene_num == 1){
         shader->setUniform("pointLights[0].position", {0,15,74});
         shader->setUniform("pointLights[0].constant", 1.0f);
         shader->setUniform("pointLights[0].linear", 0.0f);

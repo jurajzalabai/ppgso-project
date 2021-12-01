@@ -17,9 +17,15 @@ std::unique_ptr<ppgso::Shader> Turtle::shader;
 
 Turtle::Turtle() {
     scale *= (0.1f);
-    speed = {(0.0f), (0.0f), 0.0f};
-    rotation.y = (ppgso::PI/180)*(-80);
-    rotation.x = (ppgso::PI/180)*(-90);
+    keyframes = {
+            {
+            Keyframe(glm::vec3(-15,1,-30), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 30.0f, 5.0f),
+            // korytnacka prichadza do zaberu
+            Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 0.0f, 0.0f)},
+
+            {},
+            {Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 85.0f, 0.0f),}
+    };
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -28,12 +34,20 @@ Turtle::Turtle() {
 }
 bool Turtle::update(Scene &scene, float dt) {
     age += dt;
-    if (age > 2){
-        if (position.z < -10){
-            position.z += 3*dt;
+
+    if (keyframes[scene_num][curr].startTime < age) {
+        if (keyframes[scene_num][curr].duration != 0) {
+            if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
+                position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr + 1].position, age,
+                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+                rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr + 1].rotation, age,
+                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+            } else {
+                curr++;
+            }
         }
-        else{
-                rotation.y = static_cast<float>(sin(age) + 4.14);
+        else {
+            rotation.y = static_cast<float>(sin(age) + 4.14);
         }
     }
 
