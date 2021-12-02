@@ -150,18 +150,12 @@ public:
     void initInteriorScene() {
         scene.objects.clear();
         scene.inside = true;
-        //TODO: zmenit svetla, tak aby vyzerali ze svietia
-        //TODO: pohyb v druhej scene
-        //TODO: kamery v druhej scene
-        //TODO: prepinanie medzi scenami
         //TODO: tiene
         //TODO: zapad slnka
         //TODO: textura podlahy, mozno steny
-        //TODO: mozno dym z ohna
         //TODO: ohen textura
-        //TODO: svetlo lampa
         //TODO: refaktor kodu
-        //TODO: let vtaka - parent
+        //TODO: let vtaka camera - parent
         //TODO: keyframe - na vsetko
         //TODO: spravne textury na vsetko
 
@@ -170,7 +164,7 @@ public:
         //TODO: ked nechcem vidiet smoke zo vsade
         //TODO: textury ci na vsetkom, nevieme najst
         //TODO: ci vsetko cez keyframes.. pady
-
+        //TODO: ako to maju ostatni ? zatial staci ? co dodat ?
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
         camera->inside = scene.inside;

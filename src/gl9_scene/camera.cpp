@@ -27,7 +27,7 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         // kokos
         Keyframe(glm::vec3(-17.0f,19.0f, 36.0f), glm::vec3(0.314159f,0.418879f,1), 48.0f, 4.0f),
         // prejdeme do dveri
-        Keyframe(glm::vec3(21.2f,8.44f,2.94f), glm::vec3(-7.95f,3.63f,3.63f), 0.0f, 0.0f)},
+        Keyframe(glm::vec3(21,8,3), glm::vec3(-7.95f,3.63f,3.63f), 0.0f, 0.0f)},
 
          {
         Keyframe(glm::vec3(1, 9, 96), glm::vec3(0.05f, 0.1f, 1), 65.0f, 4.0f),

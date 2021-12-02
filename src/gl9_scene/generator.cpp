@@ -15,17 +15,17 @@ bool Generator::update(Scene &scene, float dt) {
         if (time_sand > 2 && time_sand < 2.2)
             for (int i=0; i < 50; i++ ){
                 auto obj2 = std::make_unique<Particle>(
-                        glm::vec3(-15,1,-10),
+                        glm::vec3(-15,1,-20),
                         //                    glm::vec3(glm::linearRand(-2.0f, 2.0f),glm::linearRand(2.0f, 4.0f), glm::linearRand(-2.0f, 2.0f)),
                         glm::vec3(glm::linearRand(-15.0f, 15.0f),glm::linearRand(2.0f, 3.0f), glm::linearRand(-15.0f, 15.0f)),
-                        glm::vec3(0.7, 0.6, 0.1),
+                        glm::vec3(0.952, 0.929, 0.527),
                         glm::linearRand(0.2f, 0.5f), false);
                 scene.objects.push_back(move(obj2));
                 if (i==49){
                     time_sand = 0;
                 }
             }
-        if (time > 21.0f) {
+        if (time > 21.0f && time < 30.0) {
             float color = glm::linearRand(0.01f, 0.05f);
             auto obj = std::make_unique<Particle>(
                     glm::vec3(62, 22, 9),

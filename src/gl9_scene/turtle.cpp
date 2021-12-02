@@ -28,13 +28,13 @@ Turtle::Turtle() {
 }
 bool Turtle::update(Scene &scene, float dt) {
     age += dt;
-    if (age > 2){
+    if (age > 32.0 && age < 35.0){
         if (position.z < -10){
             position.z += 3*dt;
         }
-        else{
-                rotation.y = static_cast<float>(sin(age) + 4.14);
-        }
+    }
+    if (age > 36.0){
+        rotation.y = static_cast<float>(sin(age) + 4.14);
     }
 
     generateModelMatrix();
