@@ -69,7 +69,7 @@ public:
 
     void initScene() {
         scene.objects.clear();
-        scene.inside = false;
+        scene.scene_num++;
         // Add space background
         //scene.objects.push_back(std::make_unique<Space>());
 
@@ -78,35 +78,49 @@ public:
 //    generator->position.y = 10.0f;
 //    scene.objects.push_back(move(generator));
 
-        // Add player to the scene
-        auto spear = std::make_unique<Spear>(scene);
-        spear->position = glm::vec3(-1,5,47);
-        spear->age = scene.age;
-        scene.objects.push_back(move(spear));
+        if (scene.scene_num == 0) {
+            auto spear = std::make_unique<Spear>();
+            spear->age = scene.age;
+            spear->scene_num = scene.scene_num;
+            spear->position = spear->keyframes[spear->scene_num][0].position;
+            spear->rotation = spear->keyframes[spear->scene_num][0].rotation;
+            scene.objects.push_back(move(spear));
 
-        auto seagull = std::make_unique<Seagull>(scene);
-        seagull->position = glm::vec3(25,30,0);
-        seagull->age = scene.age;
-        scene.objects.push_back(move(seagull));
+            auto seagull = std::make_unique<Seagull>();
+            seagull->age = scene.age;
+            seagull->scene_num = scene.scene_num;
+            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
+            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
+            scene.objects.push_back(move(seagull));
+
+            auto human = std::make_unique<Human>();
+            human->age = scene.age;
+            human->scene_num = scene.scene_num;
+            human->position = human->keyframes[human->scene_num][0].position;
+            human->rotation = human->keyframes[human->scene_num][0].rotation;
+            scene.objects.push_back(move(human));
+        }
 
         auto palmTree = std::make_unique<PalmTree>();
+        palmTree->age = scene.age;
         palmTree->position = glm::vec3(-35,0,12);
         scene.objects.push_back(move(palmTree));
 
         auto coconut = std::make_unique<Coconut>();
+        coconut->age = scene.age;
         coconut->position = glm::vec3(-22,19,6);
         scene.objects.push_back(move(coconut));
 
         auto generator = std::make_unique<Generator>();
+        generator->time = scene.age;
         scene.objects.push_back(move(generator));
 
         auto turtle = std::make_unique<Turtle>();
-        turtle->position = glm::vec3(-15,1,-30);
+        turtle->age = scene.age;
+        turtle->scene_num = scene.scene_num;
+        turtle->position = turtle->keyframes[turtle->scene_num][0].position;
+        turtle->rotation = turtle->keyframes[turtle->scene_num][0].rotation;
         scene.objects.push_back(move(turtle));
-
-        auto human = std::make_unique<Human>(scene);
-        human->age = scene.age;
-        scene.objects.push_back(move(human));
 
         auto house = std::make_unique<House>();
         house->position = glm::vec3(50,0,0);
@@ -142,14 +156,21 @@ public:
         // Create a camera
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
-        camera->inside = scene.inside;
+        camera->scene_num = scene.scene_num;
+        camera->position = camera->keyframes[camera->scene_num][0].position;
+        camera->back = camera->keyframes[camera->scene_num][0].rotation;
         scene.camera = move(camera);
 
     }
 
     void initInteriorScene() {
         scene.objects.clear();
-        scene.inside = true;
+        scene.scene_num++;
+        //TODO: zmenit svetla, tak aby vyzerali ze svietia
+        //TODO: pohyb v druhej scene
+        //TODO: kamery v druhej scene
+        //TODO: prepinanie medzi scenami
+
         //TODO: tiene
         //TODO: zapad slnka
         //TODO: textura podlahy, mozno steny
@@ -167,12 +188,13 @@ public:
         //TODO: ako to maju ostatni ? zatial staci ? co dodat ?
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
-        camera->inside = scene.inside;
-        camera->position = camera->keyframes[camera->inside][0].position;
-        camera->back = camera->keyframes[camera->inside][0].rotation;
+        camera->scene_num = scene.scene_num;
+        camera->position = camera->keyframes[camera->scene_num][0].position;
+        camera->back = camera->keyframes[camera->scene_num][0].rotation;
         scene.camera = move(camera);
 
         auto generator = std::make_unique<Generator>();
+        generator->time = scene.age;
         scene.objects.push_back(move(generator));
 
         auto floor = std::make_unique<Floor>();
@@ -223,19 +245,25 @@ public:
         ceilinglamp->position = glm::vec3(0, 16.10, 63);
         scene.objects.push_back(move(ceilinglamp));
 
-        auto human = std::make_unique<Human>(scene);
+        auto human = std::make_unique<Human>();
         human->age = scene.age;
+        human->scene_num = scene.scene_num;
+        human->position = human->keyframes[human->scene_num][0].position;
+        human->rotation = human->keyframes[human->scene_num][0].rotation;
         scene.objects.push_back(move(human));
 
-        auto spear = std::make_unique<Spear>(scene);
+        auto spear = std::make_unique<Spear>();
         spear->age = scene.age;
-        spear->parent = scene.objects.back().get();
-
+        spear->scene_num = scene.scene_num;
+        spear->position = spear->keyframes[spear->scene_num][0].position;
+        spear->rotation = spear->keyframes[spear->scene_num][0].rotation;
         scene.objects.push_back(move(spear));
 
-        auto seagull = std::make_unique<Seagull>(scene);
+        auto seagull = std::make_unique<Seagull>();
         seagull->age = scene.age;
-        seagull->parent = scene.objects.back().get();
+        seagull->scene_num = scene.scene_num;
+        seagull->position = seagull->keyframes[seagull->scene_num][0].position;
+        seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
         scene.objects.push_back(move(seagull));
     }
 
@@ -459,10 +487,10 @@ int main() {
     window.initScene();
     // Main execution loop
     while (window.pollEvents()) {
-        if (window.scene.age >= 52.0f && !window.scene.inside){
+        if (window.scene.age >= 52.0f && window.scene.scene_num == 0){
             window.initInteriorScene();
         }
-        if (window.scene.age >= 80.0f && window.scene.inside){
+        if (window.scene.age >= 80.0f && window.scene.scene_num == 1){
             window.initScene();
         }
     }

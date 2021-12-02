@@ -24,7 +24,6 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
     // Age of the object in seconds
-    float age{0.0f};
     float counter{0.0f};
     float direction_x{0.0f};
     float direction_z{0.0f};
@@ -35,6 +34,9 @@ private:
 
 
 public:
+
+    float age{0.0f};
+
     /*!
      * Create new asteroid
      */

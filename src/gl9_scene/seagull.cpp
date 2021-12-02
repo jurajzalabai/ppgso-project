@@ -12,17 +12,20 @@ std::unique_ptr<ppgso::Mesh> Seagull::mesh;
 std::unique_ptr<ppgso::Texture> Seagull::texture;
 std::unique_ptr<ppgso::Shader> Seagull::shader;
 
-Seagull::Seagull(Scene &scene) {
+Seagull::Seagull() {
 
-  scale *= 3.0f;
-    keyframes  = {{Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
-                  Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
-                  {Keyframe(glm::vec3(0,-1,0.5), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),
-                   }};
-    position = keyframes[scene.inside][0].position;
-    rotation = keyframes[scene.inside][0].rotation;
+    scale *= 3.0f;
+    keyframes  = {
+            {
+            Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
+            // let cajky
+            Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
 
-    if (scene.inside){
+            {
+            Keyframe(glm::vec3(0,-1,0.5), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
+    };
+
+    if (scene_num == 1){
         if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     }
     else{
@@ -41,11 +44,11 @@ bool Seagull::update(Scene &scene, float dt) {
         if (age >= 73.0f && age <= 75.0f) {
             position = lerp(glm::vec3{5, 6, 63}, glm::vec3(9, 3.2f, 60), age, 73.0f, 2.0f);
         }
-        else if (keyframes[scene.inside][curr].startTime < age) {
-            if (keyframes[scene.inside][curr].duration != 0) {
-                if (age < keyframes[scene.inside][curr].startTime + keyframes[scene.inside][curr].duration){
-                    position = lerp(keyframes[scene.inside][curr].position, keyframes[scene.inside][curr+1].position, age, keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
-                    rotation = lerp(keyframes[scene.inside][curr].rotation, keyframes[scene.inside][curr+1].rotation, age, keyframes[scene.inside][curr].startTime, keyframes[scene.inside][curr].duration);
+        else if (keyframes[scene_num][curr].startTime < age) {
+            if (keyframes[scene_num][curr].duration != 0) {
+                if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration){
+                    position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr+1].position, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+                    rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr+1].rotation, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
                 }
                 else {
                     curr++;
@@ -68,7 +71,7 @@ bool Seagull::update(Scene &scene, float dt) {
 
 void Seagull::render(Scene &scene) {
     shader->use();
-    if (scene.inside){
+    if (scene_num == 1){
         shader->setUniform("pointLights[0].position", {0,15,74});
         shader->setUniform("pointLights[0].constant", 1.0f);
         shader->setUniform("pointLights[0].linear", 0.0f);

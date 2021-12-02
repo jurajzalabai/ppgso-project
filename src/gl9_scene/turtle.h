@@ -23,8 +23,7 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-    // Age of the object in seconds
-    float counter{0.0f};
+    unsigned long long int curr = 0;
 
     // Speed and rotational momentum
     glm::vec3 speed;
@@ -39,11 +38,16 @@ private:
      */
 
 public:
+
+    // Age of the object in seconds
+    float age{0.0f};
+    int scene_num = -1;
+    std::vector<std::vector<Keyframe>> keyframes;
+
     /*!
      * Create new asteroid
      */
     Turtle();
-    float age{0.0f};
     /*!
      * Update asteroid
      * @param scene Scene to interact with

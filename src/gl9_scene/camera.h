@@ -22,7 +22,7 @@ public:
     glm::mat4 projectionMatrix;
     float age{0.0f};
     bool autoMovement = true;
-    bool inside = false;
+    int scene_num;
     std::vector<std::vector<Keyframe>> keyframes;
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors

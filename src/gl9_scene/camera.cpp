@@ -6,13 +6,8 @@
 Camera::Camera(float fow, float ratio, float near, float far) {
     float fowInRad = (ppgso::PI/180.0f) * fow;
 
-//    scene.camera->position.z = 36.0f;
-//    scene.camera->position.x = -17.0f;
-//    scene.camera->position.y = 19.0f;
-//    scene.camera->back.z = 1.0f;
-//    scene.camera->back.y = 0.418879f;
-//    scene.camera->back.x = 0.314159f;
-    keyframes = {{
+    keyframes = {
+        {
         Keyframe(glm::vec3(25,30,30), glm::vec3(0, 0, 1), 0.0f, 6.0f),
         //let cajky
         Keyframe(glm::vec3(-35,18,45), glm::vec3(0, 0, 1), 6.0f, 1.5f),
@@ -29,13 +24,18 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         // prejdeme do dveri
         Keyframe(glm::vec3(21,8,3), glm::vec3(-7.95f,3.63f,3.63f), 0.0f, 0.0f)},
 
-         {
+        {
         Keyframe(glm::vec3(1, 9, 96), glm::vec3(0.05f, 0.1f, 1), 65.0f, 4.0f),
+        // prichod ku stolu
         Keyframe(glm::vec3(12, 9, 71), glm::vec3(0.25f, 0.57f, 1), 73.0f, 2.0f),
+        // pred stol
         Keyframe(glm::vec3(2, 9, 63), glm::vec3(-8.0f, 5.7f, 1), 75.0f, 4.0f),
-        Keyframe(glm::vec3(4, 9, 53), glm::vec3(-7.0f, 5.7f, -7.1f), 0.0f, 0.0f)}};
-    position = keyframes[inside][0].position;
-    back = keyframes[inside][0].rotation;
+        // prechod ponad stolom
+        Keyframe(glm::vec3(4, 9, 53), glm::vec3(-7.0f, 5.7f, -7.1f), 0.0f, 0.0f)},
+
+        {Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 0.0f, 0.0f)}
+    };
+
     curr = 0;
 
     projectionMatrix = glm::perspective(fowInRad, ratio, near, far);
@@ -44,11 +44,11 @@ Camera::Camera(float fow, float ratio, float near, float far) {
 void Camera::update(float dt) {
     age += dt;
 
-    if (autoMovement && keyframes[inside][curr].startTime < age) {
-        if (keyframes[inside][curr].duration != 0) {
-            if (age < keyframes[inside][curr].startTime + keyframes[inside][curr].duration){
-                position = lerp(keyframes[inside][curr].position, keyframes[inside][curr+1].position, age, keyframes[inside][curr].startTime, keyframes[inside][curr].duration);
-                back = lerp(keyframes[inside][curr].rotation, keyframes[inside][curr+1].rotation, age, keyframes[inside][curr].startTime, keyframes[inside][curr].duration);
+    if (autoMovement && keyframes[scene_num][curr].startTime < age) {
+        if (keyframes[scene_num][curr].duration != 0) {
+            if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration){
+                position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr+1].position, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+                back = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr+1].rotation, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
             }
             else {
                 curr++;

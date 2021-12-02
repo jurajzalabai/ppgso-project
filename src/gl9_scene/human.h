@@ -20,17 +20,7 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-    std::vector<std::vector<Keyframe>> keyframes;
     unsigned long long int curr = 0;
-//    float counter{0.0f};
-
-    // Speed and rotational momentum
-//    int speed;
-//    bool flag;
-//    glm::vec3 start;
-//    glm::vec3 goal1;
-//    int j;
-//    glm::vec3 rotMomentum;
 
     /*!
      * Split the asteroid into multiple pieces and spawn an explosion object.
@@ -44,11 +34,13 @@ private:
 public:
 
     float age{0.0f};
+    int scene_num = -1;
+    std::vector<std::vector<Keyframe>> keyframes;
 
     /*!
      * Create new asteroid
      */
-    Human(Scene &scene);
+    Human();
 
     /*!
      * Update asteroid
