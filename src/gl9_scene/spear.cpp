@@ -45,7 +45,7 @@ bool Spear::update(Scene &scene, float dt) {
     age += dt;
 
     // Collision detection
-    if (age > 5) {
+    if (age > 5 && child == nullptr) {
         for (auto &obj : scene.objects) {
             // Ignore self in scene
             if (obj.get() == this)
@@ -54,7 +54,7 @@ bool Spear::update(Scene &scene, float dt) {
             auto seagull = dynamic_cast<Seagull *>(obj.get());
             if (!seagull) continue;
 
-            if (seagull->parent == nullptr && distance(position, seagull->position) < seagull->scale.y) {
+            if ((seagull->parent == nullptr && distance(position, seagull->position) < seagull->scale.y) || scene_num == 1) {
                 seagull->parent = this;
                 child = seagull;
             }
@@ -74,6 +74,7 @@ bool Spear::update(Scene &scene, float dt) {
             }
         }
     }
+
     else if (position.y >= 2){
         position.y -= 10 * dt;
         position.x += 2 * dt;

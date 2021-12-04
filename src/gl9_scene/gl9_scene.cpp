@@ -503,6 +503,7 @@ int main() {
     // Initialize our window
     SceneWindow window;
     window.initScene();
+//    window.scene.age = 45.0f;
     // Main execution loop
 
     window.scene.age = 40.0;

@@ -67,19 +67,19 @@ bool Human::update(Scene &scene, float dt) {
                 curr++;
             }
         }
+    }
 
-        if(curr == 1 && child == nullptr) {
-            for (auto &obj : scene.objects) {
+    if((scene_num == 0 && curr == 1 && child == nullptr) || (scene_num == 1 && child == nullptr)) {
+        for (auto &obj : scene.objects) {
 
-                if (obj.get() == this)
-                    continue;
+            if (obj.get() == this)
+                continue;
 
-                auto spear = dynamic_cast<Spear *>(obj.get());
-                if (!spear) continue;
+            auto spear = dynamic_cast<Spear *>(obj.get());
+            if (!spear) continue;
 
-                spear->parent = this;
-                child = spear;
-            }
+            spear->parent = this;
+            child = spear;
         }
     }
 

@@ -22,7 +22,7 @@ Seagull::Seagull() {
             Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
 
             {
-            Keyframe(glm::vec3(0,-1,0.5), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
+            Keyframe(glm::vec3(0,0,0), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
     };
 
     if (scene_num == 1){
@@ -58,6 +58,7 @@ bool Seagull::update(Scene &scene, float dt) {
     }
     else {
         position = glm::vec3{0, 0, 0};
+        std::cout << "salalala" << std::endl;
         if (age >= 73.0f) {
             position = glm::vec3{5, 6, 63};
             std::cout << "lalala" << position.x << position.y << position.z << std::endl;
