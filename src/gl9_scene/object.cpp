@@ -24,3 +24,12 @@ void Object::generateModelMatrix() {
 glm::vec3 Object::lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration){
     return a + ((age - start)/duration) * (b-a);
 }
+
+glm::vec3 Object::quadratic_lerp(const glm::vec3 a, const glm::vec3 b, const glm::vec3 c, float age, float start, float duration) {
+    glm::vec3 r0, r1;
+    r0 = a + ((age - start)/duration) * (b-a);
+    r1 = b + ((age - start)/duration) * (c-b);
+    glm::vec3 s;
+    s = r0 + ((age - start)/duration) * (r1-r0);
+    return {s};
+}

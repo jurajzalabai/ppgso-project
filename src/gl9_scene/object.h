@@ -60,5 +60,7 @@ protected:
   void generateModelMatrix();
 
   glm::vec3 lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration);
+
+  glm::vec3 quadratic_lerp(const glm::vec3 a, const glm::vec3 b, const glm::vec3 c, float age, float start, float duration);
 };
 

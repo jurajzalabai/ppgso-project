@@ -6,9 +6,8 @@
 #include "island.h"
 #include "seagull.h"
 
-#include <shaders/diffuse_vert_glsl.h>
-#include <shaders/diffuse_frag_glsl.h>
-
+#include <shaders/scene_diffuse_vert_glsl.h>
+#include <shaders/scene_diffuse_frag_glsl.h>
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Island::mesh;
@@ -20,12 +19,12 @@ Island::Island() {
     scale *= (1.3f);
 
     // Initialize static resources if needed
-    if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
+    if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("IslandTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Island.obj");
 }
 bool Island::update(Scene &scene, float dt) {
-
+    age += dt;
 // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
 //
@@ -35,8 +34,21 @@ bool Island::update(Scene &scene, float dt) {
 void Island::render(Scene &scene) {
     shader->use();
 
-    // Set up light
-    shader->setUniform("LightDirection", scene.lightDirection);
+    shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 80.0f, 12.0f));
+    shader->setUniform("pointLights[0].constant", 6.0f);
+    shader->setUniform("pointLights[0].linear", 0.0f);
+    shader->setUniform("pointLights[0].quadratic", 0.0f);
+    shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984, 0.607, 0.215), age, 80.0f, 12.0f));
+    shader->setUniform("pointLights[0].direction", {1.0f, 1.0f, 1.0f});
+    shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));
+    shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(180.0f)));
+
+
+    shader->setUniform("diffuse_strength", 0.25f);
+    shader->setUniform("ambient_strength", 0.2f);
+    shader->setUniform("specular_strength", 0.1f);
+    shader->setUniform("viewPos", scene.camera->position);
+
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

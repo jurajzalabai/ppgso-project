@@ -21,7 +21,10 @@ Sphere::Sphere() {
 bool Sphere::update(Scene &scene, float dt) {
     // Count time alive
     age += dt;
-
+    if (age > 80.0 && age < 92.0f){
+        color = lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984, 0.607, 0.215), age, 80.0f, 12.0f);
+        position = quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 80.0f, 12.0f);
+    }
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
 

@@ -20,13 +20,13 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
     // Age of the object in seconds
-    float age{0.0f};
+    float color_lerp;
 public:
     /*!
      * Create new asteroid
      */
     Sphere();
-
+    float age{0.0f};
     /*!
      * Update asteroid
      * @param scene Scene to interact with

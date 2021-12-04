@@ -70,6 +70,9 @@ public:
     void initScene() {
         scene.objects.clear();
         scene.scene_num++;
+
+//        scene.scene_num = 1;
+//        scene.age = 80.0f;
         // Add space background
         //scene.objects.push_back(std::make_unique<Space>());
 
@@ -101,6 +104,13 @@ public:
             scene.objects.push_back(move(human));
         }
 
+        auto sun = std::make_unique<Sphere>();
+        sun->age = scene.age;
+        sun->position = glm::vec3(0, 100, 0.0f);
+        sun->scale *= 8;
+        sun->color = glm::vec3({0.992f, 0.952f, 0.588f});
+        scene.objects.push_back(move(sun));
+
         auto palmTree = std::make_unique<PalmTree>();
         palmTree->age = scene.age;
         palmTree->position = glm::vec3(-35,0,12);
@@ -124,6 +134,7 @@ public:
 
         auto house = std::make_unique<House>();
         house->position = glm::vec3(50,0,0);
+        house->age = scene.age;
         house->scale *= 1.6;
         scene.objects.push_back(move(house));
 
@@ -133,6 +144,7 @@ public:
 
         // Add player to the scene
         auto island = std::make_unique<Island>();
+        island->age = scene.age;
         island->position = glm::vec3(0,0,0);
         island->rotation.z = (ppgso::PI/180)*(-90);
         scene.objects.push_back(move(island));
@@ -166,26 +178,32 @@ public:
     void initInteriorScene() {
         scene.objects.clear();
         scene.scene_num++;
-        //TODO: zmenit svetla, tak aby vyzerali ze svietia
-        //TODO: pohyb v druhej scene
-        //TODO: kamery v druhej scene
-        //TODO: prepinanie medzi scenami
+
+        //TODO: Hlavne:
+        //TODO: opravit zapad slnka : J
+        //TODO: pridat keyframes kamery na vonok : J
+        //TODO: obloha : J
+        //TODO: proceudralne strom pozicia: J
+        //TODO: random viac kokosov, jeden z nich padne a ten pohyb opravit(mozno aj tocenie) : T
+        //TODO: vietor pridat... nejaku funkciu, co mu tam posles vahu alebo take nieco pri ostepe : T
+        //TODO: dodat jednu zlozku svetla : J
 
         //TODO: tiene
-        //TODO: zapad slnka
+        //TODO: postprocessing
+
+
+        //TODO: detaily
+        //TODO: ohen zlepsit
         //TODO: textura podlahy, mozno steny
         //TODO: ohen textura
         //TODO: refaktor kodu
-        //TODO: let vtaka camera - parent
         //TODO: keyframe - na vsetko
         //TODO: spravne textury na vsetko
+        //TODO: smoke dat aby DEPTH nemal test
 
 
-        //TODO: otazky - ked sa dlho nacitava scena
-        //TODO: ked nechcem vidiet smoke zo vsade
         //TODO: textury ci na vsetkom, nevieme najst
-        //TODO: ci vsetko cez keyframes.. pady
-        //TODO: ako to maju ostatni ? zatial staci ? co dodat ?
+
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
         camera->scene_num = scene.scene_num;
@@ -486,6 +504,10 @@ int main() {
     SceneWindow window;
     window.initScene();
     // Main execution loop
+
+    window.scene.age = 40.0;
+//    window.scene.scene_num = 1;
+
     while (window.pollEvents()) {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){
             window.initInteriorScene();
