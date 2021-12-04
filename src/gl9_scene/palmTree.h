@@ -25,6 +25,7 @@ private:
 
     // Age of the object in seconds
     float counter{0.0f};
+    bool coconuts;
 
     // Speed and rotational momentum
     glm::vec3 speed;

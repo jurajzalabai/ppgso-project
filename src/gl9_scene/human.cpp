@@ -55,7 +55,7 @@ Human::Human() {
 }
 bool Human::update(Scene &scene, float dt) {
     age += dt;
-    std::cout << scene_num << curr << "age human:" << age << std::endl;
+//    std::cout << scene_num << curr << "age human:" << age << std::endl;
     if (keyframes[scene_num][curr].startTime < age) {
         if (keyframes[scene_num][curr].duration != 0) {
             if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
