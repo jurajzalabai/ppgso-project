@@ -36,6 +36,7 @@ private:
 public:
 
     float age{0.0f};
+    bool willFall = false;
 
     /*!
      * Create new asteroid
