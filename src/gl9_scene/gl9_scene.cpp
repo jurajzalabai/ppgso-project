@@ -486,6 +486,7 @@ int main() {
     // Initialize our window
     SceneWindow window;
     window.initScene();
+//    window.scene.age = 45.0f;
     // Main execution loop
     while (window.pollEvents()) {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){
