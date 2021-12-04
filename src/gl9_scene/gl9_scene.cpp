@@ -217,8 +217,6 @@ public:
         //TODO: pridat keyframes kamery na vonok : J
         //TODO: obloha : J
         //TODO: proceudralne strom pozicia: T
-        // DONE
-
         //TODO: random viac kokosov, jeden z nich padne a ten pohyb opravit(mozno aj tocenie) : T
         //TODO: vietor pridat... nejaku funkciu, co mu tam posles vahu alebo take nieco pri ostepe : T
         //TODO: dodat jednu zlozku svetla : J
@@ -538,12 +536,11 @@ int main() {
 //    window.scene.age = 45.0f;
     // Main execution loop
 
-<<<<<<< HEAD
-    window.scene.age = 80.0;
-    window.scene.scene_num = 1;
-=======
+//    window.scene.age = 80.0;
 //    window.scene.scene_num = 1;
->>>>>>> branch_tommy
+
+//    window.scene.scene_num = 1;
+
 
     while (window.pollEvents()) {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){

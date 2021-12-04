@@ -19,10 +19,9 @@ std::unique_ptr<ppgso::Shader> Coconut::shader;
 Coconut::Coconut() {
     // Set random scale speed and rotation
     scale *= (4.0f);
-    direction_x = glm::linearRand(-10.0f, 10.0f);
-    direction_z = glm::linearRand(-10.0f, 10.0f);
 //    rotation = glm::ballRand(ppgso::PI);
-    speed = glm::vec3(1, 0, 0);
+    speed.x = glm::linearRand(-10.0f, 10.0f);
+    speed.z = glm::linearRand(0.0f, 10.0f);
     rotation.x = (ppgso::PI/180)*(-90);
     rotMomentum = glm::ballRand(ppgso::PI);
 

@@ -34,7 +34,7 @@ bool Island::update(Scene &scene, float dt) {
 void Island::render(Scene &scene) {
     shader->use();
 
-    std :: cout << age << "hlaol" << std::endl;
+//    std :: cout << age << "hlaol" << std::endl;
 
     shader->setUniform("pointLights[0].constant", 3.0f);
     shader->setUniform("pointLights[0].linear", 0.0f);
@@ -49,7 +49,7 @@ void Island::render(Scene &scene) {
         shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 84.0f, 12.0f));
     }
     else if( age > 96.0f){
-        shader->setUniform("pointLights[0].position", glm::vec3(0, 100, -100.0f));
+        shader->setUniform("pointLights[0].position", glm::vec3(0, 10, -100.0f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.984f, 0.607f, 0.215f));
     }
     shader->setUniform("pointLights[0].direction", {1.0f, 1.0f, 1.0f});
