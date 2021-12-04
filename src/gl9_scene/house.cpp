@@ -38,10 +38,10 @@ void House::render(Scene &scene) {
 //    std::cout << age << std::endl;
     shader->use();
 
-    shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 80.0f, 12.0f));
-    shader->setUniform("pointLights[0].constant", 6.0f);
+    shader->setUniform("pointLights[0].constant", 3.0f);
     shader->setUniform("pointLights[0].linear", 0.0f);
     shader->setUniform("pointLights[0].quadratic", 0.0f);
+    shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 80.0f, 12.0f));
     shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984, 0.607, 0.215), age, 80.0f, 12.0f));
     shader->setUniform("pointLights[0].direction", {1.0f, 1.0f, 1.0f});
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));

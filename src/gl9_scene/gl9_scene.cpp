@@ -183,7 +183,7 @@ public:
         //TODO: opravit zapad slnka : J
         //TODO: pridat keyframes kamery na vonok : J
         //TODO: obloha : J
-        //TODO: proceudralne strom pozicia: J
+        //TODO: proceudralne strom pozicia: T
         //TODO: random viac kokosov, jeden z nich padne a ten pohyb opravit(mozno aj tocenie) : T
         //TODO: vietor pridat... nejaku funkciu, co mu tam posles vahu alebo take nieco pri ostepe : T
         //TODO: dodat jednu zlozku svetla : J
@@ -191,8 +191,8 @@ public:
         //TODO: tiene
         //TODO: postprocessing
 
-
         //TODO: detaily
+        //TODO: opekanie cajky
         //TODO: ohen zlepsit
         //TODO: textura podlahy, mozno steny
         //TODO: ohen textura
@@ -200,9 +200,6 @@ public:
         //TODO: keyframe - na vsetko
         //TODO: spravne textury na vsetko
         //TODO: smoke dat aby DEPTH nemal test
-
-
-        //TODO: textury ci na vsetkom, nevieme najst
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
@@ -505,8 +502,8 @@ int main() {
     window.initScene();
     // Main execution loop
 
-    window.scene.age = 40.0;
-//    window.scene.scene_num = 1;
+    window.scene.age = 80.0;
+    window.scene.scene_num = 1;
 
     while (window.pollEvents()) {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){
