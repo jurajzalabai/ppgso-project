@@ -76,10 +76,6 @@ void Particle::render(Scene &scene) {
 
 
     if (part){
-        // Disable depth testing
-        if (scene.scene_num != 1)
-            glDisable(GL_DEPTH_TEST);
-
         // Enable blending
         glEnable(GL_BLEND);
         // Additive blending
@@ -91,9 +87,6 @@ void Particle::render(Scene &scene) {
     if(part){
         // Disable blending
         glDisable(GL_BLEND);
-        // Enable depth test
-        if (scene.scene_num != 1)
-            glEnable(GL_DEPTH_TEST);
     }
 }
 

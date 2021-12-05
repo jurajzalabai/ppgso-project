@@ -12,7 +12,7 @@ bool Generator::update(Scene &scene, float dt) {
 
     // Add object to scene when time reaches certain level
     if (scene.scene_num != 1){
-        if (time_sand > 2 && time_sand < 2.2)
+        if (time_sand > 2 && time_sand < 2.2 && scene.age > 35.0f)
             for (int i=0; i < 50; i++ ){
                 auto obj2 = std::make_unique<Particle>(
                         glm::vec3(-8,1,-8),

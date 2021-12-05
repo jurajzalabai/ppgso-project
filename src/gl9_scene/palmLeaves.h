@@ -16,7 +16,7 @@
  * It initializes and loads all resources only once
  * It will move down along the Y axis and self delete when reaching below -10
  */
-class PalmTree final : public Object {
+class PalmLeaves final : public Object {
 private:
     // Static resources (Shared between instances)
     static std::unique_ptr<ppgso::Mesh> mesh;
@@ -35,7 +35,7 @@ public:
     /*!
      * Create new asteroid
      */
-    PalmTree();
+    PalmLeaves();
 
     /*!
      * Update asteroid

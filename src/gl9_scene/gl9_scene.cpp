@@ -35,6 +35,8 @@
 #include "lamp.h"
 #include "ceilinglamp.h"
 #include "sphere.h"
+#include "sky.h"
+#include "palmLeaves.h"
 
 const unsigned int SIZE = 800;
 
@@ -104,6 +106,12 @@ public:
             scene.objects.push_back(move(human));
         }
 
+        auto sky = std::make_unique<Sky>();
+        sky->position = glm::vec3(0, 2, 0);
+        sky->age = scene.age;
+        sky->color = glm::vec3(0.541f, 0.796f, 0.898f);
+        scene.objects.push_back(move(sky));
+
         auto sun = std::make_unique<Sphere>();
         sun->age = scene.age;
         sun->position = glm::vec3(0, 100, 0.0f);
@@ -115,6 +123,11 @@ public:
         palmTree->age = scene.age;
         palmTree->position = glm::vec3(-35,0,12);
         scene.objects.push_back(move(palmTree));
+
+        auto palmLeaves = std::make_unique<PalmLeaves>();
+        palmLeaves->age = scene.age;
+        palmLeaves->position = glm::vec3(-35,0,12);
+        scene.objects.push_back(move(palmLeaves));
 
         auto coconut = std::make_unique<Coconut>();
         coconut->age = scene.age;
@@ -139,6 +152,7 @@ public:
         scene.objects.push_back(move(house));
 
         auto chimney = std::make_unique<Chimney>();
+        chimney->age = scene.age;
         chimney->position = glm::vec3(62,15,10);
         scene.objects.push_back(move(chimney));
 
@@ -150,6 +164,7 @@ public:
         scene.objects.push_back(move(island));
 
         auto ocean = std::make_unique<Ocean>();
+        ocean->age = scene.age;
         ocean->position = glm::vec3(0,10,0);
         ocean->scale.x *= 10;
         ocean->scale.z *= 10;
@@ -166,7 +181,7 @@ public:
 
 
         // Create a camera
-        auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
+        auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 300.0f);
         camera->age = scene.age;
         camera->scene_num = scene.scene_num;
         camera->position = camera->keyframes[camera->scene_num][0].position;
@@ -180,9 +195,7 @@ public:
         scene.scene_num++;
 
         //TODO: Hlavne:
-        //TODO: opravit zapad slnka : J
-        //TODO: pridat keyframes kamery na vonok : J
-        //TODO: obloha : J
+        //TODO: piesok nejde
         //TODO: proceudralne strom pozicia: T
         //TODO: random viac kokosov, jeden z nich padne a ten pohyb opravit(mozno aj tocenie) : T
         //TODO: vietor pridat... nejaku funkciu, co mu tam posles vahu alebo take nieco pri ostepe : T
@@ -191,7 +204,8 @@ public:
         //TODO: tiene
         //TODO: postprocessing
 
-        //TODO: detaily
+        //TODO: Detaily:
+        //TODO: upravit keyframes vonku
         //TODO: opekanie cajky
         //TODO: ohen zlepsit
         //TODO: textura podlahy, mozno steny
@@ -199,7 +213,6 @@ public:
         //TODO: refaktor kodu
         //TODO: keyframe - na vsetko
         //TODO: spravne textury na vsetko
-        //TODO: smoke dat aby DEPTH nemal test
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
@@ -501,9 +514,9 @@ int main() {
     SceneWindow window;
     window.initScene();
     // Main execution loop
-
-    window.scene.age = 80.0;
-    window.scene.scene_num = 1;
+//
+//    window.scene.age = 80.0;
+//    window.scene.scene_num = 1;
 
     while (window.pollEvents()) {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){

@@ -58,9 +58,9 @@ void Table::render(Scene &scene) {
     shader->setUniform("pointLights[3].outerCutOff", glm::cos(glm::radians(45.0f)));
     shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
 
-    shader->setUniform("diffuse_strength", 0.3f);
+    shader->setUniform("diffuse_strength", 0.5f);
     shader->setUniform("ambient_strength", 0.2f);
-    shader->setUniform("specular_strength", 0.3f);
+    shader->setUniform("specular_strength", 0.5f);
     shader->setUniform("viewPos", scene.camera->position);
 
 

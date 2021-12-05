@@ -24,7 +24,6 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
     // Age of the object in seconds
-    float age{0.0f};
     float counter{0.0f};
 
     // Speed and rotational momentum
@@ -34,6 +33,7 @@ public:
     /*!
      * Create new asteroid
      */
+    float age{0.0f};
     Ocean();
 
     /*!

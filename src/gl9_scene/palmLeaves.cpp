@@ -1,27 +1,30 @@
+//
+// Created by Tommy on 20. 11. 2021.
+//
+
 #include <glm/gtc/random.hpp>
+#include "palmLeaves.h"
 #include "seagull.h"
-#include "chimney.h"
+
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
 
 
 // Static resources
-std::unique_ptr<ppgso::Mesh> Chimney::mesh;
-std::unique_ptr<ppgso::Texture> Chimney::texture;
-std::unique_ptr<ppgso::Shader> Chimney::shader;
+std::unique_ptr<ppgso::Mesh> PalmLeaves::mesh;
+std::unique_ptr<ppgso::Texture> PalmLeaves::texture;
+std::unique_ptr<ppgso::Shader> PalmLeaves::shader;
 
-Chimney::Chimney() {
+PalmLeaves::PalmLeaves() {
     // Set random scale speed and rotation
-    scale *= (0.07f);
-    speed = {(0.0f), (0.0f), 0.0f};
-
+    scale *= (2.0f);
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("ChimneyTexture.bmp"));
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Chimney.obj");
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("PalmLeafTexture.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("PalmLeaf.obj");
 }
-bool Chimney::update(Scene &scene, float dt) {
+bool PalmLeaves::update(Scene &scene, float dt) {
     // Count time alive
     age += dt;
 
@@ -31,7 +34,7 @@ bool Chimney::update(Scene &scene, float dt) {
     return true;
 }
 
-void Chimney::render(Scene &scene) {
+void PalmLeaves::render(Scene &scene) {
 //    std::cout << age << std::endl;
     shader->use();
 
@@ -55,7 +58,8 @@ void Chimney::render(Scene &scene) {
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(180.0f)));
 
-    shader->setUniform("diffuse_strength", 0.5f);
+
+    shader->setUniform("diffuse_strength", 0.25f);
     shader->setUniform("ambient_strength", 0.2f);
     shader->setUniform("specular_strength", 0.7f);
     shader->setUniform("viewPos", scene.camera->position);
@@ -67,9 +71,6 @@ void Chimney::render(Scene &scene) {
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
+
     mesh->render();
 }
-
-
-
-
