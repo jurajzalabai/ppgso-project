@@ -73,7 +73,7 @@ public:
     void initScene() {
         scene.objects.clear();
         scene.scene_num++;
-//        scene.age = 40.0f;
+        scene.age = 30.0f;
 
 //        scene.scene_num = 1;
 //        scene.age = 80.0f;
@@ -146,13 +146,13 @@ public:
 
         float random = glm::linearRand(0.0f, 3.0f);
         if (random <= 1.0) {
-            coconut1->willFall = true;
+            coconut1->willMove = true;
         }
         else if (random <= 2.0) {
-            coconut2->willFall = true;
+            coconut2->willMove = true;
         }
         else {
-            coconut3->willFall = true;
+            coconut3->willMove = true;
         }
 
         auto palmLeaves = std::make_unique<PalmLeaves>();
@@ -227,6 +227,7 @@ public:
     void initInteriorScene() {
         scene.objects.clear();
         scene.scene_num++;
+        scene.age = 66.0f;
 
         //TODO: Hlavne:
         //TODO: piesok nejde
@@ -552,11 +553,9 @@ int main() {
     // Initialize our window
     SceneWindow window;
     window.initScene();
+//    window.initInteriorScene();
 //    window.scene.age = 45.0f;
-    // Main execution loop
-
-//    window.scene.age = 80.0;
-//    window.scene.scene_num = 1;
+    // Main execution loo
 
 //    window.scene.scene_num = 1;
 

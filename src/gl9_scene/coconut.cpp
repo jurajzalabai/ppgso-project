@@ -6,6 +6,7 @@
 #include "coconut.h"
 #include "ocean.h"
 #include "turtle.h"
+#include <math.h>
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
@@ -20,12 +21,11 @@ Coconut::Coconut() {
     // Set random scale speed and rotation
     scale *= (4.0f);
 //    rotation = glm::ballRand(ppgso::PI);
-    speed.x = glm::linearRand(-10.0f, 10.0f);
-    speed.z = glm::linearRand(0.0f, 10.0f);
-//    speed.x = 10;
-//    speed.z = 0;
+//    speed.x = glm::linearRand(-10.0f, 10.0f);
+//    speed.z = glm::linearRand(0.0f, 10.0f);
+    speed.x = 10;
+    speed.z = 0;
     rotation.x = (ppgso::PI/180)*(-90);
-    rotMomentum = glm::ballRand(ppgso::PI);
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
@@ -34,13 +34,23 @@ Coconut::Coconut() {
 }
 bool Coconut::update(Scene &scene, float dt) {
     age += dt;
-    if (willFall && age > 43.0f){
-//        rotation += rotMomentum * dt;
+    if (willMove && age > 43.0f && scene.scene_num == 0){
         if (position.y > 0.5f){
+            rotation.x += (ppgso::PI/180)*(-90)*dt;
             position.y -= 20 * dt;
             fall_time = age;
         }
         else{
+            if(speed.x < 0) {
+                rotation.z = -(atan(speed.z/speed.x));
+            }
+            else if(speed.x > 0) {
+                rotation.z = (ppgso::PI/180)*(180) - (atan(speed.z/speed.x));
+            }
+            else {
+                rotation.z = (ppgso::PI/180)*(90);
+            }
+            initial_rotation = rotation;
             for (auto &obj : scene.objects) {
                 // Ignore self in scene
                 if (obj.get() == this)
@@ -52,14 +62,18 @@ bool Coconut::update(Scene &scene, float dt) {
                         glm::vec3 new_speed = lerp(speed, glm::vec3(0, 0, 0), age, fall_time, 3.0f);
                         if(distance(position, turtle->position) > 6.0f && !collided) {
                             position += new_speed * dt;
+                            rotation.y += static_cast<float>(
+                            ((ppgso::PI / 180) * (-90 * (sqrt(pow(new_speed.x, 2) + pow(new_speed.z, 2))))) * dt);
                         }
                         else {
                             collided = true;
                             position -= new_speed * dt;
+                            rotation.y -= static_cast<float>(
+                            ((ppgso::PI / 180) * (-90 * (sqrt(pow(new_speed.x, 2) + pow(new_speed.z, 2))))) * dt);
                         }
                     }
                     else {
-                        willFall = false;
+                        willMove = false;
                     }
                 }
             }
