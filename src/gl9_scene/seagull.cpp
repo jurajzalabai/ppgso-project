@@ -53,7 +53,6 @@ bool Seagull::update(Scene &scene, float dt) {
     }
     else {
         position = glm::vec3{0, 0, 0};
-        std::cout << "salalala" << std::endl;
         if (age >= 73.0f) {
             position = glm::vec3{5, 6, 63};
             std::cout << "lalala" << position.x << position.y << position.z << std::endl;

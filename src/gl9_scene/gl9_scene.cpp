@@ -73,7 +73,7 @@ public:
     void initScene() {
         scene.objects.clear();
         scene.scene_num++;
-        scene.age = 40.0f;
+//        scene.age = 40.0f;
 
 //        scene.scene_num = 1;
 //        scene.age = 80.0f;
@@ -555,7 +555,7 @@ int main() {
 //    window.scene.age = 45.0f;
     // Main execution loop
 
-//    window.scene.age = 80.0;
+//    window.scene.age = 97.0;
 //    window.scene.scene_num = 1;
 
 //    window.scene.scene_num = 1;
