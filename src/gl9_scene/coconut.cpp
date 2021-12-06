@@ -5,7 +5,7 @@
 #include <glm/gtc/random.hpp>
 #include "coconut.h"
 #include "ocean.h"
-#include <random>
+#include "turtle.h"
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
@@ -22,6 +22,8 @@ Coconut::Coconut() {
 //    rotation = glm::ballRand(ppgso::PI);
     speed.x = glm::linearRand(-10.0f, 10.0f);
     speed.z = glm::linearRand(0.0f, 10.0f);
+//    speed.x = 10;
+//    speed.z = 0;
     rotation.x = (ppgso::PI/180)*(-90);
     rotMomentum = glm::ballRand(ppgso::PI);
 
@@ -36,21 +38,29 @@ bool Coconut::update(Scene &scene, float dt) {
 //        rotation += rotMomentum * dt;
         if (position.y > 0.5f){
             position.y -= 20 * dt;
+            fall_time = age;
         }
         else{
-//                position.x += (direction_x * dt) / (age / 3);
-//                position.z += (direction_z * dt) / (age / 3);
-            position.x += speed.x * dt;
-            position.z += speed.z * dt;
             for (auto &obj : scene.objects) {
                 // Ignore self in scene
                 if (obj.get() == this)
                     continue;
 
-                auto object = dynamic_cast<Object *>(obj.get());
-
-                if (distance(position, object->position) < object->scale.y) {
-                    speed = glm::vec3(0, 0,0 );
+                auto turtle = dynamic_cast<Turtle *>(obj.get());
+                if (turtle) {
+                    if (age - fall_time <= 3.0f) {
+                        glm::vec3 new_speed = lerp(speed, glm::vec3(0, 0, 0), age, fall_time, 3.0f);
+                        if(distance(position, turtle->position) > 6.0f && !collided) {
+                            position += new_speed * dt;
+                        }
+                        else {
+                            collided = true;
+                            position -= new_speed * dt;
+                        }
+                    }
+                    else {
+                        willFall = false;
+                    }
                 }
             }
         }

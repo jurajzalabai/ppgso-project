@@ -24,7 +24,8 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
     // Age of the object in seconds
-    float counter{0.0f};
+    float fall_time;
+    bool collided = false;
     glm::vec3 rotMomentum;
 
     // Speed and rotational momentum

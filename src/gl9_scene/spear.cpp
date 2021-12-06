@@ -78,7 +78,7 @@ bool Spear::update(Scene &scene, float dt) {
     else if (position.y >= 2){
         position.y -= 10 * dt;
         position.x += 2 * dt;
-        rotation.y += (ppgso::PI/180)*(-0.6f);
+        rotation.y += (ppgso::PI/180)*(-0.6f)*dt;
     }
 
     if(parent != nullptr) {
