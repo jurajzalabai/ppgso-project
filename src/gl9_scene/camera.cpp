@@ -15,11 +15,11 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         Keyframe(glm::vec3(-35,5,45), glm::vec3(0, 0, 1), 12.0f, 3.0f),
         // zaber na ostrov
         Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 18.0f, 3.0f),
-        // zaber na komin
+        // ideme ku kominu
         Keyframe(glm::vec3(50,20,30), glm::vec3(-0.6f, 0, 1), 28.0f, 4.0f),
-        // korytnacka
+        // ideme ku korytnacke
         Keyframe(glm::vec3(1.0f,14.0f, 12.0f), glm::vec3(0.314159f,0.418879f,1), 40.0f, 3.0f),
-        // kokos
+        // ideme k palme
         Keyframe(glm::vec3(-17.0f,19.0f, 36.0f), glm::vec3(0.314159f,0.418879f,1), 48.0f, 4.0f),
         // prejdeme do dveri
         Keyframe(glm::vec3(21,8,3), glm::vec3(-7.95f,3.63f,3.63f), 0.0f, 0.0f)},
@@ -61,13 +61,13 @@ void Camera::update(float dt) {
             }
         }
     }
-    std::cout<< " z camera: "<< position.z<< std::endl;
-    std::cout<< " y camera: "<< position.y<< std::endl;
-    std::cout<< " x camera: "<< position.x<< std::endl;
-    std::cout<< " rotate camera: "<< back.z<< std::endl;
-    std::cout<< " rotate camera: "<< back.y<< std::endl;
-    std::cout<< " rotate camera: "<< back.x<< std::endl;
-    std::cout<< " age: "<< age << std::endl;
+//    std::cout<< " z camera: "<< position.z<< std::endl;
+//    std::cout<< " y camera: "<< position.y<< std::endl;
+//    std::cout<< " x camera: "<< position.x<< std::endl;
+//    std::cout<< " rotate camera: "<< back.z<< std::endl;
+//    std::cout<< " rotate camera: "<< back.y<< std::endl;
+//    std::cout<< " rotate camera: "<< back.x<< std::endl;
+//    std::cout<< " age: "<< age << std::endl;
     viewMatrix = lookAt(position, position-back, up);
 }
 

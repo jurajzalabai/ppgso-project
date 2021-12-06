@@ -48,7 +48,7 @@ Human::Human() {
 }
 bool Human::update(Scene &scene, float dt) {
     age += dt;
-    std::cout << scene_num << curr << "age human:" << age << std::endl;
+//    std::cout << scene_num << curr << "age human:" << age << std::endl;
     if (keyframes[scene_num][curr].startTime < age) {
         if (keyframes[scene_num][curr].duration != 0) {
             if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
@@ -60,19 +60,19 @@ bool Human::update(Scene &scene, float dt) {
                 curr++;
             }
         }
+    }
 
-        if(curr == 1 && child == nullptr) {
-            for (auto &obj : scene.objects) {
+    if((scene_num == 0 && curr == 1 && child == nullptr) || (scene_num == 1 && child == nullptr)) {
+        for (auto &obj : scene.objects) {
 
-                if (obj.get() == this)
-                    continue;
+            if (obj.get() == this)
+                continue;
 
-                auto spear = dynamic_cast<Spear *>(obj.get());
-                if (!spear) continue;
+            auto spear = dynamic_cast<Spear *>(obj.get());
+            if (!spear) continue;
 
-                spear->parent = this;
-                child = spear;
-            }
+            spear->parent = this;
+            child = spear;
         }
     }
 

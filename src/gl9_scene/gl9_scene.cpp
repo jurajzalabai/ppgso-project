@@ -73,6 +73,7 @@ public:
     void initScene() {
         scene.objects.clear();
         scene.scene_num++;
+        scene.age = 40.0f;
 
 //        scene.scene_num = 1;
 //        scene.age = 80.0f;
@@ -122,18 +123,46 @@ public:
 
         auto palmTree = std::make_unique<PalmTree>();
         palmTree->age = scene.age;
-        palmTree->position = glm::vec3(-35,0,12);
-        scene.objects.push_back(move(palmTree));
+//        palmTree->position = glm::vec3(-35,0,12);
+
+        auto coconut1 = std::make_unique<Coconut>();
+        coconut1->age = scene.age;
+//        coconut->position = glm::vec3(-22,19,6);
+        coconut1->position.x = palmTree->position.x + 13;
+        coconut1->position.y = palmTree->position.y + 19;
+        coconut1->position.z = palmTree->position.z + -6;
+
+        auto coconut2 = std::make_unique<Coconut>();
+        coconut2->age = scene.age;
+        coconut2->position.x = palmTree->position.x + 11.7f;
+        coconut2->position.y = palmTree->position.y + 19;
+        coconut2->position.z = palmTree->position.z + -7.5f;
+
+        auto coconut3 = std::make_unique<Coconut>();
+        coconut3->age = scene.age;
+        coconut3->position.x = palmTree->position.x + 14.3f;
+        coconut3->position.y = palmTree->position.y + 19;
+        coconut3->position.z = palmTree->position.z + -7.5f;
+
+        float random = glm::linearRand(0.0f, 3.0f);
+        if (random <= 1.0) {
+            coconut1->willFall = true;
+        }
+        else if (random <= 2.0) {
+            coconut2->willFall = true;
+        }
+        else {
+            coconut3->willFall = true;
+        }
 
         auto palmLeaves = std::make_unique<PalmLeaves>();
         palmLeaves->age = scene.age;
         palmLeaves->position = glm::vec3(-35,0,12);
         scene.objects.push_back(move(palmLeaves));
 
-        auto coconut = std::make_unique<Coconut>();
-        coconut->age = scene.age;
-        coconut->position = glm::vec3(-22,19,6);
-        scene.objects.push_back(move(coconut));
+        scene.objects.push_back(move(coconut1));
+        scene.objects.push_back(move(coconut2));
+        scene.objects.push_back(move(coconut3));
 
         auto generator = std::make_unique<Generator>();
         generator->time = scene.age;
@@ -187,7 +216,11 @@ public:
         camera->scene_num = scene.scene_num;
         camera->position = camera->keyframes[camera->scene_num][0].position;
         camera->back = camera->keyframes[camera->scene_num][0].rotation;
+        camera->keyframes[0][6].position.x = palmTree->position.x + 17;
+        camera->keyframes[0][6].position.y = palmTree->position.y + 19;
+        camera->keyframes[0][6].position.z = palmTree->position.z + 24;
         scene.camera = move(camera);
+        scene.objects.push_back(move(palmTree));
 
     }
 
@@ -519,10 +552,14 @@ int main() {
     // Initialize our window
     SceneWindow window;
     window.initScene();
+//    window.scene.age = 45.0f;
     // Main execution loop
-//
+
 //    window.scene.age = 80.0;
 //    window.scene.scene_num = 1;
+
+//    window.scene.scene_num = 1;
+
 
     while (window.pollEvents()) {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){

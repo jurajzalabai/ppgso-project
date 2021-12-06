@@ -25,8 +25,6 @@ private:
 
     // Age of the object in seconds
     float counter{0.0f};
-    float direction_x{0.0f};
-    float direction_z{0.0f};
     glm::vec3 rotMomentum;
 
     // Speed and rotational momentum
@@ -36,6 +34,7 @@ private:
 public:
 
     float age{0.0f};
+    bool willFall = false;
 
     /*!
      * Create new asteroid

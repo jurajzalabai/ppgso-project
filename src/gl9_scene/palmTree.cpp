@@ -5,6 +5,7 @@
 #include <glm/gtc/random.hpp>
 #include "palmTree.h"
 #include "seagull.h"
+#include "coconut.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
@@ -18,6 +19,11 @@ std::unique_ptr<ppgso::Shader> PalmTree::shader;
 PalmTree::PalmTree() {
     // Set random scale speed and rotation
     scale *= (2.0f);
+    position.x = glm::linearRand(-55.0f, -35.0f);
+    position.y = 0;
+//    position.z = glm::linearRand(-25.0f, 20.0f);
+    position.z = 20.0f;
+    std::cout << position.x << position.z << std::endl;
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);

@@ -4,7 +4,8 @@
 
 #include <glm/gtc/random.hpp>
 #include "coconut.h"
-#include "seagull.h"
+#include "ocean.h"
+#include <random>
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
@@ -18,10 +19,12 @@ std::unique_ptr<ppgso::Shader> Coconut::shader;
 Coconut::Coconut() {
     // Set random scale speed and rotation
     scale *= (4.0f);
-    direction_x = glm::linearRand(-10.0f, 10.0f);
-    direction_z = glm::linearRand(-10.0f, 10.0f);
-    rotation = glm::ballRand(ppgso::PI);
+//    rotation = glm::ballRand(ppgso::PI);
+    speed.x = glm::linearRand(-10.0f, 10.0f);
+    speed.z = glm::linearRand(0.0f, 10.0f);
+    rotation.x = (ppgso::PI/180)*(-90);
     rotMomentum = glm::ballRand(ppgso::PI);
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("CoconutTexture.bmp"));
@@ -29,14 +32,27 @@ Coconut::Coconut() {
 }
 bool Coconut::update(Scene &scene, float dt) {
     age += dt;
-    if (age > 43.0f && age < 47.0f){
-        rotation += rotMomentum * dt;
+    if (willFall && age > 43.0f){
+//        rotation += rotMomentum * dt;
         if (position.y > 0.5f){
             position.y -= 20 * dt;
         }
         else{
-                position.x += (direction_x * dt) / (age / 3);
-                position.z += (direction_z * dt) / (age / 3);
+//                position.x += (direction_x * dt) / (age / 3);
+//                position.z += (direction_z * dt) / (age / 3);
+            position.x += speed.x * dt;
+            position.z += speed.z * dt;
+            for (auto &obj : scene.objects) {
+                // Ignore self in scene
+                if (obj.get() == this)
+                    continue;
+
+                auto object = dynamic_cast<Object *>(obj.get());
+
+                if (distance(position, object->position) < object->scale.y) {
+                    speed = glm::vec3(0, 0,0 );
+                }
+            }
         }
     }
     generateModelMatrix();
