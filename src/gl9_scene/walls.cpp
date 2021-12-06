@@ -45,7 +45,7 @@ void Walls::render(Scene &scene) {
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(40.0f)));
 
     shader->setUniform("pointLights[1].position", {0,1,35});
-    shader->setUniform("pointLights[1].constant", 0.5f);
+    shader->setUniform("pointLights[1].constant", 0.8f);
     shader->setUniform("pointLights[1].linear", 0.0f);
     shader->setUniform("pointLights[1].quadratic", 0.0f);
     shader->setUniform("pointLights[1].color", {1.0f, 0.5f, 0});

@@ -43,7 +43,7 @@ void Fireplace::render(Scene &scene) {
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(40.0f)));
 
     shader->setUniform("pointLights[1].position", {0,1,35});
-    shader->setUniform("pointLights[1].constant", 0.7f);
+    shader->setUniform("pointLights[1].constant", 0.8f);
     shader->setUniform("pointLights[1].linear", 0.0f);
     shader->setUniform("pointLights[1].quadratic", 0.0f);
     shader->setUniform("pointLights[1].color", {1.0f, 0.5f, 0});
@@ -60,7 +60,7 @@ void Fireplace::render(Scene &scene) {
     shader->setUniform("pointLights[3].outerCutOff", glm::cos(glm::radians(45.0f)));
     shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
 
-    shader->setUniform("diffuse_strength", 0.3f);
+    shader->setUniform("diffuse_strength", 0.9f);
     shader->setUniform("ambient_strength", 0.2f);
     shader->setUniform("specular_strength", 0.3f);
     shader->setUniform("viewPos", scene.camera->position);

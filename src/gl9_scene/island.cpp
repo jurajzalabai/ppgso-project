@@ -54,7 +54,6 @@ void Island::render(Scene &scene) {
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(180.0f)));
 
-
     shader->setUniform("diffuse_strength", 0.25f);
     shader->setUniform("ambient_strength", 0.2f);
     shader->setUniform("specular_strength", 0.1f);

@@ -78,11 +78,10 @@ void Turtle::render(Scene &scene) {
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(180.0f)));
 
-
-    shader->setUniform("diffuse_strength", 0.25f);
+    shader->setUniform("diffuse_strength", 0.4f);
     shader->setUniform("ambient_strength", 0.2f);
-    shader->setUniform("specular_strength", 0.1f);
-    shader->setUniform("viewPos", scene.camera->position);;
+    shader->setUniform("specular_strength", 0.4f);
+    shader->setUniform("viewPos", scene.camera->position);
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

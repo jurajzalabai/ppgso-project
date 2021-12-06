@@ -37,6 +37,7 @@
 #include "sphere.h"
 #include "sky.h"
 #include "palmLeaves.h"
+#include "fire.h"
 
 const unsigned int SIZE = 800;
 
@@ -257,6 +258,11 @@ public:
         fireplace->position = glm::vec3(0, 0, 33);
         fireplace->rotation.x = (ppgso::PI / 180) * (-90);
         scene.objects.push_back(move(fireplace));
+
+        auto fire = std::make_unique<Fire>();
+        fire->position = glm::vec3(0, 0, 33);
+        fire->rotation.x = (ppgso::PI / 180) * (-90);
+        scene.objects.push_back(move(fire));
 
         auto lamp = std::make_unique<Lamp>();
         lamp->position = glm::vec3(9, 3.2, 62);

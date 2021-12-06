@@ -43,38 +43,13 @@ void Plate::render(Scene &scene) {
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(40.0f)));
 
     shader->setUniform("pointLights[1].position", {0,1,35});
-    shader->setUniform("pointLights[1].constant", 1.0f);
+    shader->setUniform("pointLights[1].constant", 0.8f);
     shader->setUniform("pointLights[1].linear", 0.0f);
     shader->setUniform("pointLights[1].quadratic", 0.0f);
     shader->setUniform("pointLights[1].color", {1.0f, 0.5f, 0});
     shader->setUniform("pointLights[1].direction", {0.5f, 0.5f, 0.5f});
     shader->setUniform("pointLights[1].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[1].cutOff",  glm::cos(glm::radians(180.0f)));
-
-    if (age >= 1.0 && age <= 3.0){
-        shader->setUniform("pointLights[2].position", {0,1,35});
-        shader->setUniform("pointLights[2].constant", 1.0f);
-        shader->setUniform("pointLights[2].linear", 0.0f);
-        shader->setUniform("pointLights[2].quadratic", 0.0f);
-        shader->setUniform("pointLights[2].color", {1.0f, 0.8f, 0});
-        shader->setUniform("pointLights[2].direction", {0.5f, 0.5f, 0.5f});
-        shader->setUniform("pointLights[2].outerCutOff", glm::cos(glm::radians(180.0f)));
-        shader->setUniform("pointLights[2].cutOff",  glm::cos(glm::radians(180.0f)));
-        if (age>=2.5f){
-            age = 0;
-        }
-
-    }
-    else{
-        shader->setUniform("pointLights[2].position", {0,1,35});
-        shader->setUniform("pointLights[2].constant", 1.0f);
-        shader->setUniform("pointLights[2].linear", 0.0f);
-        shader->setUniform("pointLights[2].quadratic", 0.0f);
-        shader->setUniform("pointLights[2].color", {1.0f, 0.5f, 0});
-        shader->setUniform("pointLights[2].direction", {0.5f, 0.5f, 0.5f});
-        shader->setUniform("pointLights[2].outerCutOff", glm::cos(glm::radians(180.0f)));
-        shader->setUniform("pointLights[2].cutOff",  glm::cos(glm::radians(180.0f)));
-    }
 
     shader->setUniform("pointLights[3].position", {8.14,5.45,62});
     shader->setUniform("pointLights[3].constant", 1.0f);
