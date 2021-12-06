@@ -157,7 +157,7 @@ public:
 
         auto palmLeaves = std::make_unique<PalmLeaves>();
         palmLeaves->age = scene.age;
-        palmLeaves->position = glm::vec3(-35,0,12);
+        palmLeaves->position = palmTree->position;
         scene.objects.push_back(move(palmLeaves));
 
         scene.objects.push_back(move(coconut1));
