@@ -67,12 +67,12 @@ public:
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
-
   }
 
     void initScene() {
         scene.objects.clear();
         scene.scene_num++;
+        srand(time(0));
 //        scene.age = 30.0f;
 
 //        scene.scene_num = 2;
@@ -569,10 +569,9 @@ int main() {
     SceneWindow window;
     window.initScene();
 //    window.initInteriorScene();
-//    window.scene.age = 45.0f;
-    // Main execution loop
+    window.scene.age = 50.0f;
 
-//    window.scene.scene_num = 1;
+    window.scene.scene_num = 0;
 
 
     while (window.pollEvents()) {
