@@ -24,20 +24,23 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         // prejdeme do dveri
         Keyframe(glm::vec3(21,8,3), glm::vec3(-7.95f,3.63f,3.63f), 0.0f, 0.0f)},
 
-        {
-        Keyframe(glm::vec3(1, 9, 96), glm::vec3(0.05f, 0.1f, 1), 65.0f, 4.0f),
-        // prichod ku stolu
-        Keyframe(glm::vec3(12, 9, 71), glm::vec3(0.25f, 0.57f, 1), 73.0f, 2.0f),
+        {Keyframe(glm::vec3(1, 9, 96), glm::vec3(0.05f, 0.1f, 1), 64.0f, 3.0f),
+        // presun k krbu
+         Keyframe(glm::vec3(9, 7, 49), glm::vec3(0.783f, 0.1f, 1), 70.0f, 4.0f),
+         // prichod ku stolu,
+        Keyframe(glm::vec3(12, 9, 71), glm::vec3(0.25f, 0.57f, 1), 81.0f, 4.0f),
         // pred stol
-        Keyframe(glm::vec3(2, 9, 63), glm::vec3(-1.716f, 0.583f, 1), 75.0f, 4.0f),
+        Keyframe(glm::vec3(2, 9, 63), glm::vec3(-1.716f, 0.583f, 1), 85.0f, 5.0f),
         // prechod ponad stolom
         Keyframe(glm::vec3(4, 9, 53), glm::vec3(-7.0f, 5.7f, -7.1f), 0.0f, 0.0f)},
         // vonku
-        {Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 84.0f, 4.0f),
-
-         Keyframe(glm::vec3(-50,11,53), glm::vec3(-0.518818, 0, 0.733038), 90.0f, 10.0f),
-
-         Keyframe(glm::vec3(25.091,14.0073,101.086), glm::vec3(0.21, 0, 0.733524), 0.0f, 0.0f),
+        {Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 94.0f, 4.0f),
+         // korytnacka
+        Keyframe(glm::vec3(1.0f,14.0f, 12.0f), glm::vec3(0.314159f,0.418879f,1), 106.0f, 3.0f),
+        //palma
+         Keyframe(glm::vec3(-50,11,53), glm::vec3(-0.518818, 0, 0.733038), 114.0f, 8.0f),
+        //zapad
+         Keyframe(glm::vec3(-29.9805,16.0044,107.04), glm::vec3(-0.209573, 0.10472, 0.733524), 0.0f, 0.0f),
 //        Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 0.0f, 0.0f),
         }
     };

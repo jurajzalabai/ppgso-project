@@ -40,8 +40,8 @@ bool Seagull::update(Scene &scene, float dt) {
     age += dt;
 
     if (parent == nullptr) {
-        if (age >= 74.0f && age <= 75.0f) {
-            position = lerp(glm::vec3{8, 6, 61}, glm::vec3(9, 3.5f, 60), age, 74.0f, 1.0f);
+        if (age >= 79.0f && age <= 80.0f) {
+            position = lerp(glm::vec3{8, 6, 61}, glm::vec3(9, 3.5f, 60), age, 79.0f, 1.0f);
         }
 //        else if (keyframes[scene_num][curr].startTime < age) {
 //            if (keyframes[scene_num][curr].duration != 0) {
@@ -54,13 +54,13 @@ bool Seagull::update(Scene &scene, float dt) {
 //                }
 //            }
 //        }
-        else if (age < 73.0f){
+        else if (age < 79.0f){
             position += (gravity(mass) + flight + wind + lift) * dt;
         }
     }
     else {
         position = glm::vec3{0, 0, 0};
-        if (age >= 73.0f) {
+        if (age >= 79.0f) {
             rotation = glm::vec3((ppgso::PI/180)*(180), (ppgso::PI/180)*(0), (ppgso::PI/180)*(-40));
             position = glm::vec3{8, 6, 61};
             parent = nullptr;
