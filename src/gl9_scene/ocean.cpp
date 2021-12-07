@@ -42,15 +42,15 @@ void Ocean::render(Scene &scene) {
     shader->setUniform("pointLights[0].linear", 0.0f);
     shader->setUniform("pointLights[0].quadratic", 0.0f);
 
-    if (age < 84.0f){
+    if (age < 106.0f){
         shader->setUniform("pointLights[0].position", glm::vec3(0, 100, 0.0f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.992f, 0.952f, 0.588f));
     }
-    else if (age > 84.0f && age <= 96.0f){
-        shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 84.0f, 12.0f));
-        shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 84.0f, 12.0f));
+    else if (age > 106.0f && age <= 118.0f){
+        shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 106.0f, 12.0f));
+        shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 106.0f, 12.0f));
     }
-    else if( age > 96.0f){
+    else if( age > 118.0f){
         shader->setUniform("pointLights[0].position", glm::vec3(0, 10, -100.0f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.984f, 0.607f, 0.215f));
     }
@@ -60,7 +60,7 @@ void Ocean::render(Scene &scene) {
 
     shader->setUniform("diffuse_strength", 0.5f);
     shader->setUniform("ambient_strength", 0.2f);
-    shader->setUniform("specular_strength", 0.7f);
+    shader->setUniform("specular_strength", 1.0f);
     shader->setUniform("viewPos", scene.camera->position);
 
 

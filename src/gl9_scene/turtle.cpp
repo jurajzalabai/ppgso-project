@@ -24,7 +24,11 @@ Turtle::Turtle() {
             Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 0.0f, 0.0f)},
 
             {},
-            {Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 80.0f, 0.0f),}
+            {Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 98.0f, 2.0f),
+             Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(110), 0), 100.0f, 5.0f),
+             Keyframe(glm::vec3(-20,0.000579834,-48.949), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(110), 0), 105.0f, 2.0f),
+             Keyframe(glm::vec3(-22,-4,-58.949), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(110), 0), 0.0f, 0.0f),
+             }
     };
 
     // Initialize static resources if needed
@@ -40,13 +44,13 @@ bool Turtle::update(Scene &scene, float dt) {
             if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
                 position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr + 1].position, age,
                                 keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
-//                rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr + 1].rotation, age,
-//                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+                rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr + 1].rotation, age,
+                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
             } else {
                 curr++;
             }
         }
-        else {
+        else if (age < 98.0f){
             rotation.y = static_cast<float>(sin(age) + 4.14);
         }
     }
@@ -62,15 +66,15 @@ void Turtle::render(Scene &scene) {
     shader->setUniform("pointLights[0].linear", 0.0f);
     shader->setUniform("pointLights[0].quadratic", 0.0f);
 
-    if (age < 84.0f){
+    if (age < 106.0f){
         shader->setUniform("pointLights[0].position", glm::vec3(0, 100, 0.0f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.992f, 0.952f, 0.588f));
     }
-    else if (age > 84.0f && age <= 96.0f){
-        shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 84.0f, 12.0f));
-        shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 84.0f, 12.0f));
+    else if (age > 106.0f && age <= 118.0f){
+        shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 106.0f, 12.0f));
+        shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 106.0f, 12.0f));
     }
-    else if( age > 96.0f){
+    else if( age > 118.0f){
         shader->setUniform("pointLights[0].position", glm::vec3(0, 10, -100.0f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.984f, 0.607f, 0.215f));
     }

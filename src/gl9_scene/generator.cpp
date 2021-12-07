@@ -11,7 +11,7 @@ bool Generator::update(Scene &scene, float dt) {
 
     // Add object to scene when time reaches certain level
     if (scene.scene_num != 1){
-        if (scene.age > 35.0f){
+        if ((scene.age > 35.0f && scene.age < 52.0) || (scene.age > 90.0f && scene.age < 98.0)){
             time_sand += dt;
             if (time_sand > 1.5f){
                 for (int i = 0; i<50; i++){
@@ -27,7 +27,7 @@ bool Generator::update(Scene &scene, float dt) {
                 }
             }
         }
-        if (time > 21.0f && time < 30.0) {
+        if ((time > 21.0f && time < 30.0)  ||  (time > 90.0 && time < 119)) {
             float color = glm::linearRand(0.01f, 0.05f);
             auto obj = std::make_unique<Particle>(
                     glm::vec3(62, 22, 9),

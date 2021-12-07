@@ -248,19 +248,13 @@ public:
         scene.scene_num++;
 //        scene.age = 66.0f;
 
-        //TODO: Hlavne:
-        //TODO: predlzit scenu vo vnutri, opravit vsade age
-        //TODO: mozno korytnacka do mora
-
         //TODO: SKUSIT shader na piesok a smoke, ak nejde tak skusit texturu akl nie tak maunalne farbu posuvat : J
-        //TODO: mozno opravit keyframes kamery ze blizsie ku ohnu : J
         //TODO: tocenie spearu pri krbe a dlhsie opekanie(skorej typek ku krbu) : T
 
         //TODO: tiene
         //TODO: postprocessing
 
         //TODO: Detaily:
-        //TODO: upravit keyframes vonku
         //TODO: opekanie cajky
         //TODO: textura podlahy
         //TODO: refaktor kodu
@@ -572,9 +566,14 @@ int main() {
     SceneWindow window;
     window.initScene();
 //    window.initInteriorScene();
-    window.scene.age = 50.0f;
-    
-    window.scene.scene_num = 0;
+
+
+//    window.scene.age = 45.0f;
+    // Main execution loop
+
+    window.scene.age = 90.0;
+    window.scene.scene_num = 1;
+
 
 
 
@@ -582,7 +581,7 @@ int main() {
         if (window.scene.age >= 52.0f && window.scene.scene_num == 0){
             window.initInteriorScene();
         }
-        if (window.scene.age >= 80.0f && window.scene.scene_num == 1){
+        if (window.scene.age >= 90.0f && window.scene.scene_num == 1){
             window.initScene();
         }
     }
