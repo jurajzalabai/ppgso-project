@@ -40,8 +40,8 @@ bool Seagull::update(Scene &scene, float dt) {
     age += dt;
 
     if (parent == nullptr) {
-        if (age >= 73.0f && age <= 75.0f) {
-            position = lerp(glm::vec3{5, 6, 63}, glm::vec3(9, 3.2f, 60), age, 73.0f, 2.0f);
+        if (age >= 74.0f && age <= 75.0f) {
+            position = lerp(glm::vec3{8, 6, 61}, glm::vec3(9, 3.5f, 60), age, 74.0f, 1.0f);
         }
 //        else if (keyframes[scene_num][curr].startTime < age) {
 //            if (keyframes[scene_num][curr].duration != 0) {
@@ -61,14 +61,11 @@ bool Seagull::update(Scene &scene, float dt) {
     else {
         position = glm::vec3{0, 0, 0};
         if (age >= 73.0f) {
-            position = glm::vec3{5, 6, 63};
+            rotation = glm::vec3((ppgso::PI/180)*(180), (ppgso::PI/180)*(0), (ppgso::PI/180)*(-40));
+            position = glm::vec3{8, 6, 61};
             parent = nullptr;
         }
     }
-    std::cout << "age " << age << std::endl;
-    std::cout << "x " << position.x << std::endl;
-    std::cout << "y " << position.y << std::endl;
-    std::cout << "z " << position.z << std::endl;
   generateModelMatrix();
   return true;
 }
@@ -112,7 +109,7 @@ void Seagull::render(Scene &scene) {
         else{
             shader->setUniform("diffuse_strength", 0.05f);
             shader->setUniform("ambient_strength", 0.05f);
-            shader->setUniform("specular_strength", 0.05f);
+            shader->setUniform("specular_strength", 0.6f);
             shader->setUniform("viewPos", scene.camera->position);
         }
     }

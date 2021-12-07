@@ -29,7 +29,7 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         // prichod ku stolu
         Keyframe(glm::vec3(12, 9, 71), glm::vec3(0.25f, 0.57f, 1), 73.0f, 2.0f),
         // pred stol
-        Keyframe(glm::vec3(2, 9, 63), glm::vec3(-8.0f, 5.7f, 1), 75.0f, 4.0f),
+        Keyframe(glm::vec3(2, 9, 63), glm::vec3(-1.716f, 0.583f, 1), 75.0f, 4.0f),
         // prechod ponad stolom
         Keyframe(glm::vec3(4, 9, 53), glm::vec3(-7.0f, 5.7f, -7.1f), 0.0f, 0.0f)},
         // vonku
@@ -64,9 +64,9 @@ void Camera::update(float dt) {
     std::cout<< " z camera: "<< position.z<< std::endl;
     std::cout<< " y camera: "<< position.y<< std::endl;
     std::cout<< " x camera: "<< position.x<< std::endl;
-    std::cout<< " rotate camera: "<< back.z<< std::endl;
-    std::cout<< " rotate camera: "<< back.y<< std::endl;
-    std::cout<< " rotate camera: "<< back.x<< std::endl;
+    std::cout<< " rotate camera z: "<< back.z<< std::endl;
+    std::cout<< " rotate camera y: "<< back.y<< std::endl;
+    std::cout<< " rotate camera x: "<< back.x<< std::endl;
     std::cout<< " age: "<< age << std::endl;
     viewMatrix = lookAt(position, position-back, up);
 }

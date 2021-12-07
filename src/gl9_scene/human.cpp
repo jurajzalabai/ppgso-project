@@ -30,15 +30,15 @@ Human::Human() {
 
 
             {
-            Keyframe(glm::vec3(0,0,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 62.0f, 3.0f),
+            Keyframe(glm::vec3(0,0.4,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 62.0f, 3.0f),
             // prichod ku krbu
-            Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 65.0f, 2.0f),
+            Keyframe(glm::vec3(-5,0.4,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 65.0f, 2.0f),
             // otocenie ku krbu
-            Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 68.0f, 1.0f),
+            Keyframe(glm::vec3(-5,0.4,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 68.0f, 1.0f),
             // otocenie ku stolu
-            Keyframe(glm::vec3(-5,0,40), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 69.0f, 4.0f),
+            Keyframe(glm::vec3(-5,0.4,40), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 69.0f, 4.0f),
             // prichod ku stolu
-            Keyframe(glm::vec3(5,0,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}
+            Keyframe(glm::vec3(5,0.4,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}
     };
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
