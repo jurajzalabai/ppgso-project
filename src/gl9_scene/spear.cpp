@@ -30,6 +30,8 @@ Spear::Spear() {
             Keyframe(glm::vec3(0,6,3), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)), 0.0f, 0.0f)}
     };
 
+    mass = 1.0f;
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("SpearTexture.bmp"));
@@ -71,9 +73,8 @@ bool Spear::update(Scene &scene, float dt) {
     }
 
     else if (position.y >= 2){
-        position.y -= 10 * dt;
-        position.x += 2 * dt;
-        rotation.y += (ppgso::PI/180)*(-0.6f)*dt;
+        position += (gravity(mass) + gravity(child->mass) + (dynamic_cast<Seagull *>(child))->flight ) * dt;
+        rotation.y += (ppgso::PI/180)*(420)*dt;
     }
 
     if(parent != nullptr) {

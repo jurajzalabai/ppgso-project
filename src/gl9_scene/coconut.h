@@ -26,7 +26,7 @@ private:
     // Age of the object in seconds
     float fall_time;
     bool collided = false;
-    glm::vec3 rotMomentum;
+    glm::vec3 initial_rotation;
 
     // Speed and rotational momentum
     glm::vec3 speed;
@@ -35,7 +35,7 @@ private:
 public:
 
     float age{0.0f};
-    bool willFall = false;
+    bool willMove = false;
 
     /*!
      * Create new asteroid
