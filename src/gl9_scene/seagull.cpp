@@ -25,9 +25,9 @@ Seagull::Seagull() {
 //            Keyframe(glm::vec3(0,0,0), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
 //    };
 
-    mass = 3.0f;
+    mass = 2.0f;
     flight = glm::vec3(-10.0f, 0, 2.5f);
-    lift = glm::vec3(0, 27.43f, 0);
+    lift = glm::vec3(0, -gravity(mass).y-2, 0);
     wind = glm::vec3(-1.167f, 0, 0);
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);

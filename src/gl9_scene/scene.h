@@ -49,6 +49,10 @@ class Scene {
     float age={0.0};
 
     int scene_num=-1;
+    glm::vec3 palmTree_position;
+    glm::vec3 coconut_position = glm::vec3{0, 0, 0};
+    glm::vec3 coconut_rotation;
+    float fallenCoconut;
 
     // Store cursor state
     struct {

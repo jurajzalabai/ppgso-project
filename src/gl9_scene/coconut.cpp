@@ -76,6 +76,8 @@ bool Coconut::update(Scene &scene, float dt) {
                     }
                     else {
                         willMove = false;
+                        scene.coconut_position = position;
+                        scene.coconut_rotation = rotation;
                     }
                 }
             }
