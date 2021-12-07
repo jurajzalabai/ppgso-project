@@ -40,13 +40,16 @@
 #include "fire.h"
 
 const unsigned int SIZE = 800;
-
+const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 /*!
  * Custom windows for our simple game
  */
 class SceneWindow : public ppgso::Window {
 private:
   bool animate = true;
+
+    unsigned int depthMapFBO;
+    unsigned int depthMap;
 
 public:
   /*!
@@ -246,21 +249,21 @@ public:
 //        scene.age = 66.0f;
 
         //TODO: Hlavne:
-        //TODO: piesok nejde
-        //TODO: vietor pridat... nejaku funkciu, co mu tam posles vahu alebo take nieco pri ostepe : T
-        //TODO: dodat jednu zlozku svetla : J
+        //TODO: predlzit scenu vo vnutri, opravit vsade age
+        //TODO: mozno korytnacka do mora
+
+        //TODO: SKUSIT shader na piesok a smoke, ak nejde tak skusit texturu akl nie tak maunalne farbu posuvat : J
+        //TODO: mozno opravit keyframes kamery ze blizsie ku ohnu : J
+        //TODO: tocenie spearu pri krbe a dlhsie opekanie(skorej typek ku krbu) : T
+
         //TODO: tiene
         //TODO: postprocessing
 
         //TODO: Detaily:
         //TODO: upravit keyframes vonku
         //TODO: opekanie cajky
-        //TODO: ohen zlepsit
-        //TODO: textura podlahy, mozno steny
-        //TODO: ohen textura
+        //TODO: textura podlahy
         //TODO: refaktor kodu
-        //TODO: keyframe - na vsetko
-        //TODO: spravne textury na vsetko
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
         camera->age = scene.age;
@@ -570,8 +573,9 @@ int main() {
     window.initScene();
 //    window.initInteriorScene();
     window.scene.age = 50.0f;
-
+    
     window.scene.scene_num = 0;
+
 
 
     while (window.pollEvents()) {
