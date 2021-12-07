@@ -16,13 +16,18 @@ std::unique_ptr<ppgso::Mesh> PalmTree::mesh;
 std::unique_ptr<ppgso::Texture> PalmTree::texture;
 std::unique_ptr<ppgso::Shader> PalmTree::shader;
 
-PalmTree::PalmTree() {
+PalmTree::PalmTree(Scene &scene) {
     // Set random scale speed and rotation
     scale *= (2.0f);
-//    position.x = glm::linearRand(-45.0f, -35.0f);
-//    position.z = glm::linearRand(-10.0f, 20.0f);
-    position.x = -35;
-    position.z = 2;
+    if (scene.scene_num == 0) {
+        position.x = glm::linearRand(-45.0f, -35.0f);
+        position.z = glm::linearRand(-10.0f, 20.0f);
+    }
+    else {
+        position = scene.palmTree_position;
+    }
+//    position.x = -35;
+//    position.z = 2;
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);

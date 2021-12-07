@@ -24,7 +24,7 @@ Turtle::Turtle() {
             Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 0.0f, 0.0f)},
 
             {},
-            {Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 85.0f, 0.0f),}
+            {Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 80.0f, 0.0f),}
     };
 
     // Initialize static resources if needed
@@ -40,8 +40,8 @@ bool Turtle::update(Scene &scene, float dt) {
             if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
                 position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr + 1].position, age,
                                 keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
-                rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr + 1].rotation, age,
-                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+//                rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr + 1].rotation, age,
+//                                keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
             } else {
                 curr++;
             }

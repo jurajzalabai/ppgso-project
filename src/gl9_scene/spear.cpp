@@ -74,7 +74,7 @@ bool Spear::update(Scene &scene, float dt) {
 
     else if (position.y >= 2){
         position += (gravity(mass) + gravity(child->mass) + (dynamic_cast<Seagull *>(child))->flight ) * dt;
-        rotation.y += (ppgso::PI/180)*(420)*dt;
+        rotation.y += (ppgso::PI/180)*(250)*dt;
     }
 
     if(parent != nullptr) {

@@ -75,7 +75,7 @@ public:
         scene.scene_num++;
 //        scene.age = 30.0f;
 
-//        scene.scene_num = 1;
+//        scene.scene_num = 2;
 //        scene.age = 80.0f;
         // Add space background
         //scene.objects.push_back(std::make_unique<Space>());
@@ -108,6 +108,8 @@ public:
             human->position = human->keyframes[human->scene_num][0].position;
             human->rotation = human->keyframes[human->scene_num][0].rotation;
             scene.objects.push_back(move(human));
+
+            scene.fallenCoconut = glm::linearRand(0.0f, 3.0f);
         }
 
         auto sky = std::make_unique<Sky>();
@@ -123,8 +125,9 @@ public:
         sun->color = glm::vec3({0.992f, 0.952f, 0.588f});
         scene.objects.push_back(move(sun));
 
-        auto palmTree = std::make_unique<PalmTree>();
+        auto palmTree = std::make_unique<PalmTree>(scene);
         palmTree->age = scene.age;
+        scene.palmTree_position = palmTree->position;
 //        palmTree->position = glm::vec3(-35,0,12);
 
         auto coconut1 = std::make_unique<Coconut>();
@@ -146,15 +149,26 @@ public:
         coconut3->position.y = palmTree->position.y + 19;
         coconut3->position.z = palmTree->position.z + -7.5f;
 
-        float random = glm::linearRand(0.0f, 3.0f);
-        if (random <= 1.0) {
+        if (scene.fallenCoconut <= 1.0) {
             coconut1->willMove = true;
+            if (scene.scene_num == 2 && scene.coconut_position != glm::vec3{0, 0, 0}) {
+                coconut1->position = scene.coconut_position;
+                coconut1->rotation = scene.coconut_rotation;
+            }
         }
-        else if (random <= 2.0) {
+        else if (scene.fallenCoconut <= 2.0) {
             coconut2->willMove = true;
+            if (scene.scene_num == 2 && scene.coconut_position != glm::vec3{0, 0, 0}) {
+                coconut2->position = scene.coconut_position;
+                coconut2->rotation = scene.coconut_rotation;
+            }
         }
         else {
             coconut3->willMove = true;
+            if (scene.scene_num == 2 && scene.coconut_position != glm::vec3{0, 0, 0}) {
+                coconut3->position = scene.coconut_position;
+                coconut3->rotation = scene.coconut_rotation;
+            }
         }
 
         auto palmLeaves = std::make_unique<PalmLeaves>();
@@ -556,7 +570,7 @@ int main() {
     window.initScene();
 //    window.initInteriorScene();
 //    window.scene.age = 45.0f;
-    // Main execution loo
+    // Main execution loop
 
 //    window.scene.scene_num = 1;
 

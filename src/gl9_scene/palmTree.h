@@ -36,7 +36,7 @@ public:
     /*!
      * Create new asteroid
      */
-    PalmTree();
+    PalmTree(Scene &scene);
 
     /*!
      * Update asteroid
