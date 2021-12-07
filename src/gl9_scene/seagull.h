@@ -22,6 +22,9 @@ public:
 
     float age{0.0f};
     int scene_num = -1;
+    glm::vec3 flight;
+    glm::vec3 wind;
+    glm::vec3 lift;
     std::vector<std::vector<Keyframe>> keyframes;
 
     /*!

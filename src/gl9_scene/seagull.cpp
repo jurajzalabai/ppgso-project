@@ -15,52 +15,60 @@ std::unique_ptr<ppgso::Shader> Seagull::shader;
 Seagull::Seagull() {
 
     scale *= 3.0f;
-    keyframes  = {
-            {
-            Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
-            // let cajky
-            Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
+//    keyframes  = {
+//            {
+////            Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
+////            // let cajky
+////            Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
+//
+//            {
+//            Keyframe(glm::vec3(0,0,0), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
+//    };
 
-            {
-            Keyframe(glm::vec3(0,0,0), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
-    };
+    mass = 3.0f;
+    flight = glm::vec3(-10.0f, 0, 2.5f);
+    lift = glm::vec3(0, 27.43f, 0);
+    wind = glm::vec3(-1.167f, 0, 0);
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
-  if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
-  if (!mesh) mesh = std::make_unique<ppgso::Mesh>("seagull-low-poly.obj");
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("seagull-low-poly.obj");
 }
 
 bool Seagull::update(Scene &scene, float dt) {
-  // Fire delay increment
-    std::cout<<" cas: "<<age << std::endl;
+
     age += dt;
 
     if (parent == nullptr) {
         if (age >= 73.0f && age <= 75.0f) {
             position = lerp(glm::vec3{5, 6, 63}, glm::vec3(9, 3.2f, 60), age, 73.0f, 2.0f);
         }
-        else if (keyframes[scene_num][curr].startTime < age) {
-            if (keyframes[scene_num][curr].duration != 0) {
-                if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration){
-                    position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr+1].position, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
-                    rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr+1].rotation, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
-                }
-                else {
-                    curr++;
-                }
-            }
+//        else if (keyframes[scene_num][curr].startTime < age) {
+//            if (keyframes[scene_num][curr].duration != 0) {
+//                if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration){
+//                    position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr+1].position, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+//                    rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr+1].rotation, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
+//                }
+//                else {
+//                    curr++;
+//                }
+//            }
+//        }
+        else if (age < 73.0f){
+            position += (gravity(mass) + flight + wind + lift) * dt;
         }
     }
     else {
         position = glm::vec3{0, 0, 0};
-        std::cout << "salalala" << std::endl;
         if (age >= 73.0f) {
             position = glm::vec3{5, 6, 63};
-            std::cout << "lalala" << position.x << position.y << position.z << std::endl;
             parent = nullptr;
         }
     }
-
+    std::cout << "age " << age << std::endl;
+    std::cout << "x " << position.x << std::endl;
+    std::cout << "y " << position.y << std::endl;
+    std::cout << "z " << position.z << std::endl;
   generateModelMatrix();
   return true;
 }

@@ -50,6 +50,8 @@ public:
   glm::mat4 modelMatrix{1};
   glm::mat4 modelMatrixNotScaled{1};
 
+  float mass;
+
   Object *parent = nullptr;
   Object *child = nullptr;
 
@@ -62,5 +64,7 @@ protected:
   glm::vec3 lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration);
 
   glm::vec3 quadratic_lerp(const glm::vec3 a, const glm::vec3 b, const glm::vec3 c, float age, float start, float duration);
+
+  glm::vec3 gravity(float mass);
 };
 

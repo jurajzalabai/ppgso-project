@@ -73,7 +73,7 @@ public:
     void initScene() {
         scene.objects.clear();
         scene.scene_num++;
-        scene.age = 30.0f;
+//        scene.age = 30.0f;
 
 //        scene.scene_num = 1;
 //        scene.age = 80.0f;
@@ -96,8 +96,10 @@ public:
             auto seagull = std::make_unique<Seagull>();
             seagull->age = scene.age;
             seagull->scene_num = scene.scene_num;
-            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
-            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
+            seagull->position = glm::vec3(25,30,10);
+            seagull->rotation = glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90));
+//            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
+//            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
             scene.objects.push_back(move(seagull));
 
             auto human = std::make_unique<Human>();
@@ -227,15 +229,12 @@ public:
     void initInteriorScene() {
         scene.objects.clear();
         scene.scene_num++;
-        scene.age = 66.0f;
+//        scene.age = 66.0f;
 
         //TODO: Hlavne:
         //TODO: piesok nejde
-        //TODO: proceudralne strom pozicia: T
-        //TODO: random viac kokosov, jeden z nich padne a ten pohyb opravit(mozno aj tocenie) : T
         //TODO: vietor pridat... nejaku funkciu, co mu tam posles vahu alebo take nieco pri ostepe : T
         //TODO: dodat jednu zlozku svetla : J
-
         //TODO: tiene
         //TODO: postprocessing
 
@@ -330,8 +329,10 @@ public:
         auto seagull = std::make_unique<Seagull>();
         seagull->age = scene.age;
         seagull->scene_num = scene.scene_num;
-        seagull->position = seagull->keyframes[seagull->scene_num][0].position;
-        seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
+        seagull->position = glm::vec3(0,0,0);
+        seagull->rotation = glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90));
+//        seagull->position = seagull->keyframes[seagull->scene_num][0].position;
+//        seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
         scene.objects.push_back(move(seagull));
     }
 
