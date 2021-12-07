@@ -40,13 +40,16 @@
 #include "fire.h"
 
 const unsigned int SIZE = 800;
-
+const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 /*!
  * Custom windows for our simple game
  */
 class SceneWindow : public ppgso::Window {
 private:
   bool animate = true;
+
+    unsigned int depthMapFBO;
+    unsigned int depthMap;
 
 public:
   /*!
