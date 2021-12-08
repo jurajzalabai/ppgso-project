@@ -6,6 +6,7 @@
 #include "coconut.h"
 #include "ocean.h"
 #include "turtle.h"
+#include "particle.h"
 #include <math.h>
 
 #include <shaders/scene_diffuse_vert_glsl.h>
@@ -43,6 +44,16 @@ bool Coconut::update(Scene &scene, float dt) {
             fall_time = age;
         }
         else{
+            if (fall_time >= age && fall_time < age + 0.2){
+                for (int i = 0; i<50; i++){
+                    auto obj2 = std::make_unique<Particle>(
+                            glm::vec3(position),
+                            glm::vec3(glm::linearRand(-15.0f, 15.0f),glm::linearRand(2.0f, 3.0f), glm::linearRand(-15.0f, 15.0f)),
+                            glm::vec3(0.952, 0.929, 0.527),
+                            glm::linearRand(0.2f, 0.5f), false);
+                    scene.objects.push_back(move(obj2));
+                }
+            }
             if(speed.x < 0) {
                 rotation.z = -(atan(speed.z/speed.x));
             }

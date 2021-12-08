@@ -17,6 +17,7 @@ std::unique_ptr<ppgso::Shader> Human::shader;
 
 Human::Human() {
 
+
     scale *= (4.0f);
     keyframes  = {
             {

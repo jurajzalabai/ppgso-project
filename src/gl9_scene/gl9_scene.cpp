@@ -38,6 +38,10 @@
 #include "sky.h"
 #include "palmLeaves.h"
 #include "fire.h"
+#include "boots.h"
+#include "eyes.h"
+#include "pants.h"
+#include "shirt.h"
 
 const unsigned int SIZE = 800;
 const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
@@ -111,6 +115,34 @@ public:
             human->position = human->keyframes[human->scene_num][0].position;
             human->rotation = human->keyframes[human->scene_num][0].rotation;
             scene.objects.push_back(move(human));
+
+            auto boots = std::make_unique<Boots>();
+            boots->age = scene.age;
+            boots->scene_num = scene.scene_num;
+            boots->position = boots->keyframes[boots->scene_num][0].position;
+            boots->rotation = boots->keyframes[boots->scene_num][0].rotation;
+            scene.objects.push_back(move(boots));
+
+            auto eyes = std::make_unique<Eyes>();
+            eyes->age = scene.age;
+            eyes->scene_num = scene.scene_num;
+            eyes->position = eyes->keyframes[eyes->scene_num][0].position;
+            eyes->rotation = eyes->keyframes[eyes->scene_num][0].rotation;
+            scene.objects.push_back(move(eyes));
+
+            auto pants = std::make_unique<Pants>();
+            pants->age = scene.age;
+            pants->scene_num = scene.scene_num;
+            pants->position = pants->keyframes[pants->scene_num][0].position;
+            pants->rotation = pants->keyframes[pants->scene_num][0].rotation;
+            scene.objects.push_back(move(pants));
+
+            auto shirt = std::make_unique<Shirt>();
+            shirt->age = scene.age;
+            shirt->scene_num = scene.scene_num;
+            shirt->position = shirt->keyframes[shirt->scene_num][0].position;
+            shirt->rotation = shirt->keyframes[shirt->scene_num][0].rotation;
+            scene.objects.push_back(move(shirt));
 
             scene.fallenCoconut = glm::linearRand(0.0f, 3.0f);
         }
@@ -248,14 +280,12 @@ public:
         scene.scene_num++;
 //        scene.age = 66.0f;
 
-        //TODO: SKUSIT shader na piesok a smoke, ak nejde tak skusit texturu akl nie tak maunalne farbu posuvat : J
-        //TODO: tocenie spearu pri krbe a dlhsie opekanie(skorej typek ku krbu) : T
-
         //TODO: tiene
         //TODO: postprocessing
 
         //TODO: Detaily:
-        //TODO: opekanie cajky
+        //TODO: piesok orech
+        //TODO: vyskladat human
         //TODO: textura podlahy
         //TODO: refaktor kodu
 
@@ -329,6 +359,34 @@ public:
         human->position = human->keyframes[human->scene_num][0].position;
         human->rotation = human->keyframes[human->scene_num][0].rotation;
         scene.objects.push_back(move(human));
+
+        auto boots = std::make_unique<Boots>();
+        boots->age = scene.age;
+        boots->scene_num = scene.scene_num;
+        boots->position = boots->keyframes[boots->scene_num][0].position;
+        boots->rotation = boots->keyframes[boots->scene_num][0].rotation;
+        scene.objects.push_back(move(boots));
+
+        auto eyes = std::make_unique<Eyes>();
+        eyes->age = scene.age;
+        eyes->scene_num = scene.scene_num;
+        eyes->position = eyes->keyframes[eyes->scene_num][0].position;
+        eyes->rotation = eyes->keyframes[eyes->scene_num][0].rotation;
+        scene.objects.push_back(move(eyes));
+
+        auto pants = std::make_unique<Pants>();
+        pants->age = scene.age;
+        pants->scene_num = scene.scene_num;
+        pants->position = pants->keyframes[pants->scene_num][0].position;
+        pants->rotation = pants->keyframes[pants->scene_num][0].rotation;
+        scene.objects.push_back(move(pants));
+
+        auto shirt = std::make_unique<Shirt>();
+        shirt->age = scene.age;
+        shirt->scene_num = scene.scene_num;
+        shirt->position = shirt->keyframes[shirt->scene_num][0].position;
+        shirt->rotation = shirt->keyframes[shirt->scene_num][0].rotation;
+        scene.objects.push_back(move(shirt));
 
         auto spear = std::make_unique<Spear>();
         spear->age = scene.age;
@@ -569,8 +627,8 @@ int main() {
 //    window.scene.age = 45.0f;
     // Main execution loop
 
-    window.scene.age = 90.0;
-    window.scene.scene_num = 1;
+//    window.scene.age = 90.0;
+//    window.scene.scene_num = 1;
 
 //    window.scene.scene_num = 1;
 

@@ -23,6 +23,7 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts) 
     scale *= sc;
     color = c;
     fast_start = 0;
+    life_age = glm::linearRand(3.0f, 7.0f);
     part = parts;
     if (!shader) shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("stars.bmp"));
@@ -31,27 +32,20 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts) 
 bool Particle::update(Scene &scene, float dt) {
     age += dt;
     fast_start++;
-    if (speed.y >= 0 && part)
+    if (speed.y >= 0 && part){
         speed.y = 4 + (fast_start / 1000) * (1 - 4);
+    }
     if (!part){
         speed.y -= 20 * dt;
     }
-//    if (fast_start % 100 == 0 ){
-//        if (position.x >= 5){
-//            speed.x += glm::linearRand(speed.x - 1, speed.x);
-//        }
-//        else if (position.x <= -5){
-//            speed.x += glm::linearRand(speed.x, speed.x + 1);
-//        }
-//        else{
-//            speed.x += glm::linearRand(speed.x - 1, speed.x + 1);
-//        }
-//    }
+    if (life_age - age <= 1.0){
+        scale *= 0.965;
+    }
     position += speed * dt;
     generateModelMatrix();
     if (part){
         if (scene.scene_num != 1)
-            return age <= 3.0;
+            return age <= life_age;
         else
             return age <= 1.0;
     }

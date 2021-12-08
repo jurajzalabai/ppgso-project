@@ -21,6 +21,7 @@ private:
 
     // Age of the object in seconds
     float age{0.0f};
+    float life_age{0.0f};
     float fast_start{0.0f};
     glm::vec3 speed;
     glm::vec3 color;

@@ -34,11 +34,11 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         // prechod ponad stolom
         Keyframe(glm::vec3(4, 9, 53), glm::vec3(-7.0f, 5.7f, -7.1f), 0.0f, 0.0f)},
         // vonku
-        {Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 94.0f, 4.0f),
+        {Keyframe(glm::vec3(0,15,100), glm::vec3( -0.10472, 0, 1), 94.0f, 4.0f),
          // korytnacka
         Keyframe(glm::vec3(1.0f,14.0f, 12.0f), glm::vec3(0.314159f,0.418879f,1), 106.0f, 3.0f),
         //palma
-         Keyframe(glm::vec3(-50,11,53), glm::vec3(-0.518818, 0, 0.733038), 114.0f, 8.0f),
+         Keyframe(glm::vec3(-50,13,56), glm::vec3( -0.601403, 0, 0.733038), 114.0f, 8.0f),
         //zapad
          Keyframe(glm::vec3(-29.9805,16.0044,107.04), glm::vec3(-0.209573, 0.10472, 0.733524), 0.0f, 0.0f),
 //        Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 0.0f, 0.0f),

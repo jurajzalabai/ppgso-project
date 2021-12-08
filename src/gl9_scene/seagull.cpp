@@ -73,7 +73,7 @@ bool Seagull::update(Scene &scene, float dt) {
 void Seagull::render(Scene &scene) {
     shader->use();
     if (scene_num == 1){
-        if (age < 68.0f){
+        if (age > 52.0f){
             shader->setUniform("pointLights[0].position", {0,15,74});
             shader->setUniform("pointLights[0].constant", 1.0f);
             shader->setUniform("pointLights[0].linear", 0.0f);
@@ -100,17 +100,24 @@ void Seagull::render(Scene &scene) {
             shader->setUniform("pointLights[3].direction", {0.0f, -1.0f, 0.0f});
             shader->setUniform("pointLights[3].outerCutOff", glm::cos(glm::radians(45.0f)));
             shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
-
-            shader->setUniform("diffuse_strength", 0.3f);
-            shader->setUniform("ambient_strength", 0.2f);
-            shader->setUniform("specular_strength", 0.3f);
-            shader->setUniform("viewPos", scene.camera->position);
-        }
-        else{
-            shader->setUniform("diffuse_strength", 0.05f);
-            shader->setUniform("ambient_strength", 0.05f);
-            shader->setUniform("specular_strength", 0.6f);
-            shader->setUniform("viewPos", scene.camera->position);
+            if (age > 52.0f && age <= 65.0f){
+                shader->setUniform("diffuse_strength", 0.3f);
+                shader->setUniform("ambient_strength", 0.2f);
+                shader->setUniform("specular_strength", 0.3f);
+                shader->setUniform("viewPos", scene.camera->position);
+            }
+            else if (age >= 65.0f && age < 71.0f){
+                shader->setUniform("diffuse_strength", lerp(glm::vec3(0.3f), glm::vec3(0.05f), age, 65.0f, 6.0f).x);
+                shader->setUniform("ambient_strength", lerp(glm::vec3(0.2f), glm::vec3(0.05f), age, 65.0f, 6.0f).x);
+                shader->setUniform("specular_strength", lerp(glm::vec3(0.3f), glm::vec3(0.6f), age, 65.0f, 6.0f).x);
+                shader->setUniform("viewPos", scene.camera->position);
+            }
+            else if (age > 71.0f){
+                shader->setUniform("diffuse_strength", 0.05f);
+                shader->setUniform("ambient_strength", 0.05f);
+                shader->setUniform("specular_strength", 0.6f);
+                shader->setUniform("viewPos", scene.camera->position);
+            }
         }
     }
 

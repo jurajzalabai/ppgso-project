@@ -22,7 +22,7 @@ Floor::Floor() {
     rotation.z = (ppgso::PI/180)*(-90);
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("floortexture.bmp"));
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("FloorTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Floor.obj");
 }
 bool Floor::update(Scene &scene, float dt) {
