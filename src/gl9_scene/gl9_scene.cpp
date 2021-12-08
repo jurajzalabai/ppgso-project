@@ -571,8 +571,8 @@ int main() {
 //    window.scene.age = 45.0f;
     // Main execution loop
 
-    window.scene.age = 90.0;
-    window.scene.scene_num = 1;
+    window.scene.age = 50.0;
+    window.scene.scene_num = 0;
 
 
 

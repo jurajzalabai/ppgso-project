@@ -14,7 +14,7 @@ std::unique_ptr<ppgso::Shader> Seagull::shader;
 
 Seagull::Seagull() {
 
-    scale *= 3.0f;
+    scale *= 2.5f;
 //    keyframes  = {
 //            {
 ////            Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
@@ -60,6 +60,7 @@ bool Seagull::update(Scene &scene, float dt) {
     }
     else {
         position = glm::vec3{0, 0, 0};
+//        if (age <)
         if (age >= 79.0f) {
             rotation = glm::vec3((ppgso::PI/180)*(180), (ppgso::PI/180)*(0), (ppgso::PI/180)*(-40));
             position = glm::vec3{8, 6, 61};

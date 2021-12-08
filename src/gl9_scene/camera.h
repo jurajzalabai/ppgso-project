@@ -21,7 +21,7 @@ public:
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
     float age{0.0f};
-    bool autoMovement = false;
+    bool autoMovement = true;
     int scene_num;
     std::vector<std::vector<Keyframe>> keyframes;
   /*!

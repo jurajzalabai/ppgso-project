@@ -33,6 +33,7 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         Keyframe(glm::vec3(2, 9, 63), glm::vec3(-1.716f, 0.583f, 1), 85.0f, 5.0f),
         // prechod ponad stolom
         Keyframe(glm::vec3(4, 9, 53), glm::vec3(-7.0f, 5.7f, -7.1f), 0.0f, 0.0f)},
+
         // vonku
         {Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 94.0f, 4.0f),
          // korytnacka
