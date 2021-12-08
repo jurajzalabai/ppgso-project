@@ -72,16 +72,27 @@ bool Spear::update(Scene &scene, float dt) {
         }
     }
 
-    else if (position.y >= 2){
+    else if (position.y >= 2 && age > 5.0f && age < 7.0f){
         position += (gravity(mass) + gravity(child->mass) + (dynamic_cast<Seagull *>(child))->flight ) * dt;
         rotation.y += (ppgso::PI/180)*(250)*dt;
     }
 
-    if(parent != nullptr) {
-        position = glm::vec3{0, 6, 3};
-        rotation = glm::vec3{(ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)};
+    if(parent != nullptr && age > 55.0f && age < 72.0f) {
+        if (age < 63.0f) {
+            position = glm::vec3{0, 6, 3};
+            rotation = glm::vec3{(ppgso::PI / 180) * (-45), (ppgso::PI / 180) * (20), (ppgso::PI / 180) * (180)};
+        } else if (age > 63.0f && age < 65.0f) {
+            position = lerp(glm::vec3{0, 6, 3}, glm::vec3{0.1, 1.7, 4}, age, 63.0f, 2.0f);
+            rotation = lerp(glm::vec3{(ppgso::PI / 180) * (-45), (ppgso::PI / 180) * (20), (ppgso::PI / 180) * (180)},
+                            glm::vec3{(ppgso::PI / 180) * (-105), (ppgso::PI / 180) * (20), (ppgso::PI / 180) * (180)},
+                            age, 63.0f, 2.0f);
+        } else if (age > 70.0f && age < 72.0f){
+            position = lerp(glm::vec3{0.1, 1.7, 4}, glm::vec3{0, 6, 3}, age, 70.0f, 2.0f);
+            rotation = lerp(glm::vec3{(ppgso::PI / 180) * (-105), (ppgso::PI / 180) * (20), (ppgso::PI / 180) * (180)},
+                            glm::vec3{(ppgso::PI / 180) * (-45), (ppgso::PI / 180) * (20), (ppgso::PI / 180) * (180)},
+                            age, 70.0f, 2.0f);
+        }
     }
-
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
