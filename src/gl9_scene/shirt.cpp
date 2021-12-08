@@ -33,11 +33,11 @@ Shirt::Shirt() {
             {
                     Keyframe(glm::vec3(0,0.4,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 60.0f, 3.0f),
                     // prichod ku krbu
-                    Keyframe(glm::vec3(-5,0.4,40), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 63.0f, 2.0f),
+                    Keyframe(glm::vec3(-5,0.4,41), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 63.0f, 2.0f),
                     // otocenie ku krbu
-                    Keyframe(glm::vec3(-5,0.4,40), glm::vec3(0, 0, (ppgso::PI/180)*(-210)), 72.0f, 1.0f),
+                    Keyframe(glm::vec3(-5,0.4,41), glm::vec3(0, 0, (ppgso::PI/180)*(-220)), 72.0f, 1.0f),
                     // otocenie ku stolu
-                    Keyframe(glm::vec3(-5,0.4,40), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 73.0f, 4.0f),
+                    Keyframe(glm::vec3(-5,0.4,41), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 73.0f, 4.0f),
                     // prichod ku stolu
                     Keyframe(glm::vec3(5,0.4,60), glm::vec3(0, 0, (ppgso::PI/180)*(-300)), 0.0f, 0.0f)}
     };
