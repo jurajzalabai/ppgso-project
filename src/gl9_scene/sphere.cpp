@@ -31,7 +31,10 @@ bool Sphere::update(Scene &scene, float dt) {
     return true;
 }
 
-void Sphere::render(Scene &scene) {
+void Sphere::renderDepth(Scene &scene) {
+}
+
+void Sphere::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     // Set up light

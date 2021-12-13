@@ -58,7 +58,7 @@ public:
     /*!
      * Custom click event for asteroid
      */
-    void render(Scene &scene) override;
+    void render(Scene &scene, unsigned int depthMap) override;
 
 
     void bezierShape(Scene &scene, glm::vec3 first, glm::vec3 second, int count);

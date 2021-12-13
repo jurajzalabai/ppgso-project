@@ -59,7 +59,7 @@ namespace ppgso {
     void setUniform(const std::string &name, float value) const;
 
 
-    void setTexture(const std::string &name, int value) const;
+    void setTexture(const std::string &name, const int value) const;
 
     /*!
      * Set a vector as an input for the shader program variable "name"

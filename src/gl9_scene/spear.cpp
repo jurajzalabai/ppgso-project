@@ -105,7 +105,10 @@ bool Spear::update(Scene &scene, float dt) {
     return true;
 }
 
-void Spear::render(Scene &scene) {
+void Spear::renderDepth(Scene &scene) {
+}
+
+void Spear::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     if (scene_num == 1){
         shader->setUniform("pointLights[0].position", {0,15,74});

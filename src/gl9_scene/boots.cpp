@@ -67,7 +67,11 @@ bool Boots::update(Scene &scene, float dt) {
     return true;
 }
 
-void Boots::render(Scene &scene) {
+void Boots::renderDepth(Scene &scene) {
+}
+
+
+void Boots::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     if (scene_num == 1){

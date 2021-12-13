@@ -34,7 +34,10 @@ bool House::update(Scene &scene, float dt) {
     return true;
 }
 
-void House::render(Scene &scene) {
+void House::renderDepth(Scene &scene) {
+}
+
+void House::render(Scene &scene, unsigned int depthMap) {
 //    std::cout << age << std::endl;
     shader->use();
 

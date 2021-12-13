@@ -35,7 +35,10 @@ bool Ocean::update(Scene &scene, float dt) {
     return true;
 }
 
-void Ocean::render(Scene &scene) {
+void Ocean::renderDepth(Scene &scene) {
+}
+
+void Ocean::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     shader->setUniform("pointLights[0].constant", 2.3f);

@@ -99,7 +99,10 @@ bool Coconut::update(Scene &scene, float dt) {
     return true;
 }
 
-void Coconut::render(Scene &scene) {
+void Coconut::renderDepth(Scene &scene) {
+}
+
+void Coconut::render(Scene &scene, unsigned int depthMap) {
 //    std::cout << age << std::endl;
     shader->use();
 

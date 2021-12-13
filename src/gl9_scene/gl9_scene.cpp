@@ -74,6 +74,24 @@ public:
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
+
+      // Set up glfw
+      glGenFramebuffers(1, &depthMapFBO);
+
+      glGenTextures(1, &depthMap);
+      glBindTexture(GL_TEXTURE_2D, depthMap);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+                   SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+      glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+      glDrawBuffer(GL_NONE);
+      glReadBuffer(GL_NONE);
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
     void initScene() {
@@ -607,29 +625,21 @@ public:
     float dt = animate ? (float) glfwGetTime() - time : 0;
     time = (float) glfwGetTime();
 
-    // Set gray background
-    glClearColor(.5f, .5f, .5f, 0);
+      // Update and render all objects
+      scene.update(dt);
+
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
-      glm::mat4 lightProjection, lightView;
-      glm::mat4 lightSpaceMatrix;
-      float near_plane = 1.0f, far_plane = 7.5f;
-      //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
-      lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
-      lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
-      lightSpaceMatrix = lightProjection * lightView;
-      // render scene from light's point of view
-      scene.renderDepth(depthMap);
-//      simpleDepthShader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
 
+      // 1. render depth of scene to texture (from light's perspective)
+
+      // render scene from light's point of view
       glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
       glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
-      glClear(GL_DEPTH_BUFFER_BIT);
-      glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, woodTexture);
-      renderScene(simpleDepthShader);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      scene.renderDepth();
       glBindFramebuffer(GL_FRAMEBUFFER, 0);
+      glClearColor(.5f, .5f, .5f, 0);
 
       // reset viewport
       glViewport(0, 0, SIZE, SIZE);
@@ -639,24 +649,9 @@ public:
       // --------------------------------------------------------------
       glViewport(0, 0, SIZE, SIZE);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-      shader.use();
-      glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-      glm::mat4 view = camera.GetViewMatrix();
-      shader.setMat4("projection", projection);
-      shader.setMat4("view", view);
-      // set light uniforms
-      shader.setVec3("viewPos", camera.Position);
-      shader.setVec3("lightPos", lightPos);
-      shader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
-      glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, woodTexture);
-      glActiveTexture(GL_TEXTURE1);
-      glBindTexture(GL_TEXTURE_2D, depthMap);
-      renderScene(shader);
 
-    // Update and render all objects
-    scene.update(dt);
-    scene.render();
+//      std::cout << "depth " << depthMapFBO << std::endl;
+    scene.render(depthMap);
   }
 };
 

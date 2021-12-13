@@ -53,7 +53,10 @@ bool Particle::update(Scene &scene, float dt) {
         return age <= 0.5;
 }
 
-void Particle::render(Scene &scene) {
+void Particle::renderDepth(Scene &scene) {
+}
+
+void Particle::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     // Set up light

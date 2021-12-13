@@ -22,7 +22,9 @@ public:
      * Render placeholder for generator
      * @param scene Scene to render in
      */
-    void render(Scene &scene) override;
+    void render(Scene &scene, unsigned int depthMap) override;
+
+    void renderDepth(Scene &scene) override;
 
     float time = 0.0f;
     float time_sand = 0.0f;

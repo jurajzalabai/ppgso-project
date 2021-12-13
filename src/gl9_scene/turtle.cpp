@@ -59,7 +59,10 @@ bool Turtle::update(Scene &scene, float dt) {
     return true;
 }
 
-void Turtle::render(Scene &scene) {
+void Turtle::renderDepth(Scene &scene) {
+}
+
+void Turtle::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     shader->setUniform("pointLights[0].constant", 2.3f);

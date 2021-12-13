@@ -1,6 +1,7 @@
 #version 330
 // A texture is expected as program attribute
 uniform sampler2D Texture;
+uniform sampler2D shadowMap;
 
 // (optional) Transparency
 uniform float Transparency;
@@ -18,6 +19,8 @@ in vec3 fragPos;
 
 // Wordspace normal passed from vertex shader
 in vec4 normal;
+
+in vec4 fragPosLightSpace;
 
 // The final color
 out vec4 FragmentColor;
@@ -37,6 +40,21 @@ struct PointLight {
 };
 #define NR_POINT_LIGHTS 4
 uniform PointLight pointLights[NR_POINT_LIGHTS];
+
+float ShadowCalculation() {
+    // perform perspective divide
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    // transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+    // get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+    float closestDepth = texture(shadowMap, projCoords.xy).r;
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    // check whether current frag pos is in shadow
+    float shadow = currentDepth > closestDepth  ? 1.0 : 0.0;
+
+    return shadow;
+}
 
 vec3 CalcPointLight(PointLight light, vec3 viewDir)
 {
@@ -65,7 +83,10 @@ vec3 CalcPointLight(PointLight light, vec3 viewDir)
         diffuse  *= intensity;
         specular *= intensity;
         ambient *= intensity;
-        return (ambient + diffuse + specular);
+
+        float shadow = ShadowCalculation();
+//        return vec3(shadow);
+        return (ambient + (1.0 - shadow) * (diffuse + specular));
     }
     return vec3(0.0f);
 }
@@ -76,6 +97,7 @@ void main() {
     vec3 result = vec3(0.0f);
     for(int i = 0; i < NR_POINT_LIGHTS; i++)
     result += CalcPointLight(pointLights[i], viewDir);
+
   FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y) + TextureOffset) * vec4(result, 1.0f);
   FragmentColor.a = Transparency;
 }

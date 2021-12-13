@@ -121,12 +121,12 @@ void ppgso::Shader::setUniform(const std::string &name, float value) const {
 }
 
 
-void ppgso::Shader::setTexture(const std::string &name, int value) const {
+void ppgso::Shader::setTexture(const std::string &name, const int value) const {
     use();
     auto uniform = getUniformLocation(name.c_str());
-    glUniform1i(uniform, value);
-    glActiveTexture((GLenum) (GL_TEXTURE0 + value));
+    glActiveTexture(GL_TEXTURE0 + value);
     glBindTexture(GL_TEXTURE_2D, value);
+    glUniform1i(uniform, value);
 }
 
 GLuint ppgso::Shader::getProgram() const {

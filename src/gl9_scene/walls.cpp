@@ -33,7 +33,10 @@ bool Walls::update(Scene &scene, float dt) {
     return true;
 }
 
-void Walls::render(Scene &scene) {
+void Walls::renderDepth(Scene &scene) {
+}
+
+void Walls::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     shader->setUniform("pointLights[0].position", {0,15,74});
     shader->setUniform("pointLights[0].constant", 1.0f);

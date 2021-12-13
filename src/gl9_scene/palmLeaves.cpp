@@ -34,7 +34,10 @@ bool PalmLeaves::update(Scene &scene, float dt) {
     return true;
 }
 
-void PalmLeaves::render(Scene &scene) {
+void PalmLeaves::renderDepth(Scene &scene) {
+}
+
+void PalmLeaves::render(Scene &scene, unsigned int depthMap) {
 //    std::cout << age << std::endl;
     shader->use();
 

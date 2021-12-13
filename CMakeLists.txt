@@ -68,6 +68,7 @@ set(PPGSO_SHADER_SRC
         shader/color_vert.glsl shader/color_frag.glsl
         shader/convolution_vert.glsl shader/convolution_frag.glsl
         shader/diffuse_vert.glsl shader/diffuse_frag.glsl
+        shader/depth_vert.glsl shader/depth_frag.glsl
         shader/scene_diffuse_vert.glsl shader/scene_diffuse_frag.glsl
         shader/texture_vert.glsl shader/texture_frag.glsl
         )

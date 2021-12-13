@@ -67,7 +67,10 @@ bool Shirt::update(Scene &scene, float dt) {
     return true;
 }
 
-void Shirt::render(Scene &scene) {
+void Shirt::renderDepth(Scene &scene) {
+}
+
+void Shirt::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     if (scene_num == 1){

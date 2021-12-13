@@ -31,7 +31,10 @@ bool Chimney::update(Scene &scene, float dt) {
     return true;
 }
 
-void Chimney::render(Scene &scene) {
+void Chimney::renderDepth(Scene &scene) {
+}
+
+void Chimney::render(Scene &scene, unsigned int depthMap) {
 //    std::cout << age << std::endl;
     shader->use();
 

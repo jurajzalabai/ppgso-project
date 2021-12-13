@@ -34,7 +34,10 @@ bool Sky::update(Scene &scene, float dt) {
     return true;
 }
 
-void Sky::render(Scene &scene) {
+void Sky::renderDepth(Scene &scene) {
+}
+
+void Sky::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     // Set up light

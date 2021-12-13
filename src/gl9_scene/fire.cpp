@@ -31,7 +31,10 @@ bool Fire::update(Scene &scene, float dt) {
     return true;
 }
 
-void Fire::render(Scene &scene) {
+void Fire::renderDepth(Scene &scene) {
+}
+
+void Fire::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     shader->setUniform("pointLights[0].position", {0,15,74});
     shader->setUniform("pointLights[0].constant", 1.0f);

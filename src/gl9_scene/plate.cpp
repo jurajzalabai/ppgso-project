@@ -31,7 +31,10 @@ bool Plate::update(Scene &scene, float dt) {
     return true;
 }
 
-void Plate::render(Scene &scene) {
+void Plate::renderDepth(Scene &scene) {
+}
+
+void Plate::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     shader->setUniform("pointLights[0].position", {0,15,74});
     shader->setUniform("pointLights[0].constant", 1.0f);

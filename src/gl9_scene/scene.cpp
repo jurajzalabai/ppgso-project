@@ -22,13 +22,13 @@ void Scene::update(float time) {
   }
 }
 
-void Scene::render() {
+void Scene::render(unsigned int depthMap) {
   // Simply render all objects
   for ( auto& obj : objects )
-    obj->render(*this);
+    obj->render(*this, depthMap);
 }
 
-void Scene::renderDepth(unsigned int depthMap) {
+void Scene::renderDepth() {
     // Simply render all objects
     for ( auto& obj : objects )
         obj->renderDepth(*this);

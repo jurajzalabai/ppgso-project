@@ -31,7 +31,10 @@ bool Floor::update(Scene &scene, float dt) {
     return true;
 }
 
-void Floor::render(Scene &scene) {
+void Floor::renderDepth(Scene &scene) {
+}
+
+void Floor::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     shader->setUniform("pointLights[0].position", {0,15,74});
     shader->setUniform("pointLights[0].constant", 1.0f);

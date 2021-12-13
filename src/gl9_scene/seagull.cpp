@@ -71,7 +71,10 @@ bool Seagull::update(Scene &scene, float dt) {
   return true;
 }
 
-void Seagull::render(Scene &scene) {
+void Seagull::renderDepth(Scene &scene) {
+}
+
+void Seagull::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     if (scene_num == 1){
         if (age > 52.0f){
