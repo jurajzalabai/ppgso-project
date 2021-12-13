@@ -28,6 +28,12 @@ void Scene::render() {
     obj->render(*this);
 }
 
+void Scene::renderDepth(unsigned int depthMap) {
+    // Simply render all objects
+    for ( auto& obj : objects )
+        obj->renderDepth(*this);
+}
+
 std::vector<Object*> Scene::intersect(const glm::vec3 &position, const glm::vec3 &direction) {
   std::vector<Object*> intersected = {};
   for(auto& object : objects) {

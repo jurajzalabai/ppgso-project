@@ -26,6 +26,8 @@ class Scene {
      */
     void render();
 
+    void renderDepth(unsigned int depthMap);
+
     /*!
      * Pick objects using a ray
      * @param position - Position in the scene to pick object from

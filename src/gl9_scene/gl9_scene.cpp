@@ -605,13 +605,54 @@ public:
 
     // Compute time delta
     float dt = animate ? (float) glfwGetTime() - time : 0;
-
     time = (float) glfwGetTime();
 
     // Set gray background
     glClearColor(.5f, .5f, .5f, 0);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      glm::vec3 lightPos(-2.0f, 4.0f, -1.0f);
+      glm::mat4 lightProjection, lightView;
+      glm::mat4 lightSpaceMatrix;
+      float near_plane = 1.0f, far_plane = 7.5f;
+      //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
+      lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f, near_plane, far_plane);
+      lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+      lightSpaceMatrix = lightProjection * lightView;
+      // render scene from light's point of view
+      scene.renderDepth(depthMap);
+//      simpleDepthShader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
+
+      glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+      glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+      glClear(GL_DEPTH_BUFFER_BIT);
+      glActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_2D, woodTexture);
+      renderScene(simpleDepthShader);
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+      // reset viewport
+      glViewport(0, 0, SIZE, SIZE);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+      // 2. render scene as normal using the generated depth/shadow map
+      // --------------------------------------------------------------
+      glViewport(0, 0, SIZE, SIZE);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      shader.use();
+      glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+      glm::mat4 view = camera.GetViewMatrix();
+      shader.setMat4("projection", projection);
+      shader.setMat4("view", view);
+      // set light uniforms
+      shader.setVec3("viewPos", camera.Position);
+      shader.setVec3("lightPos", lightPos);
+      shader.setMat4("lightSpaceMatrix", lightSpaceMatrix);
+      glActiveTexture(GL_TEXTURE0);
+      glBindTexture(GL_TEXTURE_2D, woodTexture);
+      glActiveTexture(GL_TEXTURE1);
+      glBindTexture(GL_TEXTURE_2D, depthMap);
+      renderScene(shader);
 
     // Update and render all objects
     scene.update(dt);
