@@ -1,4 +1,6 @@
 #version 330
+layout (location = 0) out vec4 FragmentColor;
+layout (location = 1) out vec4 BrightColor;
 // A texture is expected as program attribute
 uniform sampler2D Texture;
 
@@ -20,7 +22,6 @@ in vec3 fragPos;
 in vec4 normal;
 
 // The final color
-out vec4 FragmentColor;
 
 struct PointLight {
     vec3 position;
@@ -76,6 +77,12 @@ void main() {
     vec3 result = vec3(0.0f);
     for(int i = 0; i < NR_POINT_LIGHTS; i++)
     result += CalcPointLight(pointLights[i], viewDir);
+
+    float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
+    if(brightness > 1.0)
+    BrightColor = vec4(result, 1.0);
+    else
+    BrightColor = vec4(0.0, 0.0, 0.0, 1.0);
   FragmentColor = texture(Texture, vec2(texCoord.x, 1.0 - texCoord.y) + TextureOffset) * vec4(result, 1.0f);
   FragmentColor.a = Transparency;
 }

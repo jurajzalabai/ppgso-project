@@ -60,7 +60,7 @@ void Ocean::render(Scene &scene) {
 
     shader->setUniform("diffuse_strength", 0.5f);
     shader->setUniform("ambient_strength", 0.2f);
-    shader->setUniform("specular_strength", 1.0f);
+    shader->setUniform("specular_strength", 0.9f);
     shader->setUniform("viewPos", scene.camera->position);
 
 

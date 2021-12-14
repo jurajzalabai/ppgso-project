@@ -13,6 +13,7 @@
 std::unique_ptr<ppgso::Mesh> Island::mesh;
 std::unique_ptr<ppgso::Texture> Island::texture;
 std::unique_ptr<ppgso::Shader> Island::shader;
+std::unique_ptr<ppgso::Shader> Island::shader_blur;
 
 Island::Island() {
     // Set random scale speed and rotation

@@ -70,6 +70,8 @@ set(PPGSO_SHADER_SRC
         shader/diffuse_vert.glsl shader/diffuse_frag.glsl
         shader/scene_diffuse_vert.glsl shader/scene_diffuse_frag.glsl
         shader/texture_vert.glsl shader/texture_frag.glsl
+        shader/blur_vert.glsl shader/blur_frag.glsl
+        shader/bloom_vert.glsl shader/bloom_frag.glsl
         )
 add_resources(shaders ${PPGSO_SHADER_SRC})
 
