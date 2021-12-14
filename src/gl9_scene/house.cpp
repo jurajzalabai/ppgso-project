@@ -59,7 +59,7 @@ void House::render(Scene &scene) {
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(180.0f)));
 
     shader->setUniform("diffuse_strength", 0.4f);
-    shader->setUniform("ambient_strength", 0.2f);
+    shader->setUniform("ambient_strength", 10.2f);
     shader->setUniform("specular_strength", 0.3f);
     shader->setUniform("viewPos", scene.camera->position);
 
