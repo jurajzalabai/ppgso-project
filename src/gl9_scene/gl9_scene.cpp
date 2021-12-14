@@ -63,6 +63,9 @@ private:
     unsigned int pingpongFBO[2];
     unsigned int pingpongColorbuffers[2];
     unsigned int hdrFBO;
+    //shadows
+    unsigned int depthMapFBO;
+    unsigned int depthMap;
 
 public:
   /*!
@@ -86,6 +89,27 @@ public:
     glEnable(GL_CULL_FACE);
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
+
+    //shadows
+      glGenFramebuffers(1, &depthMapFBO);
+
+      glGenTextures(1, &depthMap);
+      glBindTexture(GL_TEXTURE_2D, depthMap);
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT,
+                   SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      float clampColor[]= {1.0f, 1.0f, 1.0f, 1.0f};
+      glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, clampColor);
+
+      glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+      glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
+      glDrawBuffer(GL_NONE);
+      glReadBuffer(GL_NONE);
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
 
       glGenFramebuffers(1, &hdrFBO);
       glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
@@ -171,7 +195,7 @@ public:
 //        scene.age = 30.0f;
 
 //        scene.scene_num = 2;
-//        scene.age = 80.0f;
+//        scene.age = 98.0f;
         // Add space background
         //scene.objects.push_back(std::make_unique<Space>());
 
@@ -193,8 +217,8 @@ public:
             seagull->scene_num = scene.scene_num;
             seagull->position = glm::vec3(25,30,10);
             seagull->rotation = glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90));
-//            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
-//            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
+////            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
+////            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
             scene.objects.push_back(move(seagull));
 
             auto human = std::make_unique<Human>();
@@ -251,7 +275,7 @@ public:
         auto palmTree = std::make_unique<PalmTree>(scene);
         palmTree->age = scene.age;
         scene.palmTree_position = palmTree->position;
-//        palmTree->position = glm::vec3(-35,0,12);
+        palmTree->position = glm::vec3(-35,0,12);
 
         auto coconut1 = std::make_unique<Coconut>();
         coconut1->age = scene.age;
@@ -369,12 +393,11 @@ public:
 //        scene.age = 66.0f;
 
         //TODO: tiene
-        //TODO: postprocessing
 
         //TODO: Detaily:
-        //TODO: piesok orech
-        //TODO: vyskladat human
-        //TODO: textura podlahy
+        //TODO: korytnacka sa netoci
+        //TODO: obloha skareda
+        //TODO: mozno lampa troska menej bloom
         //TODO: refaktor kodu
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
@@ -697,11 +720,31 @@ public:
 
       scene.update(dt);
 
+      glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+      // 1. render depth of scene to texture (from light's perspective)
+      // --------------------------------------------------------------
+
+      //glEnable(GL_DEPTH_TEST);
+
+      glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
+      glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      scene.renderDepth();
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+      // reset viewport
+      glViewport(0, 0, SIZE, SIZE);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+
       glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
     // Set gray background
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glClearColor(.5f, .5f, .5f, 0);
-      scene.render();
+      glClearColor(.5f, .5f, .5f, 0);
+      scene.render(depthMap);
 
       bool horizontal = true, first_iteration = true;
       unsigned int amount = 10;
@@ -741,7 +784,7 @@ int main() {
     // Main execution loop
 
 
-//    window.scene.age = 90.0;
+//    window.scene.age = 98.0;
 //    window.scene.scene_num = 1;
 
 //    window.scene.age = 50.0;

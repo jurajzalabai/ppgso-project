@@ -59,7 +59,11 @@ bool Lerp::update(Scene &scene, float dt) {
     return true;
 }
 
-void Lerp::render(Scene &scene) {
+void Lerp::renderDepth(Scene &scene) {
+
+}
+
+void Lerp::render(Scene &scene, unsigned int depthMap) {
 }
 
 

@@ -41,7 +41,10 @@ public:
      * Render asteroid
      * @param scene Scene to render in
      */
-    void render(Scene &scene) override;
+    void render(Scene &scene, unsigned int depthMap) override;
+
+    void renderDepth(Scene &scene) override;
+
 
 private:
 };

@@ -24,9 +24,9 @@ class Scene {
     /*!
      * Render all objects in the scene
      */
-    void render();
+    void render(unsigned int depthMap);
 
-    void renderDepth(unsigned int depthMap);
+    void renderDepth();
 
     /*!
      * Pick objects using a ray

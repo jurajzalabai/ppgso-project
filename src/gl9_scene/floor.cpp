@@ -31,7 +31,11 @@ bool Floor::update(Scene &scene, float dt) {
     return true;
 }
 
-void Floor::render(Scene &scene) {
+void Floor::renderDepth(Scene &scene) {
+
+}
+
+void Floor::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     shader->setUniform("pointLights[0].position", {0,15,74});
     shader->setUniform("pointLights[0].constant", 1.0f);
@@ -51,14 +55,14 @@ void Floor::render(Scene &scene) {
     shader->setUniform("pointLights[1].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[1].cutOff",  glm::cos(glm::radians(180.0f)));
 
-    shader->setUniform("pointLights[3].position", {8.14,5.45,62});
-    shader->setUniform("pointLights[3].constant", 1.0f);
-    shader->setUniform("pointLights[3].linear", 0.0f);
-    shader->setUniform("pointLights[3].quadratic", 0.0f);
-    shader->setUniform("pointLights[3].color", {1.0f, 1.0f, 1.0f});
-    shader->setUniform("pointLights[3].direction", {0.0f, -1.0f, 0.0f});
-    shader->setUniform("pointLights[3].outerCutOff", glm::cos(glm::radians(45.0f)));
-    shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
+//    shader->setUniform("pointLights[3].position", {8.14,5.45,62});
+//    shader->setUniform("pointLights[3].constant", 1.0f);
+//    shader->setUniform("pointLights[3].linear", 0.0f);
+//    shader->setUniform("pointLights[3].quadratic", 0.0f);
+//    shader->setUniform("pointLights[3].color", {1.0f, 1.0f, 1.0f});
+//    shader->setUniform("pointLights[3].direction", {0.0f, -1.0f, 0.0f});
+//    shader->setUniform("pointLights[3].outerCutOff", glm::cos(glm::radians(45.0f)));
+//    shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
 
     shader->setUniform("diffuse_strength", 0.3f);
     shader->setUniform("ambient_strength", 0.2f);

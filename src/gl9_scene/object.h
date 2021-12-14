@@ -34,7 +34,9 @@ public:
    * Render the object in the scene
    * @param scene
    */
-  virtual void render(Scene &scene) = 0;
+  virtual void render(Scene &scene, unsigned int depthMap) = 0;
+
+  virtual void renderDepth(Scene &scene) = 0;
 
 
   /*!

@@ -31,7 +31,11 @@ bool Fire::update(Scene &scene, float dt) {
     return true;
 }
 
-void Fire::render(Scene &scene) {
+void Fire::renderDepth(Scene &scene) {
+
+}
+
+void Fire::render(Scene &scene, unsigned int depthMap) {
     shader->use();
     shader->setUniform("pointLights[0].position", {0,15,74});
     shader->setUniform("pointLights[0].constant", 1.0f);
@@ -61,7 +65,7 @@ void Fire::render(Scene &scene) {
     shader->setUniform("pointLights[3].cutOff",  glm::cos(glm::radians(25.0f)));
 
     shader->setUniform("diffuse_strength", 4.9f);
-    shader->setUniform("ambient_strength", 0.2f);
+    shader->setUniform("ambient_strength", 1.1f);
     shader->setUniform("specular_strength", 4.9f);
     shader->setUniform("viewPos", scene.camera->position);
 

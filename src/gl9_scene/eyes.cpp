@@ -66,8 +66,11 @@ bool Eyes::update(Scene &scene, float dt) {
 
     return true;
 }
+void Eyes::renderDepth(Scene &scene) {
 
-void Eyes::render(Scene &scene) {
+}
+
+void Eyes::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     if (scene_num == 1){

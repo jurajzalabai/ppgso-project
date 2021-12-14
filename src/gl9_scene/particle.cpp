@@ -32,14 +32,23 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts) 
 bool Particle::update(Scene &scene, float dt) {
     age += dt;
     fast_start++;
-    if (speed.y >= 0 && part){
-        speed.y = 4 + (fast_start / 1000) * (1 - 4);
-    }
-    if (!part){
-        speed.y -= 20 * dt;
-    }
-    if (life_age - age <= 1.0){
-        scale *= 0.965;
+    if (color == glm::vec3(0.43f,0.02f,0.03f)){
+            scale *= 0.995;
+        if (!part){
+            speed.x -= 10 * dt;
+            speed.z -= 10 * dt;
+            speed.y -= 30 * dt;
+        }
+    }else{
+        if (speed.y >= 0 && part){
+            speed.y = 4 + (fast_start / 1000) * (1 - 4);
+        }
+        if (!part){
+            speed.y -= 20 * dt;
+        }
+        if (life_age - age <= 1.0){
+            scale *= 0.965;
+        }
     }
     position += speed * dt;
     generateModelMatrix();
@@ -47,13 +56,21 @@ bool Particle::update(Scene &scene, float dt) {
         if (scene.scene_num != 1)
             return age <= life_age;
         else
-            return age <= 1.0;
+            return age <= 0.8;
     }
     else
+        if (color == glm::vec3(0.43f,0.02f,0.03f)){
+            return age <= 1.0;
+        }
+            else
         return age <= 0.5;
 }
 
-void Particle::render(Scene &scene) {
+void Particle::renderDepth(Scene &scene) {
+
+}
+
+void Particle::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     // Set up light

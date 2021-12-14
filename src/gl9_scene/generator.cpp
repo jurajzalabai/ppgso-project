@@ -60,6 +60,10 @@ bool Generator::update(Scene &scene, float dt) {
     return true;
 }
 
-void Generator::render(Scene &scene) {
+void Generator::renderDepth(Scene &scene) {
+
+}
+
+void Generator::render(Scene &scene, unsigned int depthMap) {
     // Generator will not be rendered
 }

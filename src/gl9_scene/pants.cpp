@@ -67,7 +67,11 @@ bool Pants::update(Scene &scene, float dt) {
     return true;
 }
 
-void Pants::render(Scene &scene) {
+void Pants::renderDepth(Scene &scene) {
+
+}
+
+void Pants::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     if (scene_num == 1){

@@ -82,7 +82,11 @@ bool Human::update(Scene &scene, float dt) {
     return true;
 }
 
-void Human::render(Scene &scene) {
+void Human::renderDepth(Scene &scene) {
+
+}
+
+void Human::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     if (scene_num == 1){

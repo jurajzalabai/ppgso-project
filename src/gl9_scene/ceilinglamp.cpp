@@ -31,7 +31,11 @@ bool CeilingLamp::update(Scene &scene, float dt) {
     return true;
 }
 
-void CeilingLamp::render(Scene &scene) {
+void CeilingLamp::renderDepth(Scene &scene) {
+
+}
+
+void CeilingLamp::render(Scene &scene, unsigned int depthMap) {
     shader->use();
 
     // Set up light

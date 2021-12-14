@@ -1,5 +1,5 @@
 #include "scene.h"
-#include "spear.h"
+//#include "spear.h"
 
 void Scene::update(float time) {
   camera->update(time);
@@ -22,10 +22,16 @@ void Scene::update(float time) {
   }
 }
 
-void Scene::render() {
+void Scene::render(unsigned int depthMap) {
   // Simply render all objects
   for ( auto& obj : objects )
-    obj->render(*this);
+    obj->render(*this, depthMap);
+}
+
+void Scene::renderDepth() {
+    // Simply render all objects
+    for ( auto& obj : objects )
+        obj->renderDepth(*this);
 }
 
 

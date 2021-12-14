@@ -29,6 +29,7 @@ public:
 
     // Age of the object in seconds
     float age{0.0f};
+    float fall_time;
     int scene_num = -1;
     std::vector<std::vector<Keyframe>> keyframes;
 
@@ -49,7 +50,10 @@ public:
      * Render asteroid
      * @param scene Scene to render in
      */
-    void render(Scene &scene) override;
+    void render(Scene &scene, unsigned int depthMap) override;
+
+    void renderDepth(Scene &scene) override;
+
 
 private:
 };

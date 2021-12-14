@@ -9,5 +9,6 @@ uniform vec3 OverallColor;
 
 void main() {
   // Just pass the color to the output
+
   FragmentColor = vec4(vertexColor + OverallColor, 1.0f);
 }
