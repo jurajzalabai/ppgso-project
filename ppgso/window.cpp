@@ -17,9 +17,6 @@ bool ppgso::Window::pollEvents() {
 }
 
 ppgso::Window::Window(std::string title, int width, int height) : title{title}, width{width}, height{height} {
-  // Set up glfw
-    //prebublat
-
 
     glfwInstance::Init();
 
