@@ -10,9 +10,9 @@ Camera::Camera(float fow, float ratio, float near, float far) {
         {
         Keyframe(glm::vec3(25,30,30), glm::vec3(0, 0, 1), 0.0f, 6.0f),
         // let cajky
-        Keyframe(glm::vec3(-45,18,45), glm::vec3(0, 0, 1), 6.0f, 0.5f),
+        Keyframe(glm::vec3(-18,18,45), glm::vec3(0, 0, 1), 6.0f, 1.0f),
         // smrt cajky
-        Keyframe(glm::vec3(-45,5,45), glm::vec3(0, 0, 1), 12.0f, 3.0f),
+        Keyframe(glm::vec3(-32,5,45), glm::vec3(0, 0, 1), 12.0f, 3.0f),
         // zaber na ostrov
         Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 18.0f, 3.0f),
         // ideme ku kominu

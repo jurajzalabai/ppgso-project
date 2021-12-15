@@ -54,6 +54,9 @@ bool Turtle::update(Scene &scene, float dt) {
             rotation.y = static_cast<float>(sin(age) + 4.14);
         }
     }
+    else if (scene_num == 2){
+        rotation.y = static_cast<float>(sin(age) + 4.14);
+    }
 
     generateModelMatrix();
     return true;

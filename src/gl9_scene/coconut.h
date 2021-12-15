@@ -36,6 +36,7 @@ public:
 
     float age{0.0f};
     bool willMove = false;
+    glm::vec3 gravity = glm::vec3(0, -9.81f, 0);
 
     /*!
      * Create new asteroid

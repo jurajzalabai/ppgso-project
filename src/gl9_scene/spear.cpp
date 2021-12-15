@@ -24,13 +24,11 @@ Spear::Spear() {
             {
             Keyframe(glm::vec3(-1,5,47), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), 0), 4.0f, 2.0f),
             // trafenie cajky
-            Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(5), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
+            Keyframe(glm::vec3(-22,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(5), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
 
             {
             Keyframe(glm::vec3(0,6,3), glm::vec3((ppgso::PI/180)*(-45), (ppgso::PI/180)*(20), (ppgso::PI/180)*(180)), 0.0f, 0.0f)}
     };
-
-    mass = 1.0f;
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
@@ -72,9 +70,10 @@ bool Spear::update(Scene &scene, float dt) {
         }
     }
 
-    else if (position.y >= 2 && age > 5.0f && age < 7.0f){
-        position += (gravity(mass) + gravity(child->mass) + (dynamic_cast<Seagull *>(child))->flight ) * dt;
-        rotation.y += (ppgso::PI/180)*(250)*dt;
+    else if (position.y >= 0 && age > 6.0f && age < 8.0f){
+        position += (gravity + (dynamic_cast<Seagull *>(child))->flight ) * dt;
+        std::cout << position.y << std::endl;
+        rotation.y += (ppgso::PI/180)*(300)*dt;
     }
 
     if(parent != nullptr) {

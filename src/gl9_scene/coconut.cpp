@@ -28,8 +28,6 @@ Coconut::Coconut() {
 //    speed.z = 0;
     rotation.x = (ppgso::PI/180)*(-90);
 
-    mass = 2.0f;
-
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("CoconutTexture.bmp"));
@@ -39,8 +37,8 @@ bool Coconut::update(Scene &scene, float dt) {
     age += dt;
     if (willMove && age > 43.0f && scene.scene_num == 0){
         if (position.y > 0.5f){
-            rotation.x += (ppgso::PI/180)*(-90)*dt;
-            position += gravity(mass) * dt;
+            rotation.x += (ppgso::PI/180)*(-45)*dt;
+            position += gravity * dt;
             fall_time = age;
         }
         else{

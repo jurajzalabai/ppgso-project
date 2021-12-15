@@ -23,9 +23,9 @@ Pants::Pants() {
             {
                     Keyframe(glm::vec3(-1,-1,50), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 8.0f, 3.0f),
                     //idem si po cajku
-                    Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
+                    Keyframe(glm::vec3(-33,0,32), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 12.0f, 1.0f),
                     //otocim sa ku domu
-                    Keyframe(glm::vec3(-42,0,25), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
+                    Keyframe(glm::vec3(-33,0,32), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
                     //idem domov
                     Keyframe(glm::vec3(25,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
 

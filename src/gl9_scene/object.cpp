@@ -33,7 +33,3 @@ glm::vec3 Object::quadratic_lerp(const glm::vec3 a, const glm::vec3 b, const glm
     s = r0 + ((age - start)/duration) * (r1-r0);
     return {s};
 }
-
-glm::vec3 Object::gravity(float mass) {
-    return glm::vec3(0, -(mass * 9.81f), 0);
-}
