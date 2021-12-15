@@ -42,15 +42,14 @@ bool Coconut::update(Scene &scene, float dt) {
             fall_time = age;
         }
         else{
-            if (fall_time >= age && fall_time < age + 0.2){
-                for (int i = 0; i<50; i++){
+            //std::cout << "JANO" << std::endl;
+            if (fall_time < age && fall_time + 0.2 > age){
                     auto obj2 = std::make_unique<Particle>(
                             glm::vec3(position),
                             glm::vec3(glm::linearRand(-15.0f, 15.0f),glm::linearRand(2.0f, 3.0f), glm::linearRand(-15.0f, 15.0f)),
                             glm::vec3(0.952, 0.929, 0.527),
                             glm::linearRand(0.2f, 0.5f), false);
                     scene.objects.push_back(move(obj2));
-                }
             }
             if(speed.x < 0) {
                 rotation.z = -(atan(speed.z/speed.x));
@@ -96,8 +95,8 @@ bool Coconut::update(Scene &scene, float dt) {
 
     return true;
 }
-
 void Coconut::renderDepth(Scene &scene) {
+
 }
 
 void Coconut::render(Scene &scene, unsigned int depthMap) {
@@ -113,12 +112,16 @@ void Coconut::render(Scene &scene, unsigned int depthMap) {
         shader->setUniform("pointLights[0].color", glm::vec3(0.992f, 0.952f, 0.588f));
     }
     else if (age > 106.0f && age <= 118.0f){
+        if (age > 116.0f && age <= 118.0f){
+            shader->setUniform("pointLights[0].constant", lerp(glm::vec3{2.3f}, glm::vec3(1.0f), age, 116.0f, 2.0f).x);
+        }
         shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 106.0f, 12.0f));
         shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 106.0f, 12.0f));
     }
     else if( age > 118.0f){
-        shader->setUniform("pointLights[0].position", glm::vec3(0, 10, -100.0f));
+        shader->setUniform("pointLights[0].position", glm::vec3(0, -10, -140.5f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.984f, 0.607f, 0.215f));
+        shader->setUniform("pointLights[0].constant", lerp(glm::vec3{1.0f}, glm::vec3(0.9f), age, 118.0f, 2.0f).x);
     }
     shader->setUniform("pointLights[0].direction", {1.0f, 1.0f, 1.0f});
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));

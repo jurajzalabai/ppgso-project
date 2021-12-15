@@ -32,6 +32,7 @@ bool Fireplace::update(Scene &scene, float dt) {
 }
 
 void Fireplace::renderDepth(Scene &scene) {
+
 }
 
 void Fireplace::render(Scene &scene, unsigned int depthMap) {

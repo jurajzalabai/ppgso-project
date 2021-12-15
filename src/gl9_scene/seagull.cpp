@@ -66,6 +66,7 @@ bool Seagull::update(Scene &scene, float dt) {
   return true;
 }
 
+
 void Seagull::renderDepth(Scene &scene) {
 }
 

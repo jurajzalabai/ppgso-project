@@ -35,6 +35,8 @@ namespace ppgso {
      */
     GLuint getAttribLocation(const std::string &name) const;
 
+    void setUniformInt(const std::string &name, int value) const;
+
     /*!
      * Get OpenGL uniform location for for the input specified by "name"
      *

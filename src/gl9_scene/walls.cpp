@@ -4,7 +4,6 @@
 
 #include <glm/gtc/random.hpp>
 #include "palmTree.h"
-#include "seagull.h"
 #include "walls.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>

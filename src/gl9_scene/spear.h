@@ -29,6 +29,7 @@ public:
 
     // Age of the object in seconds
     float age{0.0f};
+    float fall_time;
     int scene_num = -1;
     glm::vec3 gravity = glm::vec3(0, -9.81f, 0);
     std::vector<std::vector<Keyframe>> keyframes;
@@ -53,6 +54,7 @@ public:
     void render(Scene &scene, unsigned int depthMap) override;
 
     void renderDepth(Scene &scene) override;
+
 
 private:
 };

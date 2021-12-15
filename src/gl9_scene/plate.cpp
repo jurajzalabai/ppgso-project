@@ -32,6 +32,7 @@ bool Plate::update(Scene &scene, float dt) {
 }
 
 void Plate::renderDepth(Scene &scene) {
+
 }
 
 void Plate::render(Scene &scene, unsigned int depthMap) {

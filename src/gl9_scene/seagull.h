@@ -48,4 +48,5 @@ public:
     void render(Scene &scene, unsigned int depthMap) override;
 
     void renderDepth(Scene &scene) override;
+
 };

@@ -66,7 +66,6 @@ bool Eyes::update(Scene &scene, float dt) {
 
     return true;
 }
-
 void Eyes::renderDepth(Scene &scene) {
 }
 

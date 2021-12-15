@@ -32,6 +32,7 @@ bool CeilingLamp::update(Scene &scene, float dt) {
 }
 
 void CeilingLamp::renderDepth(Scene &scene) {
+
 }
 
 void CeilingLamp::render(Scene &scene, unsigned int depthMap) {

@@ -1,5 +1,5 @@
 #include "scene.h"
-#include "spear.h"
+//#include "spear.h"
 
 void Scene::update(float time) {
   camera->update(time);

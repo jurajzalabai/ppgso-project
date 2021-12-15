@@ -58,6 +58,7 @@ public:
 
     void renderDepth(Scene &scene) override;
 
+
     /*!
      * Custom click event for asteroid
      */

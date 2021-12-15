@@ -42,6 +42,10 @@
 #include "eyes.h"
 #include "pants.h"
 #include "shirt.h"
+#include <shaders/blur_frag_glsl.h>
+#include <shaders/blur_vert_glsl.h>
+#include <shaders/bloom_vert_glsl.h>
+#include <shaders/bloom_frag_glsl.h>
 
 const unsigned int SIZE = 800;
 const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
@@ -51,7 +55,15 @@ const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 class SceneWindow : public ppgso::Window {
 private:
   bool animate = true;
-
+    std::unique_ptr<ppgso::Shader> shader;
+    std::unique_ptr<ppgso::Shader> shader_bloom;
+    unsigned int rboDepth;
+    unsigned int colorBuffers[2];
+    unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+    unsigned int pingpongFBO[2];
+    unsigned int pingpongColorbuffers[2];
+    unsigned int hdrFBO;
+    //shadows
     unsigned int depthMapFBO;
     unsigned int depthMap;
 
@@ -63,7 +75,10 @@ public:
 
   SceneWindow() : Window{"gl9_scene", SIZE, SIZE} {
     //hideCursor();
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
+      if (!shader) shader = std::make_unique<ppgso::Shader>(blur_vert_glsl, blur_frag_glsl);
+      if (!shader_bloom) shader_bloom = std::make_unique<ppgso::Shader>(bloom_vert_glsl, bloom_frag_glsl);
+
+      glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
 
     // Initialize OpenGL state
     // Enable Z-buffer
@@ -75,7 +90,8 @@ public:
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
 
-      // Set up glfw
+    //shadows
+
       glGenFramebuffers(1, &depthMapFBO);
 
       glGenTextures(1, &depthMap);
@@ -84,15 +100,94 @@ public:
                    SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-//      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-//      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+      float clampColor[]= {1.0f, 1.0f, 1.0f, 1.0f};
+      glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, clampColor);
+
 
       glBindFramebuffer(GL_FRAMEBUFFER, depthMapFBO);
       glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
       glDrawBuffer(GL_NONE);
       glReadBuffer(GL_NONE);
       glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+      glGenFramebuffers(1, &hdrFBO);
+      glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+
+      glGenTextures(2, colorBuffers);
+      for (unsigned int i = 0; i < 2; i++)
+      {
+          glBindTexture(GL_TEXTURE_2D, colorBuffers[i]);
+          glTexImage2D(
+                  GL_TEXTURE_2D, 0, GL_RGBA16F, SIZE, SIZE, 0, GL_RGBA, GL_FLOAT, NULL
+          );
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+          // attach texture to framebuffer
+          glFramebufferTexture2D(
+                  GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, colorBuffers[i], 0
+          );
+      }
+
+      glGenRenderbuffers(1, &rboDepth);
+      glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+      glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, SIZE, SIZE);
+      glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+
+      glDrawBuffers(2, attachments);
+
+      glGenFramebuffers(2, pingpongFBO);
+      glGenTextures(2, pingpongColorbuffers);
+      for (unsigned int i = 0; i < 2; i++)
+      {
+          glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[i]);
+          glBindTexture(GL_TEXTURE_2D, pingpongColorbuffers[i]);
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, SIZE, SIZE, 0, GL_RGBA, GL_FLOAT, NULL);
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // we clamp to the edge as the blur filter would otherwise sample repeated texture values!
+          glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+          glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, pingpongColorbuffers[i], 0);
+          // also check if framebuffers are complete (no need for depth buffer)
+          if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+              std::cout << "Framebuffer not complete!" << std::endl;
+      }
+
   }
+
+    unsigned int quadVAO = 0;
+    unsigned int quadVBO;
+    void renderQuad()
+    {
+        if (quadVAO == 0)
+        {
+            float quadVertices[] = {
+                    // positions        // texture Coords
+                    -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+                    -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+                    1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+                    1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+            };
+            // setup plane VAO
+            glGenVertexArrays(1, &quadVAO);
+            glGenBuffers(1, &quadVBO);
+            glBindVertexArray(quadVAO);
+            glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+            glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+            glEnableVertexAttribArray(0);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+            glEnableVertexAttribArray(1);
+            glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+        }
+        glBindVertexArray(quadVAO);
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+        glBindVertexArray(0);
+    }
+
+
 
     void initScene() {
         scene.objects.clear();
@@ -101,7 +196,7 @@ public:
 //        scene.age = 30.0f;
 
 //        scene.scene_num = 2;
-//        scene.age = 80.0f;
+//        scene.age = 98.0f;
         // Add space background
         //scene.objects.push_back(std::make_unique<Space>());
 
@@ -123,8 +218,8 @@ public:
             seagull->scene_num = scene.scene_num;
             seagull->position = glm::vec3(25,30,10);
             seagull->rotation = glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90));
-//            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
-//            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
+////            seagull->position = seagull->keyframes[seagull->scene_num][0].position;
+////            seagull->rotation = seagull->keyframes[seagull->scene_num][0].rotation;
             scene.objects.push_back(move(seagull));
 
             auto human = std::make_unique<Human>();
@@ -181,7 +276,7 @@ public:
         auto palmTree = std::make_unique<PalmTree>(scene);
         palmTree->age = scene.age;
         scene.palmTree_position = palmTree->position;
-//        palmTree->position = glm::vec3(-35,0,12);
+        palmTree->position = glm::vec3(-35,0,12);
 
         auto coconut1 = std::make_unique<Coconut>();
         coconut1->age = scene.age;
@@ -299,12 +394,11 @@ public:
 //        scene.age = 66.0f;
 
         //TODO: tiene
-        //TODO: postprocessing
 
         //TODO: Detaily:
-        //TODO: piesok orech
-        //TODO: vyskladat human
-        //TODO: textura podlahy
+        //TODO: korytnacka sa netoci
+        //TODO: obloha skareda
+        //TODO: mozno lampa troska menej bloom
         //TODO: refaktor kodu
 
         auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 200.0f);
@@ -625,13 +719,13 @@ public:
     float dt = animate ? (float) glfwGetTime() - time : 0;
     time = (float) glfwGetTime();
 
-      // Update and render all objects
       scene.update(dt);
 
-    // Clear depth and color buffers
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
       // 1. render depth of scene to texture (from light's perspective)
+
 
       // render scene from light's point of view
       glViewport(0, 0, SHADOW_WIDTH, SHADOW_HEIGHT);
@@ -645,13 +739,39 @@ public:
       glViewport(0, 0, SIZE, SIZE);
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-      // 2. render scene as normal using the generated depth/shadow map
-      // --------------------------------------------------------------
-      glViewport(0, 0, SIZE, SIZE);
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//      std::cout << "depth " << depthMapFBO << std::endl;
-    scene.render(depthMap);
+
+      glBindFramebuffer(GL_FRAMEBUFFER, hdrFBO);
+    // Set gray background
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      glClearColor(.5f, .5f, .5f, 0);
+      scene.render(depthMap);
+
+      bool horizontal = true, first_iteration = true;
+      unsigned int amount = 10;
+      shader->use();
+      for (unsigned int i = 0; i < amount; i++)
+      {
+          glBindFramebuffer(GL_FRAMEBUFFER, pingpongFBO[horizontal]);
+          shader->setUniformInt("horizontal", horizontal);
+          shader->setTexture("image", first_iteration ? (int)colorBuffers[1] : (int)pingpongColorbuffers[!horizontal]);
+          //glBindTexture(GL_TEXTURE_2D, first_iteration ? colorBuffers[1] : pingpongColorbuffers[!horizontal]);  // bind texture of other framebuffer (or scene if first iteration)
+          renderQuad();
+          horizontal = !horizontal;
+          if (first_iteration)
+              first_iteration = false;
+      }
+      glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+      shader_bloom->use();
+      shader_bloom->setTexture("scene", (int)colorBuffers[0]);
+      shader_bloom->setTexture("bloomBlur", (int)pingpongColorbuffers[!horizontal]);
+      shader_bloom->setUniform("exposure", 1.0f);
+      // Update and render all objects
+
+      renderQuad();
+
   }
 };
 
@@ -666,7 +786,7 @@ int main() {
     // Main execution loop
 
 
-//    window.scene.age = 90.0;
+//    window.scene.age = 98.0;
 //    window.scene.scene_num = 1;
 
 //    window.scene.age = 50.0;

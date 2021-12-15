@@ -52,5 +52,6 @@ public:
 
     void renderDepth(Scene &scene) override;
 
+
 private:
 };

@@ -26,8 +26,15 @@ Sky::Sky() {
 }
 bool Sky::update(Scene &scene, float dt) {
     age += dt;
-    if (age > 106.0f && age <= 118.0f){
-        color = lerp(glm::vec3{0.541f, 0.796f, 0.898f}, glm::vec3(0.184f, 0.419f, 0.513f), age, 106.0f, 12.0f);
+    if (age > 106.0f && age <= 116.0f){
+
+        color = lerp(glm::vec3{0.541f, 0.796f, 0.898f}, glm::vec3(0.11f,0.23f,0.42f), age, 106.0f, 10.0f);
+    }
+    else if( age > 116.0f && age < 120.0f){
+        color = lerp(glm::vec3{0.11f,0.23f,0.42f}, glm::vec3(0.04f,0.12f,0.24f), age, 116.0f, 4.0f);
+    }
+    else if( age > 120.0f){
+        color = lerp(glm::vec3{0.04f,0.12f,0.24f}, glm::vec3(0.02f,0.07f,0.16f), age, 120.0f, 4.0f);
     }
     generateModelMatrix();
 

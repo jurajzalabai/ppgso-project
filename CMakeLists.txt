@@ -71,6 +71,9 @@ set(PPGSO_SHADER_SRC
         shader/depth_vert.glsl shader/depth_frag.glsl
         shader/scene_diffuse_vert.glsl shader/scene_diffuse_frag.glsl
         shader/texture_vert.glsl shader/texture_frag.glsl
+        shader/blur_vert.glsl shader/blur_frag.glsl
+        shader/bloom_vert.glsl shader/bloom_frag.glsl
+        shader/depth_vert.glsl shader/depth_frag.glsl
         )
 add_resources(shaders ${PPGSO_SHADER_SRC})
 

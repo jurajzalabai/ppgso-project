@@ -60,6 +60,7 @@ public:
      */
     void render(Scene &scene, unsigned int depthMap) override;
 
+    void renderDepth(Scene &scene) override;
 
     void bezierShape(Scene &scene, glm::vec3 first, glm::vec3 second, int count);
 

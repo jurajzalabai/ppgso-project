@@ -5,6 +5,7 @@
 #include <glm/gtc/random.hpp>
 #include "spear.h"
 #include "seagull.h"
+#include "particle.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
@@ -50,6 +51,15 @@ bool Spear::update(Scene &scene, float dt) {
             if (!seagull) continue;
 
             if ((seagull->parent == nullptr && distance(position, seagull->position) < seagull->scale.y) || scene_num == 1) {
+                for (int i = 0; i<100; i++) {
+                    auto obj2 = std::make_unique<Particle>(
+                            glm::vec3(position),
+                            glm::vec3(glm::linearRand(-3.0f, 3.0f), glm::linearRand(-5.0f, -4.0f),
+                                      glm::linearRand(-10.0f, -5.0f)),
+                            glm::vec3(0.43f,0.02f,0.03f),
+                            glm::linearRand(0.07f, 0.11f), false);
+                    scene.objects.push_back(move(obj2));
+                }
                 seagull->parent = this;
                 child = seagull;
             }
@@ -72,8 +82,24 @@ bool Spear::update(Scene &scene, float dt) {
 
     else if (position.y >= 0 && age > 6.0f && age < 8.0f){
         position += (gravity + (dynamic_cast<Seagull *>(child))->flight ) * dt;
-        std::cout << position.y << std::endl;
         rotation.y += (ppgso::PI/180)*(300)*dt;
+        fall_time = age;
+    }
+    else{
+        if (fall_time < age && fall_time + 0.2 > age){
+            for (int i = 0; i<30; i++) {
+                auto obj2 = std::make_unique<Particle>(
+                        glm::vec3(position),
+                        glm::vec3(glm::linearRand(-6.0f, 6.0f), glm::linearRand(2.0f, 3.0f),
+                                  glm::linearRand(-6.0f, 6.0f)),
+                        glm::vec3(0.902, 0.900, 0.50),
+                        glm::linearRand(0.1f, 0.2f), false);
+                scene.objects.push_back(move(obj2));
+                if (i==29){
+                    fall_time = 0;
+                }
+            }
+        }
     }
 
     if(parent != nullptr) {

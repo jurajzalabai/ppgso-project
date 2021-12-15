@@ -4,12 +4,11 @@
 
 #include <glm/gtc/random.hpp>
 #include "island.h"
-#include "seagull.h"
-
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-#include <shaders/depth_frag_glsl.h>
 #include <shaders/depth_vert_glsl.h>
+#include <shaders/depth_frag_glsl.h>
+
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Island::mesh;
@@ -36,34 +35,23 @@ bool Island::update(Scene &scene, float dt) {
 }
 
 void Island::renderDepth(Scene &scene) {
-    glm::vec3 lightPos(0.0f, 90.0f, 0.0f);
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
-    float near_plane = 1.0f, far_plane = 200.0f;
-//    lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)1024 / (GLfloat)1024, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
-    lightProjection = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, near_plane, far_plane);
-    lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+    float near_plane = 0.1f, far_plane = 150.5f;
+    //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
+    lightProjection = glm::ortho(-200.0f, 200.0f, -200.0f, 200.0f, near_plane, far_plane);
+    lightView = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f) * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;
-
     shaderDepth->use();
-
     shaderDepth->setUniform("lightSpaceMatrix", lightSpaceMatrix);
     shaderDepth->setUniform("model", modelMatrix);
-
     mesh->render();
 }
 
 void Island::render(Scene &scene, unsigned int depthMap) {
-    glm::vec3 lightPos(0.0f, 90.0f, 0.0f);
-    glm::mat4 lightProjection, lightView;
-    glm::mat4 lightSpaceMatrix;
-    float near_plane = 1.0f, far_plane = 200.0f;
-//    lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)1024 / (GLfloat)1024, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
-    lightProjection = glm::ortho(-50.0f, 50.0f, -50.0f, 50.0f, near_plane, far_plane);
-    lightView = glm::lookAt(lightPos, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
-    lightSpaceMatrix = lightProjection * lightView;
 
     shader->use();
+
 
     shader->setUniform("pointLights[0].constant", 2.3f);
     shader->setUniform("pointLights[0].linear", 0.0f);
@@ -74,12 +62,16 @@ void Island::render(Scene &scene, unsigned int depthMap) {
         shader->setUniform("pointLights[0].color", glm::vec3(0.992f, 0.952f, 0.588f));
     }
     else if (age > 106.0f && age <= 118.0f){
+        if (age > 116.0f && age <= 118.0f){
+            shader->setUniform("pointLights[0].constant", lerp(glm::vec3{2.3f}, glm::vec3(1.0f), age, 116.0f, 2.0f).x);
+        }
         shader->setUniform("pointLights[0].position", quadratic_lerp(glm::vec3(0, 100, 0.0f),glm::vec3(0, 100, -100.0f), glm::vec3(0, 10, -100.0f), age, 106.0f, 12.0f));
         shader->setUniform("pointLights[0].color", lerp(glm::vec3{0.992f, 0.952f, 0.588f}, glm::vec3(0.984f, 0.607f, 0.215f), age, 106.0f, 12.0f));
     }
     else if( age > 118.0f){
-        shader->setUniform("pointLights[0].position", glm::vec3(0, 10, -100.0f));
+        shader->setUniform("pointLights[0].position", glm::vec3(0, -10, -140.5f));
         shader->setUniform("pointLights[0].color", glm::vec3(0.984f, 0.607f, 0.215f));
+        shader->setUniform("pointLights[0].constant", lerp(glm::vec3{1.0f}, glm::vec3(0.9f), age, 118.0f, 2.0f).x);
     }
     shader->setUniform("pointLights[0].direction", {1.0f, 1.0f, 1.0f});
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));
@@ -90,6 +82,14 @@ void Island::render(Scene &scene, unsigned int depthMap) {
     shader->setUniform("specular_strength", 0.1f);
     shader->setUniform("viewPos", scene.camera->position);
 
+    glm::mat4 lightProjection, lightView;
+    glm::mat4 lightSpaceMatrix;
+    float near_plane = 0.1f, far_plane = 150.5f;
+    //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
+    lightProjection = glm::ortho(-200.0f, 200.0f, -200.0f, 200.0f, near_plane, far_plane);
+    lightView = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f) * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
+    lightSpaceMatrix = lightProjection * lightView;
+    shader->setUniform("lightSpaceMatrix",lightSpaceMatrix);
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
@@ -98,8 +98,10 @@ void Island::render(Scene &scene, unsigned int depthMap) {
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
-    shader->setUniform("lightSpaceMatrix", lightSpaceMatrix);
-    shader->setTexture("shadowMap", (int) depthMap);
+
+    shader->setUniform("lightPos", glm::vec3(0.0f, 50.0f, 0.0f));
+    shader->setTexture("shadowMap", (int)depthMap);
+
     mesh->render();
 }
 

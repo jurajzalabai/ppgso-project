@@ -68,6 +68,7 @@ bool Boots::update(Scene &scene, float dt) {
 }
 
 void Boots::renderDepth(Scene &scene) {
+
 }
 
 
