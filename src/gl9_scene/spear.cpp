@@ -82,7 +82,7 @@ bool Spear::update(Scene &scene, float dt) {
 
     else if (position.y >= 0 && age > 6.0f && age < 8.0f){
         position += (gravity + (dynamic_cast<Seagull *>(child))->flight ) * dt;
-        rotation.y += (ppgso::PI/180)*(300)*dt;
+        rotation.y += (ppgso::PI/180)*(80)*dt;
         fall_time = age;
     }
     else{
