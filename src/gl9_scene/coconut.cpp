@@ -1,10 +1,5 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "coconut.h"
-#include "ocean.h"
 #include "turtle.h"
 #include "particle.h"
 #include <math.h>
@@ -19,13 +14,10 @@ std::unique_ptr<ppgso::Texture> Coconut::texture;
 std::unique_ptr<ppgso::Shader> Coconut::shader;
 
 Coconut::Coconut() {
-    // Set random scale speed and rotation
+    // Set scale speed and rotation
     scale *= (4.0f);
-//    rotation = glm::ballRand(ppgso::PI);
     speed.x = glm::linearRand(-10.0f, 10.0f);
     speed.z = glm::linearRand(0.0f, 10.0f);
-//    speed.x = 10;
-//    speed.z = 0;
     rotation.x = (ppgso::PI/180)*(-90);
 
     // Initialize static resources if needed
@@ -42,7 +34,6 @@ bool Coconut::update(Scene &scene, float dt) {
             fall_time = age;
         }
         else{
-            //std::cout << "JANO" << std::endl;
             if (fall_time < age && fall_time + 0.2 > age){
                     auto obj2 = std::make_unique<Particle>(
                             glm::vec3(position),
@@ -60,7 +51,6 @@ bool Coconut::update(Scene &scene, float dt) {
             else {
                 rotation.z = (ppgso::PI/180)*(90);
             }
-            initial_rotation = rotation;
             for (auto &obj : scene.objects) {
                 // Ignore self in scene
                 if (obj.get() == this)
@@ -100,7 +90,6 @@ void Coconut::renderDepth(Scene &scene) {
 }
 
 void Coconut::render(Scene &scene, unsigned int depthMap) {
-//    std::cout << age << std::endl;
     shader->use();
 
     shader->setUniform("pointLights[0].constant", 2.3f);

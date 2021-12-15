@@ -1,5 +1,4 @@
 #include <glm/gtc/random.hpp>
-#include "seagull.h"
 #include "ceilinglamp.h"
 
 #include <shaders/diffuse_vert_glsl.h>
@@ -12,9 +11,8 @@ std::unique_ptr<ppgso::Texture> CeilingLamp::texture;
 std::unique_ptr<ppgso::Shader> CeilingLamp::shader;
 
 CeilingLamp::CeilingLamp() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (0.1f);
-    speed = {(0.0f), (0.0f), 0.0f};
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -22,8 +20,6 @@ CeilingLamp::CeilingLamp() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("CeilingLamp.obj");
 }
 bool CeilingLamp::update(Scene &scene, float dt) {
-    // Count time alive
-    age += dt;
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();

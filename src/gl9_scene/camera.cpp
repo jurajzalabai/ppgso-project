@@ -39,10 +39,9 @@ Camera::Camera(float fow, float ratio, float near, float far) {
          // korytnacka
         Keyframe(glm::vec3(1.0f,14.0f, 12.0f), glm::vec3(0.314159f,0.418879f,1), 106.0f, 3.0f),
         //palma
-         Keyframe(glm::vec3(-50,13,56), glm::vec3( -0.601403, 0, 0.733038), 114.0f, 8.0f),
+         Keyframe(glm::vec3(-50,13,56), glm::vec3( -0.601403, 0, 0.733038), 118.0f, 7.0f),
         //zapad
          Keyframe(glm::vec3(-29.9805,16.0044,107.04), glm::vec3(-0.209573, 0.10472, 0.733524), 0.0f, 0.0f),
-//        Keyframe(glm::vec3(0,15,100), glm::vec3(0, 0, 1), 0.0f, 0.0f),
         }
     };
 
@@ -65,32 +64,7 @@ void Camera::update(float dt) {
             }
         }
     }
-    std::cout<< " z camera: "<< position.z<< std::endl;
-    std::cout<< " y camera: "<< position.y<< std::endl;
-    std::cout<< " x camera: "<< position.x<< std::endl;
-
-    std::cout<< " rotate camera z: "<< back.z<< std::endl;
-    std::cout<< " rotate camera y: "<< back.y<< std::endl;
-    std::cout<< " rotate camera x: "<< back.x<< std::endl;
-    std::cout<< " age: "<< age << std::endl;
     viewMatrix = lookAt(position, position-back, up);
-}
-
-glm::vec3 Camera::cast(double u, double v) {
-  // Create point in Screen coordinates
-  glm::vec4 screenPosition{u,v,0.0f,1.0f};
-
-  // Use inverse matrices to get the point in world coordinates
-  auto invProjection = glm::inverse(projectionMatrix);
-  auto invView = glm::inverse(viewMatrix);
-
-  // Compute position on the camera plane
-  auto planePosition = invView * invProjection * screenPosition;
-  planePosition /= planePosition.w;
-
-  // Create direction vector
-  auto direction = glm::normalize(planePosition - glm::vec4{position,1.0f});
-  return glm::vec3{direction};
 }
 
 glm::vec3 Camera::lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration){

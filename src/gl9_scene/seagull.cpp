@@ -4,8 +4,6 @@
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-#include <shaders/diffuse_vert_glsl.h>
-#include <shaders/diffuse_frag_glsl.h>
 
 // shared resources
 std::unique_ptr<ppgso::Mesh> Seagull::mesh;
@@ -15,15 +13,6 @@ std::unique_ptr<ppgso::Shader> Seagull::shader;
 Seagull::Seagull() {
 
     scale *= 2.5f;
-//    keyframes  = {
-//            {
-////            Keyframe(glm::vec3(25,30,10), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 6.0f),
-////            // let cajky
-////            Keyframe(glm::vec3(-42,18,25), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f)},
-//
-//            {
-//            Keyframe(glm::vec3(0,0,0), glm::vec3((ppgso::PI/180)*(15), (ppgso::PI/180)*(-25), (ppgso::PI/180)*(-90)), 0.0f, 0.0f),}
-//    };
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("seagullTexture.bmp"));
@@ -38,24 +27,12 @@ bool Seagull::update(Scene &scene, float dt) {
         if (age >= 79.0f && age <= 80.0f) {
             position = lerp(glm::vec3{8, 6, 61}, glm::vec3(9, 3.5f, 60), age, 79.0f, 1.0f);
         }
-//        else if (keyframes[scene_num][curr].startTime < age) {
-//            if (keyframes[scene_num][curr].duration != 0) {
-//                if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration){
-//                    position = lerp(keyframes[scene_num][curr].position, keyframes[scene_num][curr+1].position, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
-//                    rotation = lerp(keyframes[scene_num][curr].rotation, keyframes[scene_num][curr+1].rotation, age, keyframes[scene_num][curr].startTime, keyframes[scene_num][curr].duration);
-//                }
-//                else {
-//                    curr++;
-//                }
-//            }
-//        }
         else if (age < 79.0f){
             position += (gravity + flight + wind + lift) * dt;
         }
     }
     else {
         position = glm::vec3{0, 0, 0};
-//        if (age <)
         if (age >= 79.0f) {
             rotation = glm::vec3((ppgso::PI/180)*(180), (ppgso::PI/180)*(0), (ppgso::PI/180)*(-40));
             position = glm::vec3{8, 6, 61};
@@ -149,11 +126,11 @@ void Seagull::render(Scene &scene, unsigned int depthMap) {
     }
 
     // use camera
-  shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-  shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+    shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
-  // render mesh
-  shader->setUniform("ModelMatrix", modelMatrix);
-  shader->setUniform("Texture", *texture);
-  mesh->render();
+    // render mesh
+    shader->setUniform("ModelMatrix", modelMatrix);
+    shader->setUniform("Texture", *texture);
+    mesh->render();
 }

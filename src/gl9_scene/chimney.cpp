@@ -1,5 +1,4 @@
 #include <glm/gtc/random.hpp>
-#include "seagull.h"
 #include "chimney.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
@@ -12,9 +11,8 @@ std::unique_ptr<ppgso::Texture> Chimney::texture;
 std::unique_ptr<ppgso::Shader> Chimney::shader;
 
 Chimney::Chimney() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (0.07f);
-    speed = {(0.0f), (0.0f), 0.0f};
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
@@ -36,7 +34,6 @@ void Chimney::renderDepth(Scene &scene) {
 }
 
 void Chimney::render(Scene &scene, unsigned int depthMap) {
-//    std::cout << age << std::endl;
     shader->use();
 
     shader->setUniform("pointLights[0].constant", 2.3f);

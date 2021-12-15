@@ -1,9 +1,4 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
-#include "human.h"
 #include "eyes.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
@@ -17,7 +12,6 @@ std::unique_ptr<ppgso::Shader> Eyes::shader;
 
 Eyes::Eyes() {
 
-
     scale *= (4.0f);
     keyframes  = {
             {
@@ -28,7 +22,6 @@ Eyes::Eyes() {
                     Keyframe(glm::vec3(-33,0,32), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
                     //idem domov
                     Keyframe(glm::vec3(25,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
-
 
             {
                     Keyframe(glm::vec3(0,0.4,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 60.0f, 3.0f),
@@ -49,7 +42,6 @@ Eyes::Eyes() {
 }
 bool Eyes::update(Scene &scene, float dt) {
     age += dt;
-//    std::cout << scene_num << curr << "age human:" << age << std::endl;
     if (keyframes[scene_num][curr].startTime < age) {
         if (keyframes[scene_num][curr].duration != 0) {
             if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
@@ -131,7 +123,6 @@ void Eyes::render(Scene &scene, unsigned int depthMap) {
         shader->setUniform("specular_strength", 0.1f);
         shader->setUniform("viewPos", scene.camera->position);
     }
-
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

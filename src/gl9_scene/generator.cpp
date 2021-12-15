@@ -3,7 +3,7 @@
 
 #include "generator.h"
 #include "particle.h"
-#include "spear.h"
+
 
 bool Generator::update(Scene &scene, float dt) {
     // Accumulate time
@@ -31,7 +31,6 @@ bool Generator::update(Scene &scene, float dt) {
             glm::vec3 color;
             if (scene.age > 106.0f && scene.age <= 119.0f){
                 float offset = glm::linearRand(0.01f, 0.02f);
-                //0.862, 0.694, 0.396
                 color = lerp(glm::vec3(static_cast<float>(0.01 + offset)), glm::vec3(0.025+ offset, 0.01, 0.01), time, 106.0f, 12.0f);
             }
             else{

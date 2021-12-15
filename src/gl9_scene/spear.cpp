@@ -1,7 +1,3 @@
-//
-// Created by juraj on 10/11/2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "spear.h"
 #include "seagull.h"
@@ -9,9 +5,6 @@
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-#include <shaders/diffuse_vert_glsl.h>
-#include <shaders/diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Spear::mesh;
@@ -37,7 +30,6 @@ Spear::Spear() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Spear.obj");
 }
 bool Spear::update(Scene &scene, float dt) {
-
     age += dt;
 
     // Collision detection
@@ -124,7 +116,6 @@ bool Spear::update(Scene &scene, float dt) {
         }
     }
 
-    // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
 
     return true;
@@ -195,13 +186,12 @@ void Spear::render(Scene &scene, unsigned int depthMap) {
         shader->setUniform("viewPos", scene.camera->position);
     }
 
-
     // use camera
-        shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-        shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+    shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
-        // render mesh
-        shader->setUniform("ModelMatrix", modelMatrix);
-        shader->setUniform("Texture", *texture);
-        mesh->render();
+    // render mesh
+    shader->setUniform("ModelMatrix", modelMatrix);
+    shader->setUniform("Texture", *texture);
+    mesh->render();
 }

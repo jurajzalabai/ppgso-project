@@ -1,15 +1,8 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "palmLeaves.h"
-#include "seagull.h"
-
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> PalmLeaves::mesh;
@@ -17,8 +10,9 @@ std::unique_ptr<ppgso::Texture> PalmLeaves::texture;
 std::unique_ptr<ppgso::Shader> PalmLeaves::shader;
 
 PalmLeaves::PalmLeaves() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (2.0f);
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("PalmLeafTexture.bmp"));
@@ -35,11 +29,9 @@ bool PalmLeaves::update(Scene &scene, float dt) {
 }
 
 void PalmLeaves::renderDepth(Scene &scene) {
-
 }
 
 void PalmLeaves::render(Scene &scene, unsigned int depthMap) {
-//    std::cout << age << std::endl;
     shader->use();
 
     shader->setUniform("pointLights[0].constant", 2.3f);
@@ -65,7 +57,6 @@ void PalmLeaves::render(Scene &scene, unsigned int depthMap) {
     shader->setUniform("pointLights[0].direction", {1.0f, 1.0f, 1.0f});
     shader->setUniform("pointLights[0].outerCutOff", glm::cos(glm::radians(180.0f)));
     shader->setUniform("pointLights[0].cutOff",  glm::cos(glm::radians(180.0f)));
-
 
     shader->setUniform("diffuse_strength", 0.5f);
     shader->setUniform("ambient_strength", 0.2f);

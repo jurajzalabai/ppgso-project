@@ -1,14 +1,8 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
-#include "palmTree.h"
 #include "walls.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Walls::mesh;
@@ -16,16 +10,17 @@ std::unique_ptr<ppgso::Texture> Walls::texture;
 std::unique_ptr<ppgso::Shader> Walls::shader;
 
 Walls::Walls() {
-    // Set random scale speed and rotation
+
     scale *= (2.0f);
     rotation.z = (ppgso::PI/180)*(-90);
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("CoconutTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Walls.obj");
 }
+
 bool Walls::update(Scene &scene, float dt) {
-    age += dt;
 
     generateModelMatrix();
 

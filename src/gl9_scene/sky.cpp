@@ -1,14 +1,8 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
-#include "palmTree.h"
 #include "sky.h"
 
 #include <shaders/color_vert_glsl.h>
 #include <shaders/color_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Sky::mesh;
@@ -16,9 +10,10 @@ std::unique_ptr<ppgso::Texture> Sky::texture;
 std::unique_ptr<ppgso::Shader> Sky::shader;
 
 Sky::Sky() {
-    // Set random scale speed and rotation
+
     scale *= (20.0f);
     rotation.z = (ppgso::PI/180)*(-90);
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(color_vert_glsl, color_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("CoconutTexture.bmp"));
@@ -27,7 +22,6 @@ Sky::Sky() {
 bool Sky::update(Scene &scene, float dt) {
     age += dt;
     if (age > 106.0f && age <= 116.0f){
-
         color = lerp(glm::vec3{0.541f, 0.796f, 0.898f}, glm::vec3(0.11f,0.23f,0.42f), age, 106.0f, 10.0f);
     }
     else if( age > 116.0f && age < 120.0f){

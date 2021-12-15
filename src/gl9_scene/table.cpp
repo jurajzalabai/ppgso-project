@@ -1,10 +1,8 @@
 #include <glm/gtc/random.hpp>
-#include "seagull.h"
 #include "table.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Table::mesh;
@@ -12,16 +10,13 @@ std::unique_ptr<ppgso::Texture> Table::texture;
 std::unique_ptr<ppgso::Shader> Table::shader;
 
 Table::Table() {
-    // Set random scale speed and rotation
-    scale *= (1.0f);
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("TableTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Table.obj");
 }
 bool Table::update(Scene &scene, float dt) {
-    // Count time alive
-    age += dt;
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
@@ -65,7 +60,6 @@ void Table::render(Scene &scene, unsigned int depthMap) {
     shader->setUniform("ambient_strength", 0.2f);
     shader->setUniform("specular_strength", 0.5f);
     shader->setUniform("viewPos", scene.camera->position);
-
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

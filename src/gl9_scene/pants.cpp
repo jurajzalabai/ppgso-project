@@ -1,14 +1,8 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
-#include "human.h"
 #include "pants.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Pants::mesh;
@@ -16,7 +10,6 @@ std::unique_ptr<ppgso::Texture> Pants::texture;
 std::unique_ptr<ppgso::Shader> Pants::shader;
 
 Pants::Pants() {
-
 
     scale *= (4.0f);
     keyframes  = {
@@ -28,7 +21,6 @@ Pants::Pants() {
                     Keyframe(glm::vec3(-33,0,32), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 13.0f, 5.0f),
                     //idem domov
                     Keyframe(glm::vec3(25,0,0), glm::vec3(0, 0, (ppgso::PI/180)*(-230)), 0.0f, 0.0f)},
-
 
             {
                     Keyframe(glm::vec3(0,0.4,90), glm::vec3(0, 0, (ppgso::PI/180)*(-180)), 60.0f, 3.0f),
@@ -43,13 +35,12 @@ Pants::Pants() {
     };
 
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
-
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("pantsTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("pants.obj");
 }
 bool Pants::update(Scene &scene, float dt) {
     age += dt;
-//    std::cout << scene_num << curr << "age human:" << age << std::endl;
+
     if (keyframes[scene_num][curr].startTime < age) {
         if (keyframes[scene_num][curr].duration != 0) {
             if (age < keyframes[scene_num][curr].startTime + keyframes[scene_num][curr].duration) {
@@ -132,7 +123,6 @@ void Pants::render(Scene &scene, unsigned int depthMap) {
         shader->setUniform("specular_strength", 0.1f);
         shader->setUniform("viewPos", scene.camera->position);
     }
-
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

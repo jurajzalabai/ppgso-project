@@ -1,10 +1,8 @@
 #include <glm/gtc/random.hpp>
-#include "seagull.h"
 #include "mug.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Mug::mesh;
@@ -12,17 +10,15 @@ std::unique_ptr<ppgso::Texture> Mug::texture;
 std::unique_ptr<ppgso::Shader> Mug::shader;
 
 Mug::Mug() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (1.0f);
-    speed = {(0.0f), (0.0f), 0.0f};
+
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("PlateTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Mug.obj");
 }
 bool Mug::update(Scene &scene, float dt) {
-    // Count time alive
-    age += dt;
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
@@ -74,20 +70,8 @@ void Mug::render(Scene &scene, unsigned int depthMap) {
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
-//    // Disable depth testing
-//    glDisable(GL_DEPTH_TEST);
-//
-//    // Enable blending
-//    glEnable(GL_BLEND);
-//    // Additive blending
-//    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
     mesh->render();
-
-//    // Disable blending
-//    glDisable(GL_BLEND);
-//    // Enable depth test
-//    glEnable(GL_DEPTH_TEST);
 }
 
 

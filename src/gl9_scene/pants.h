@@ -7,12 +7,6 @@
 #include "object.h"
 #include "keyframe.h"
 
-/*!
- * Simple asteroid object
- * This sphere object represents an instance of mesh geometry
- * It initializes and loads all resources only once
- * It will move down along the Y axis and self delete when reaching below -10
- */
 class Pants final : public Object {
 private:
     // Static resources (Shared between instances)
@@ -22,46 +16,19 @@ private:
 
     unsigned long long int curr = 0;
 
-    /*!
-     * Split the asteroid into multiple pieces and spawn an explosion object.
-     *
-     * @param scene - Scene to place pieces and explosion into
-     * @param explosionPosition - Initial position of the explosion
-     * @param explosionScale - Scale of the explosion
-     * @param pieces - Asteroid pieces to generate
-     */
-
 public:
 
     float age{0.0f};
     int scene_num = -1;
     std::vector<std::vector<Keyframe>> keyframes;
 
-    /*!
-     * Create new asteroid
-     */
     Pants();
 
-    /*!
-     * Update asteroid
-     * @param scene Scene to interact with
-     * @param dt Time delta for animation purposes
-     * @return
-     */
     bool update(Scene &scene, float dt) override;
 
-    /*!
-     * Render asteroid
-     * @param scene Scene to render in
-     */
     void render(Scene &scene, unsigned int depthMap) override;
 
     void renderDepth(Scene &scene) override;
-
-
-    /*!
-     * Custom click event for asteroid
-     */
 
 private:
 };

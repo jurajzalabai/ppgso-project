@@ -1,14 +1,8 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "particle.h"
-#include "seagull.h"
 
 #include <shaders/color_vert_glsl.h>
 #include <shaders/color_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Particle::mesh;
@@ -16,7 +10,6 @@ std::unique_ptr<ppgso::Texture> Particle::texture;
 std::unique_ptr<ppgso::Shader> Particle::shader;
 
 Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts) {
-    // Set random scale speed and rotation
     position = p;
     speed = s;
     age = 0;
@@ -29,6 +22,7 @@ Particle::Particle(glm::vec3 p, glm::vec3 s, glm::vec3 c, float sc, bool parts) 
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("stars.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("sphere.obj");
 }
+
 bool Particle::update(Scene &scene, float dt) {
     age += dt;
     fast_start++;
@@ -62,8 +56,9 @@ bool Particle::update(Scene &scene, float dt) {
         if (color == glm::vec3(0.43f,0.02f,0.03f)){
             return age <= 1.0;
         }
-            else
-        return age <= 0.5;
+        else {
+            return age <= 0.5;
+        }
 }
 
 void Particle::renderDepth(Scene &scene) {
@@ -83,7 +78,6 @@ void Particle::render(Scene &scene, unsigned int depthMap) {
     shader->setUniform("ModelMatrix", modelMatrix);
 //    shader->setUniform("Texture", *texture);
     shader->setUniform("OverallColor", color);
-
 
     if (part){
         // Enable blending

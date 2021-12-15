@@ -1,14 +1,9 @@
-//
-// Created by juraj on 10/11/2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "island.h"
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
 #include <shaders/depth_vert_glsl.h>
 #include <shaders/depth_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Island::mesh;
@@ -17,7 +12,7 @@ std::unique_ptr<ppgso::Shader> Island::shader;
 std::unique_ptr<ppgso::Shader> Island::shaderDepth;
 
 Island::Island() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (1.3f);
 
     // Initialize static resources if needed
@@ -28,9 +23,9 @@ Island::Island() {
 }
 bool Island::update(Scene &scene, float dt) {
     age += dt;
-// Generate modelMatrix from position, rotation and scale
+
     generateModelMatrix();
-//
+
     return true;
 }
 
@@ -38,7 +33,6 @@ void Island::renderDepth(Scene &scene) {
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
     float near_plane = 0.1f, far_plane = 150.5f;
-    //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
     lightProjection = glm::ortho(-200.0f, 200.0f, -200.0f, 200.0f, near_plane, far_plane);
     lightView = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f) * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;
@@ -49,9 +43,7 @@ void Island::renderDepth(Scene &scene) {
 }
 
 void Island::render(Scene &scene, unsigned int depthMap) {
-
     shader->use();
-
 
     shader->setUniform("pointLights[0].constant", 2.3f);
     shader->setUniform("pointLights[0].linear", 0.0f);
@@ -85,7 +77,6 @@ void Island::render(Scene &scene, unsigned int depthMap) {
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
     float near_plane = 0.1f, far_plane = 150.5f;
-    //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
     lightProjection = glm::ortho(-200.0f, 200.0f, -200.0f, 200.0f, near_plane, far_plane);
     lightView = glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f) * 20.0f, glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;

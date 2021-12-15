@@ -1,10 +1,8 @@
 #include <glm/gtc/random.hpp>
-#include "seagull.h"
 #include "plate.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Plate::mesh;
@@ -12,9 +10,8 @@ std::unique_ptr<ppgso::Texture> Plate::texture;
 std::unique_ptr<ppgso::Shader> Plate::shader;
 
 Plate::Plate() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (10.0f);
-    speed = {(0.0f), (0.0f), 0.0f};
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
@@ -22,8 +19,6 @@ Plate::Plate() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Plate.obj");
 }
 bool Plate::update(Scene &scene, float dt) {
-    // Count time alive
-    age += dt;
 
     // Generate modelMatrix from position, rotation and scale
     generateModelMatrix();
@@ -32,7 +27,6 @@ bool Plate::update(Scene &scene, float dt) {
 }
 
 void Plate::renderDepth(Scene &scene) {
-
 }
 
 void Plate::render(Scene &scene, unsigned int depthMap) {

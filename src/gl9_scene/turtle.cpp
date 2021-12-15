@@ -1,7 +1,3 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "turtle.h"
 #include "particle.h"
@@ -28,8 +24,11 @@ Turtle::Turtle() {
 
             {},
             {Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(-80), 0), 98.0f, 2.0f),
+             // otoci sa k moru
              Keyframe(glm::vec3(-8,1,-8), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(110), 0), 100.0f, 5.0f),
+             // prichadza k moru
              Keyframe(glm::vec3(-20,0.000579834,-48.949), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(110), 0), 105.0f, 2.0f),
+             // ponori sa
              Keyframe(glm::vec3(-22,-4,-58.949), glm::vec3((ppgso::PI/180)*(-90), (ppgso::PI/180)*(110), 0), 0.0f, 0.0f),
              }
     };
@@ -40,19 +39,9 @@ Turtle::Turtle() {
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("TurtleTexture.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("Turtle.obj");
 }
+
 bool Turtle::update(Scene &scene, float dt) {
     age += dt;
-
-//    if (age > 105.5f && age < 106.0f){
-//            auto obj2 = std::make_unique<Particle>(
-//                    glm::vec3(position + glm::vec3(0.0f, 1.0f, 0.0f)),
-//                    glm::vec3(glm::linearRand(-6.0f, 6.0f), glm::linearRand(2.0f, 3.0f),
-//                              glm::linearRand(-6.0f, 6.0f)),
-//                    glm::vec3(0.53,0.6,0.8),
-//                    glm::linearRand(0.1f, 0.4f), false);
-//            scene.objects.push_back(move(obj2));
-//    }
-
 
     if (keyframes[scene_num][curr].startTime < age) {
         if (keyframes[scene_num][curr].duration != 0) {
@@ -115,11 +104,12 @@ void Turtle::render(Scene &scene, unsigned int depthMap) {
     glm::mat4 lightProjection, lightView;
     glm::mat4 lightSpaceMatrix;
     float near_plane = 1.0f, far_plane = 150.5f;
-    //lightProjection = glm::perspective(glm::radians(45.0f), (GLfloat)SHADOW_WIDTH / (GLfloat)SHADOW_HEIGHT, near_plane, far_plane); // note that if you use a perspective projection matrix you'll have to change the light position as the current light position isn't enough to reflect the whole scene
     lightProjection = glm::ortho(-70.0f, 70.0f, -70.0f, 70.0f, near_plane, far_plane);
     lightView = glm::lookAt(glm::vec3(0.0f, 50.0f, 0.0f), glm::vec3(0.0f), glm::vec3(0.0, 1.0, 0.0));
     lightSpaceMatrix = lightProjection * lightView;
+
     shader->setUniform("lightSpaceMatrix",lightSpaceMatrix);
+
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);

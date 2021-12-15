@@ -1,14 +1,8 @@
-//
-// Created by Tommy on 20. 11. 2021.
-//
-
 #include <glm/gtc/random.hpp>
 #include "ocean.h"
-#include "seagull.h"
 
 #include <shaders/scene_diffuse_vert_glsl.h>
 #include <shaders/scene_diffuse_frag_glsl.h>
-
 
 // Static resources
 std::unique_ptr<ppgso::Mesh> Ocean::mesh;
@@ -16,9 +10,8 @@ std::unique_ptr<ppgso::Texture> Ocean::texture;
 std::unique_ptr<ppgso::Shader> Ocean::shader;
 
 Ocean::Ocean() {
-    // Set random scale speed and rotation
+    // Set scale
     scale *= (15.0f);
-    speed = {(0.0f), (0.0f), 0.0f};
 
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(scene_diffuse_vert_glsl, scene_diffuse_frag_glsl);
@@ -70,7 +63,6 @@ void Ocean::render(Scene &scene, unsigned int depthMap) {
     shader->setUniform("ambient_strength", 0.2f);
     shader->setUniform("specular_strength", 0.9f);
     shader->setUniform("viewPos", scene.camera->position);
-
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

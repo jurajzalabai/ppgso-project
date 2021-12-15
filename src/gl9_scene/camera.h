@@ -24,6 +24,7 @@ public:
     bool autoMovement = true;
     int scene_num;
     std::vector<std::vector<Keyframe>> keyframes;
+
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors
    * @param fow - Field of view in degrees
@@ -38,20 +39,9 @@ public:
    */
   void update(float dt);
 
-  /*!
-   * Get direction vector in world coordinates through camera projection plane
-   * @param u - camera projection plane horizontal coordinate [-1,1]
-   * @param v - camera projection plane vertical coordinate [-1,1]
-   * @return Normalized vector from camera position to position on the camera projection plane
-   */
-    glm::vec3 cast(double u, double v);
-
-    glm::vec3 lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration);
+  glm::vec3 lerp(glm::vec3 a, glm::vec3 b, float age, float start, float duration);
 
 protected:
-    /*!
-     * Generate modelMatrix from position, rotation and scale
-     */
 };
 
 
